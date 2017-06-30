@@ -115,6 +115,7 @@ class Admin extends Component {
                  aria-describedby="fileHelp"
                  onChange={this.fileInput}
                  value={this.state.pics}/>
+          <small>please press "shift" or "control" on your own for multiple selection</small>
         </div>
         <button type="submit" className="btn btn-primary" onClick={this.submit}>Submit</button>
 
