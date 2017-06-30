@@ -20,8 +20,6 @@ class App extends Component {
       <Router>
         <Switch>
           <Route exact path="/" component={Admin}/>
-          <Route path="/todo/:test" component={Todo}/>
-          <Route component = {notFound}/>
         </Switch>
       </Router>
     );
