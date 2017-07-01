@@ -1,0 +1,18 @@
+.header{
+  height: 100%;
+  display: flex;
+}
+
+.col-sm-2 img{
+  height: 50px;
+  margin: 5px 0 0 5px;
+}
+.col-sm-8 input{
+  width: 100%;
+  margin-top: 10px;
+  display: block;
+}
+
+.col-sm-1{
+  margin-top:15px;
+}
