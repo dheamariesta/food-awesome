@@ -1,4 +1,3 @@
-
 // Import modules
 import React, { Component } from 'react';
 import {
@@ -9,7 +8,7 @@ import {
 
 //Import Components
 import Header from "../Header/Header";
-//import Admin from "../Admin/Admin";
+import Admin from "../Admin/Admin";
 
 // Import Static Files
 import './App.css';
