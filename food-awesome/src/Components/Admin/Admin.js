@@ -1,4 +1,6 @@
 import React, {Component, propTypes} from 'react';
+import { connect } from 'react-redux';
+import { addRestaurent } from '../../Actions/Admin';
 
 class Admin extends Component {
   constructor(props) {
@@ -8,8 +10,8 @@ class Admin extends Component {
       star:"",
       describeHome:"",
       describeIndividual:"",
-      pics:[],
-      restraurent:[]
+      picHome:"",
+      picIndividual:""
     }
   }
 
@@ -39,30 +41,27 @@ class Admin extends Component {
   }
 
   fileInput = (event) => {
-    let picsArray = [];
-    picsArray.push(event.target.value);
-    this.setState({
-      pics: picsArray
-    })
+    if(event.target.name=="forHome"){
+      this.setState({
+        picHome: event.target.value
+      })
+    }
+    if(event.target.name=="forIndividual"){
+      this.setState({
+        picIndividual: event.target.value
+      })
+    }
   }
 
   submit = () => {
-    let restraurentArray = this.state.restraurent;
     let newRestraurent = {};
     newRestraurent.name = this.state.name;
     newRestraurent.star = this.state.star;
     newRestraurent.describeHome = this.state.describeHome;
     newRestraurent.describeIndividual = this.state.describeIndividual;
-    newRestraurent.pics = this.state.pics;
-    restraurentArray.push(newRestraurent);
-    this.setState({
-      name: "",
-      star:"",
-      describeHome:"",
-      describeIndividual:"",
-      pics:[],
-      restraurent: restraurentArray
-    })
+    newRestraurent.picHome = this.state.picHome;
+    newRestraurent.picIndividual = this.state.picIndividual;
+    this.props.addRestaurent(newRestraurent);
   }
 
   render() {
@@ -108,13 +107,20 @@ class Admin extends Component {
         </div>
         <div className="form-group">
           <label>Picture input</label>
-          <input multiple
+          <input
                  type="file"
                  className="form-control-file"
                  id="pictureInput"
                  aria-describedby="fileHelp"
                  onChange={this.fileInput}
-                 value={this.state.pics}/>
+                 value={this.state.picHome}/>
+           <input
+                  type="file"
+                  className="form-control-file"
+                  id="pictureInput"
+                  aria-describedby="fileHelp"
+                  onChange={this.fileInput}
+                  value={this.state.picIndividual}/>
           <small>please press "shift" or "control" on your own for multiple selection</small>
         </div>
         <button type="submit" className="btn btn-primary" onClick={this.submit}>Submit</button>
@@ -124,4 +130,18 @@ class Admin extends Component {
   }
 }
 
-export default Admin;
+const mapStateToProps = (state) => {  // takes the output of reducer as "state"
+                                      // putting state into props of this component
+  return {
+    restaurents: state.admin
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {  // putting specific functions that uses dispatch into props
+                                          // used in line 31: this.props.createTodo
+  return {
+    addRestaurent: (newRestraurent) => {dispatch(addRestaurent(newRestraurent));}
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Admin);
