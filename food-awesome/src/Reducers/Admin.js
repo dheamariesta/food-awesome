@@ -2,9 +2,7 @@ import {getAdmin} from '../API/AdminAPI';
 const initialRestaurent = getAdmin();
 
 
-const Admin = (state = initialRestaurent, action) => { // if state is not given, then use [] ____ if state is given, just use that state
-                                        // state is always same, but action is different??
-                                        // action is exactly what is returned in the Actions folder/file
+const Admin = (state = initialRestaurent, action) => { 
   switch (action.type) {
     case 'ADD_RESTAURENT':
       return [
