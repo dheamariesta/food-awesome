@@ -17,10 +17,14 @@ import { Navbar, Jumbotron, Button } from 'react-bootstrap';
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Header/>
 
-      </div>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Header}/>
+          <Route path="/admin" component={Admin}/>
+        </Switch>
+      </Router>
+
     );
   }
 }
