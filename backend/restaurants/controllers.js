@@ -24,8 +24,9 @@ exports.postRestaurant = (req, res) => {
 
   newRestaurant.save((err) => {
     if(err){console.log(err); return;}
+    res.json(newRestaurant);
   });
-  res.json('save to database successfully');
+
 }
 
 exports.updateRestaurant = (req,res) => {
@@ -38,7 +39,7 @@ exports.updateRestaurant = (req,res) => {
     restaurant.picIndividual = req.body.picIndividual || restaurant.picIndividual,
     restaurant.save((err)=>{
       if(err){console.log(err); return;}
-      res.json('updated successfully')
+      res.json(restaurant)
     });
   });
 }
@@ -46,6 +47,6 @@ exports.updateRestaurant = (req,res) => {
 exports.deleteRestaurant = (req,res) => {
   Restaurant.findOneAndRemove({'_id':req.params.id}, (err,restaurant) => {
       if(err){console.log(err); return;}
-      res.json('removed successfully');
+      res.json(restaurant);
   })
 }
