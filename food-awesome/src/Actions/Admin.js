@@ -9,6 +9,13 @@ export const addRestaurent = (restaurent) => {  // basic action object
     describeHome: restaurent.describeHome,
     describeIndividual: restaurent.describeIndividual,
     picHome: restaurent.picHome,
-    picIndividual: restaurent.picIndividual          
+    picIndividual: restaurent.picIndividual
+  }
+}
+
+export const updateRestaurent = (restaurent) => {
+  return {
+    type: 'UPDATE_RESTAURENT',
+    restaurent
   }
 }
