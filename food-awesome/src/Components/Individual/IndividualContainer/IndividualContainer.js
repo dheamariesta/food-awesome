@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
-import RestaurantItem from '../../Home/RestaurantItem/RestaurantItem';
+// import RestaurantItem from '../../Home/RestaurantItem/RestaurantItem';
+import Scroll from '../Scroll/Scroll';
+import Poster from '../Poster/Poster';
+
 export class IndividualContainer extends Component {
   constructor(props) {
     super(props);
@@ -9,10 +12,8 @@ export class IndividualContainer extends Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <RestaurantItem/>
-          <RestaurantItem/>
-          <RestaurantItem/>
-          <RestaurantItem/>
+          <Scroll/>
+          <Poster/>
         </div>
       </div>
     );
