@@ -7,7 +7,8 @@ import {
 } from 'react-router-dom';
 
 //Import Components
-import Header from "../Header/Header";
+import Home from "../Home/Home";
+import Individual from "../Individual/Individual";
 //import Admin from "../Admin/Admin";
 
 // Import Static Files
@@ -17,13 +18,12 @@ import { Navbar, Jumbotron, Button } from 'react-bootstrap';
 class App extends Component {
   render() {
     return (
-
       <Router>
         <Switch>
-          <Route exact path="/" component={Header}/>
+          <Route exact path="/" component={Home}/>
+          <Route exact path="/individual" component={Individual}/>
         </Switch>
       </Router>
-
     );
   }
 }

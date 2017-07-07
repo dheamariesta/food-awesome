@@ -1,0 +1,23 @@
+.footer{
+  margin: 20px;
+  padding-top: 10px;
+  border-top: 1px solid black;
+}
+.about{
+  margin-left: 20px;
+}
+#about{
+  font-weight: bold;
+  font-size: 16px;
+}
+p{
+  font-size: 12px;
+}
+.share{
+  margin-top: 20px;
+  font-size: 12px;
+}
+.share img{
+  width: 20px;
+  height: 100%;
+}
