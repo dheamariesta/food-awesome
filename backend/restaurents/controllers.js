@@ -6,6 +6,12 @@ exports.getRestaurent = (req, res) => {
   })
 }
 
+exports.getSpecificRestaurent = (req, res) => {
+  Restaurent.findOne({'_id':req.params.id},(err,restaurent) => {
+    res.json(restaurent);
+  })
+}
+
 exports.postRestaurent = (req, res) => {
   const newRestaurent = new Restaurent({
     name: req.body.name,
@@ -23,7 +29,7 @@ exports.postRestaurent = (req, res) => {
 }
 
 exports.updateRestaurent = (req,res) => {
-  Restaurent.findOne({'name':req.body.name}, (err,restaurent) => {
+  Restaurent.findOne({'_id':req.params.id}, (err,restaurent) => {
     restaurent.name = req.body.name || restaurent.name,
     restaurent.star = req.body.star ||restaurent.star,
     restaurent.describeHome = req.body.describeHome || restaurent.describeHome,
@@ -38,7 +44,7 @@ exports.updateRestaurent = (req,res) => {
 }
 
 exports.deleteRestaurent = (req,res) => {
-  Restaurent.findOneAndRemove({'name':req.body.name}, (err,restaurent) => {
+  Restaurent.findOneAndRemove({'_id':req.params.id}, (err,restaurent) => {
       if(err){console.log(err); return;}
       res.json('removed successfully');
   })
