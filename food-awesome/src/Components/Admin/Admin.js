@@ -11,9 +11,11 @@ class Admin extends Component {
 
   render() {
     return (
-      <Compose />
-      <UpdateRestaurent />
-      <DeleteRestaurent />
+      <div>
+        <Compose />
+        <UpdateRestaurent />
+        <DeleteRestaurent />
+      </div>
     );
   }
 }
