@@ -1,4 +1,4 @@
-import Restaurent from '../models/restaurent';
+import Restaurent from './model';
 
 exports.getRestaurent = (req, res) => {
   Restaurent.find({},(err,restaurent) => {
