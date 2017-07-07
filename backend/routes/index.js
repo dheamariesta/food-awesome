@@ -5,8 +5,9 @@ const router = express.Router();
 
 /* GET index page. */
 router.get('/', restaurentController.getRestaurent);
+router.get('/:id', restaurentController.getSpecificRestaurent);
 router.post('/', restaurentController.postRestaurent);
-router.put('/', restaurentController.updateRestaurent);
-router.delete('/', restaurentController.deleteRestaurent);
+router.put('/:id', restaurentController.updateRestaurent);
+router.delete('/:id', restaurentController.deleteRestaurent);
 
 export default router;
