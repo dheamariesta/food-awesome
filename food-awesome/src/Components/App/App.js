@@ -8,7 +8,7 @@ import {
 
 //Import Components
 import Header from "../Header/Header";
-import Admin from "../Admin/Admin";
+//import Admin from "../Admin/Admin";
 
 // Import Static Files
 import './App.css';
@@ -21,7 +21,6 @@ class App extends Component {
       <Router>
         <Switch>
           <Route exact path="/" component={Header}/>
-          <Route path="/admin" component={Admin}/>
         </Switch>
       </Router>
 
