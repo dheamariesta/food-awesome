@@ -1,22 +1,22 @@
-export const setAdmin = (restaurents) => { //storing into local storage of the browser
-  if(Array.isArray(restaurents)){ // to prevent error being saved into local storage
-    localStorage.setItem('restaurents', JSON.stringify(restaurents)); // 1st arugment sets the name, 2nd arugment = item to store
+export const setAdmin = (restaurants) => { //storing into local storage of the browser
+  if(Array.isArray(restaurants)){ // to prevent error being saved into local storage
+    localStorage.setItem('restaurants', JSON.stringify(restaurants)); // 1st arugment sets the name, 2nd arugment = item to store
   }
 }
 
 export const getAdmin = () => {
-  const restaurentsJSON = localStorage.getItem('restaurents');    //calling from localStorage using the name
-  let restaurents = [];
+  const restaurantsJSON = localStorage.getItem('restaurants');    //calling from localStorage using the name
+  let restaurants = [];
   try{
-    restaurents = JSON.parse(restaurentsJSON);
+    restaurants = JSON.parse(restaurantsJSON);
   }catch(error){
-    console.log("Error: could not decode restaurents's from localStorage")
+    console.log("Error: could not decode restaurants's from localStorage")
   }
-  return Array.isArray(restaurents) ? restaurents: [];
+  return Array.isArray(restaurants) ? restaurants: [];
 }
 
-// export const filterRestaurentToUpdate = (restaurents,nameForUpdate) => {
-//   restaurentToUpdate = restaurents.filter((elem,index) => {
+// export const filterRestaurentToUpdate = (restaurants,nameForUpdate) => {
+//   restaurentToUpdate = restaurants.filter((elem,index) => {
 //     return elem.name.includes(nameForUpdate);
 //   })
 //   return restaurentToUpdate;

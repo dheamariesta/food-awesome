@@ -9,7 +9,7 @@ import lessMiddleware from 'less-middleware';
 import index from './routes/index';
 import mongoose from 'mongoose';
 
-mongoose.connect('mongodb://localhost/food-awesome');
+mongoose.connect('mongodb://admin:admin@ds151242.mlab.com:51242/food-awesome');
 
 const app = express();
 const debug = Debug('backend:app');
