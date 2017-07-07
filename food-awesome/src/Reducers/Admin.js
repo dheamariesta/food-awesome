@@ -1,8 +1,8 @@
-import {getAdmin} from '../API/AdminAPI';
-const initialRestaurent = getAdmin();
+// import {getAdmin} from '../API/AdminAPI';
+// const initialRestaurent = getAdmin();
 
 
-const Admin = (state = initialRestaurent, action) => { 
+const Admin = (state = [], action) => { 
   switch (action.type) {
     case 'ADD_RESTAURENT':
       return [

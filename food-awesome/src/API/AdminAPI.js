@@ -15,9 +15,9 @@ export const getAdmin = () => {
   return Array.isArray(restaurents) ? restaurents: [];
 }
 
-export const filterRestaurentToUpdate = (restaurents,nameForUpdate) => {
-  restaurentToUpdate = restaurents.filter((elem,index) => {
-    return elem.name.includes(nameForUpdate);
-  })
-  return restaurentToUpdate;
-}
+// export const filterRestaurentToUpdate = (restaurents,nameForUpdate) => {
+//   restaurentToUpdate = restaurents.filter((elem,index) => {
+//     return elem.name.includes(nameForUpdate);
+//   })
+//   return restaurentToUpdate;
+// }
