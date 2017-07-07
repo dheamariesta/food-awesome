@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 //Import Components
-import Header from "../Header/Header";
+import Home from "../Home/Home";
 //import Admin from "../Admin/Admin";
 
 // Import Static Files
@@ -20,7 +20,7 @@ class App extends Component {
 
       <Router>
         <Switch>
-          <Route exact path="/" component={Header}/>
+          <Route exact path="/" component={Home}/>
         </Switch>
       </Router>
 

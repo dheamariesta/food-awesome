@@ -17,7 +17,7 @@ class Header extends Component {
           <a href="#" id="signup">Signup</a>
         </div>
         <div className="col-sm-1">
-          <a href="#">Login HELLO IM THE CHANGE</a>
+          <a href="#">Login</a>
         </div>
 
       </div>
