@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-// import './RestaurantItem.css'
+import Havana from './havana.jpg';
+import './Poster.css'
+
 export class Poster extends Component {
   // constructor(props) {
   //   super(props);
@@ -10,7 +12,9 @@ export class Poster extends Component {
       <div className="col-sm-5 item">
         <div className="col-sm-12">
           <h4>Poster</h4>
-          <span>Description: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua..</span>
+          <img src={Havana} className="restaurant-image" />
+          <div>Description: Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua..</div>
         </div>
       </div>
     );
