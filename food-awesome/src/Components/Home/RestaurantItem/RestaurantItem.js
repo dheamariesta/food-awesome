@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
+
 import image from './Japan.jpg';
 import './RestaurantItem.css'
 export class RestaurantItem extends Component {
@@ -7,6 +9,7 @@ export class RestaurantItem extends Component {
   // }
 
   render() {
+    console.log(this.props.restaurants);
     return (
       <div className="col-sm-3 item">
         <div className="col-sm-12">
@@ -19,4 +22,14 @@ export class RestaurantItem extends Component {
   }
 }
 
-export default RestaurantItem;
+const mapStateToProps = (state) => {
+  return {
+    restaurants: state.admin
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(RestaurantItem);
