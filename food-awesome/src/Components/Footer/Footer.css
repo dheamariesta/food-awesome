@@ -21,3 +21,7 @@ p{
   width: 20px;
   height: 100%;
 }
+#facebook-logo:hover{
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
