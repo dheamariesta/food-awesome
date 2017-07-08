@@ -6,7 +6,8 @@ const restaurantSchema = new mongoose.Schema({
   describeHome: String,
   describeIndividual: String,
   picHome: String,
-  picIndividual:String
+  picIndividual:String,
+  id: String
 },{timestamp: true})
 
 const Restaurant = mongoose.model('Restaurant', restaurantSchema)
