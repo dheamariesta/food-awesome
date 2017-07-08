@@ -15,7 +15,7 @@ router.get('/:id', restaurantController.getSpecificRestaurant);
 router.post('/',restaurantController.postRestaurant);
 router.put('/:id', restaurantController.updateRestaurant);
 router.delete('/:id', restaurantController.deleteRestaurant);
-router.post('/files/picHome', upload.single('picHome'),fileUploadMiddleware);
+router.post('/files', upload.single('picHome'),fileUploadMiddleware);
 router.post('/files/picIndividual', upload.single('picIndividual'),fileUploadMiddleware);
 
 export default router;
