@@ -1,5 +1,4 @@
 import { createStore, compose, combineReducers, applyMiddleware } from 'redux'; // compose is used for debugging here
-import AdminReducer from '../Reducers/Admin';
 import RestaurantReducer from '../Reducers/Admin/Restaurant';
 import ActiveRestaurantReducer from '../Reducers/Admin/ActiveRestaurant';
 import thunk from 'redux-thunk';

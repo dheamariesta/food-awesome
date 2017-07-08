@@ -9,7 +9,7 @@ import {
 //Import Components
 import Home from "../Home/Home";
 import Individual from "../Individual/Individual";
-//import Admin from "../Admin/Admin";
+import Admin from "../Admin/Admin";
 
 // Import Static Files
 import './App.css';
