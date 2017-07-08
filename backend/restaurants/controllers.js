@@ -19,7 +19,8 @@ exports.postRestaurant = (req, res) => {
     describeHome : req.body.describeHome,
     describeIndividual : req.body.describeIndividual,
     picHome : req.body.picHome,
-    picIndividual : req.body.picIndividual
+    picIndividual : req.body.picIndividual,
+    id: req.body.id
   });
 
   newRestaurant.save((err) => {
