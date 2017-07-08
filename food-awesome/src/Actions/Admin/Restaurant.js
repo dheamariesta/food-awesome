@@ -39,9 +39,10 @@ const addRestaurantInStore = (newRestaurant) => {
     newRestaurant
   }
 }
-const addRestaurant_id = (newRestaurantId,newRestaurant_id) => {
+const addRestaurant_id = (newRestaurantPicHome, newRestaurantId,newRestaurant_id) => {
   return {
     type: 'ADD_RESTAURENT_ID',
+    newRestaurantPicHome,
     newRestaurantId,
     newRestaurant_id
   }
@@ -56,47 +57,23 @@ const updateRestaurantInStore = (restaurant) => {
 
 export const addRestaurant = (picHome, picIndividual, newRestaurant) => {
   return (dispatch) => {
-    let restaurant_id;
-    // add newRestaurant to store first while waiting for backend to update
     newRestaurant.id = uuid.v4();
     dispatch(addRestaurantInStore(newRestaurant));
 
-    //sending newRestaurant to backend
-    axios.post('/api',newRestaurant)
-    .then( (response)=>{
-      restaurant_id = response.data._id
-      //update newRestaurant in store to get the ._id of database
-      dispatch(addRestaurant_id(response.data.id,response.data._id));
-    }).catch( (error) =>{
-      console.log(error);
-      dispatch(loadingRestaurantError(error));
-    })
-
-
     let picHomeToBackEnd = new FormData();
     picHomeToBackEnd.append('picHome', picHome);
-    // picHomeToBackEnd.append('picIndividual', picIndividual);
-    picHomeToBackEnd.append('name', "picHome");
-    picHomeToBackEnd.append('id', restaurant_id);
+    picHomeToBackEnd.append('name', newRestaurant.name);
+    picHomeToBackEnd.append('star', newRestaurant.star);
+    picHomeToBackEnd.append('describeHome', newRestaurant.describeHome);
+    picHomeToBackEnd.append('describeIndividual', newRestaurant.describeIndividual);
+    picHomeToBackEnd.append('id', newRestaurant.id);
 
-    let picIndividualToBackEnd = new FormData();
-    picIndividualToBackEnd.append('picIndividual', picIndividual);
-    picIndividualToBackEnd.append('name', "picIndividual");
-    picIndividualToBackEnd.append('id', restaurant_id);
-    // console.log(picHome)
-
-    // get pic url from database
-    axios.post('/api/files/picHome',picHomeToBackEnd)
+    //sending newRestaurant to backend
+    axios.post('/api/files',picHomeToBackEnd)
     .then( (response)=>{
-      //dispatch(updateRestaurantInStore(response.data));
-    }).catch( (error) =>{
-      console.log(error);
-      dispatch(loadingRestaurantError(error));
-    })
-
-    axios.post('/api/files/picIndividual',picIndividualToBackEnd)
-    .then( (response)=>{
-      //dispatch(updateRestaurantInStore(response.data));
+      //restaurant_id = response.data._id
+      //update newRestaurant in store to get the ._id of database
+      dispatch(addRestaurant_id(response.data.picHome,response.data.id,response.data._id));
     }).catch( (error) =>{
       console.log(error);
       dispatch(loadingRestaurantError(error));

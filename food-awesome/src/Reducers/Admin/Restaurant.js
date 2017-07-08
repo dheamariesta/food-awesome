@@ -17,6 +17,7 @@ const Restaurant = (state = [], action) => {
       return state.map((restaurant,index) => {
                 if(restaurant.id === action.newRestaurantId){
                   restaurant._id = action.newRestaurant_id
+                  restaurant.picHome = action.newRestaurantPicHome
                 }
                 return restaurant
               })
