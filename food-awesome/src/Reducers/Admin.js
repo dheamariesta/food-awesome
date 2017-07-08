@@ -2,7 +2,7 @@
 // const initialRestaurent = getAdmin();
 
 
-const Admin = (state = [], action) => { 
+const Admin = (state = [], action) => {
   switch (action.type) {
     case 'ADD_RESTAURENT':
       return [
