@@ -8,8 +8,16 @@ import path from 'path';
 import lessMiddleware from 'less-middleware';
 import index from './routes/index';
 import mongoose from 'mongoose';
+import multer from 'multer';
+import cloudinary from 'cloudinary';
 
 mongoose.connect('mongodb://admin:admin@ds151242.mlab.com:51242/food-awesome');
+
+cloudinary.config({
+  cloud_name: 'dxmdjcspm',
+  api_key: '326963819454321',
+  api_secret: '7A0-lZzv7kBuQnpBrs5vlnKAk7s'
+});
 
 const app = express();
 const debug = Debug('backend:app');
