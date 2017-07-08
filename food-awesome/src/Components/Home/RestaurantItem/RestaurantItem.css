@@ -10,3 +10,12 @@ span{
 .item{
   margin-bottom: 20px;
 }
+#share-button{
+ position: absolute;
+ right: 20px;
+ top: 10px;
+}
+#share-button:hover{
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}

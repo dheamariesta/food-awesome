@@ -16,7 +16,7 @@ export class Footer extends Component {
           </p>
         </div>
         <div className="col-sm-2 col-sm-offset-5 share">
-          Visit us at: <img src={facebooklogo}/>
+          Visit us at: <img src={facebooklogo} id="facebook-logo"/>
         </div>
       </div>
 
