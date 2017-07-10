@@ -6,6 +6,7 @@ const restaurantSchema = new mongoose.Schema({
   describeHome: String,
   describeIndividual: String,
   picHome: String,
+  picHomePublicId: String,
   picIndividual:String,
   id: String
 },{timestamp: true})
