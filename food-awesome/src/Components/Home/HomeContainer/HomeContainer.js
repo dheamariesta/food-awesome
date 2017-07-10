@@ -13,7 +13,7 @@ export class HomeContainer extends Component {
     renderRestaurants = (restaurants) => {
       //console.log('render_func', restaurants)
       if (restaurants.length === 0) {
-        return  <div>No restaurants</div>
+        return  (<div>Loading restaurant list...</div>)
       } else {
         return restaurants.map((restaurant) => {
           console.log('map')
@@ -21,7 +21,9 @@ export class HomeContainer extends Component {
             <RestaurantItem name={restaurant.name}
                           id = {restaurant.id}
                           key={restaurant.id}
-                          description={restaurant.describeHome}/>
+                          description={restaurant.describeHome}
+                          img={restaurant.picHome}
+                          star={restaurant.star}/>
           )
         });
       }
