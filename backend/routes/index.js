@@ -2,14 +2,7 @@ import express from 'express';
 import restaurantController from '../restaurants/controllers';
 import multer from 'multer';
 import cloudinary from 'cloudinary';
-<<<<<<< Updated upstream
-const storage = multer.memoryStorage();
-const upload = multer({ storage });
-import fileUploadMiddleware from '../fileUploadMiddleWare';
-=======
 const upload = multer({ dest: './uploads/' });
->>>>>>> Stashed changes
-
 
 const router = express.Router();
 
