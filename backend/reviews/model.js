@@ -5,10 +5,10 @@ const reviewSchema = new mongoose.Schema({
   star: Number,
   votes: Number,
   description: String,
-  pic: String,
-  picPublicId:String,
+  picReview: String,
+  picReviewPublicId:String,
   id: String,
-  user: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 },{timestamp: true})
 
 const Review = mongoose.model('Review', reviewSchema)

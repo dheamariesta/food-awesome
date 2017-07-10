@@ -1,0 +1,19 @@
+
+span{
+  font-size: 12px;
+  text-align: justify;
+}
+
+.item{
+  margin-bottom: 20px;
+}
+.col-sm-12:hover{
+  background-color: rgba(185, 192, 204, .3);
+}
+
+.star-rating {
+  line-height:32px;
+  font-size:1.25em;
+}
+
+.star-rating .fa-star{color: #ffcc00;}
