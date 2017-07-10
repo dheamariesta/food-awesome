@@ -22,11 +22,11 @@
   "proxy": {
     "/api": {
       "target": "http://localhost:3001",
-      "ws": true
+      "ws": false
     },
     "/auth": {
       "target": "http://localhost:3001",
-      "ws": true
+      "ws": false
     }
   },
   "scripts": {

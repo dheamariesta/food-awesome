@@ -6,16 +6,19 @@ import Footer from '../Footer/Footer';
 import { connect } from 'react-redux';
 
 export class Home extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+  }
 
   render() {
     const isLoggedIn = this.props.user._id;
+    console.log(this.props.user);
+    console.log(isLoggedIn);
 
     return (
       <div className="container-fluid">
         <Header/>
+        <div className="row">
           {isLoggedIn ? (
             <div className="isLoggedIn">
               <HomeContainer/>
@@ -25,6 +28,7 @@ export class Home extends Component {
               <Login/>
             </div>
           )}
+        </div>
         <Footer/>
       </div>
     );
@@ -32,13 +36,17 @@ export class Home extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log("map");
+  console.log(state);
+  console.log(state.user);
     return {
-        user: state.user
+      user: state.user
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+
   }
 }
 

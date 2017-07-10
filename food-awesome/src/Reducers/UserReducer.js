@@ -4,10 +4,11 @@ const UserReducer = (state = {}, action) => {
 
   switch (action.type) {
     case "USER_UPDATE":
-        return action.user || {};
+      console.log("user update");
+      return action.user || {};
 
     default:
-        return state;
+      return state;
   }
 }
 

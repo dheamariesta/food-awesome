@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
 import axios from 'axios';
-
+import { connect } from 'react-redux';
+import { getUser } from '../../Actions/User';
 import './Login.css';
 
 /**
@@ -15,7 +16,8 @@ export class Login extends Component { // eslint-disable-line react/prefer-state
     this.state = {
         email:"",
         password:"",
-        error:""
+        error:"",
+        user:""
     }
   }
 
@@ -27,23 +29,32 @@ export class Login extends Component { // eslint-disable-line react/prefer-state
     state[key] = value;
     //console.log(state);
     this.setState(state);
+    console.log(state);
   }
 
   localLogin = (e) => {
     e.preventDefault();
-    console.log(this.state)
+    console.log("localLogin");
+    console.log(this.state);
     axios.post('/auth/login', this.state)
       .then( (response) => {
         let data = response.data;
-        console.log(data)
+        console.log(data);
+
         if(data.error){
-          console.log(data.message)
+          console.log(data.message);
           this.setState({
             error:data.message
           });
         }else{
-          console.error("AJAX: Logged in @ '/auth/user'");
-          window.location.href = "/";
+          console.log("AJAX: Logged in @ '/auth/user'");
+          this.setState({
+            user:data._id
+          });
+          console.log("hello");
+          console.log(this.state);
+          this.props.getUser();
+          // window.location.href = "/";
         }
       })
       .catch((error)=> {
@@ -122,4 +133,19 @@ export class Login extends Component { // eslint-disable-line react/prefer-state
   }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+  console.log("map");
+  console.log(state);
+  console.log(state.user);
+    return {
+      user: state.user
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getUser:() => {dispatch(getUser());}
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
