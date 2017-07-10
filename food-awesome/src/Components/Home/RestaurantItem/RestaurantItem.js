@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import share from './share-icon-white.png'
-//import image from './Japan.jpg';
 import './RestaurantItem.css'
-import FB from 'fb';
+
+import { activeHome } from '../../../Actions/Home/activeHome'
+//import FB from 'fb';
 class RestaurantItem extends Component {
   // constructor(props) {
   //   super(props);
@@ -24,28 +26,30 @@ class RestaurantItem extends Component {
     //   }
     // );
   }
+
+  navigate = () => {
+    this.props.activeHome(this.props);
+  }
   componentDidMount(){
     console.log('componentDidMount')
     let stars = document.getElementById(this.props.id).childNodes;
-    console.log(stars)
 
     let rating = this.props.star;
-    console.log(rating)
     stars.forEach( (e) => {
-      console.log(e);
       let yellow = e.getAttribute('data-rating');
       if (yellow <= parseInt(rating)) {
-        e.classList.remove('fa-star-0')
+        e.classList.remove('fa-star-o')
         e.classList.add('fa-star')
       }
     })
   }
+  //{"/individual/" + this.props.name}
   render() {
     return (
       <div className="col-sm-3 item">
         <div className="col-sm-12">
           <div id="image">
-            <a href={"/" + this.props.id}>
+            <a href={ "/individual/" + this.props.name} onClick={this.navigate}>
               <img src={this.props.img} className="restaurant-image" />
             </a>
           </div>
@@ -67,4 +71,16 @@ class RestaurantItem extends Component {
   }
 }
 
-export default RestaurantItem;
+const mapStateToProps = (state) => {
+  return {
+
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    activeHome: (name) => {dispatch(activeHome(name));}
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(RestaurantItem);
