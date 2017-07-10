@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { getUser } from '../../Actions/User';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 import './Login.css';
 
 /**
@@ -98,38 +100,42 @@ export class Login extends Component { // eslint-disable-line react/prefer-state
 
   render() {
     return (
-      <div className="login">
-        <form>
-          <div className="error">{this.state.error}</div>
-          <div className="form-group">
-            <label htmlFor="email">Email address</label>
-            <input type="email"
-                   className="form-control"
-                   id="email"
-                   placeholder="Email"
-                   value={this.state.email}
-                   onChange={this.onChange} />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input type="password"
-                   className="form-control"
-                   id="password"
-                   placeholder="Password"
-                   value={this.state.password}
-                   onChange={this.onChange}/>
-          </div>
-          <button type="submit"
-                  className="btn btn-primary submit"
-                  onClick={this.localLogin}>Login</button>
-          <button type="submit"
-                  className="btn btn-default submit"
-                  onClick={this.localSignup}>Sign up</button>
-          <div className="or">or</div>
-          <button type="submit"
-                  className="btn btn-primary facebook"
-                  onClick={this.facebookLogin}>Login with Facebook</button>
-        </form>
+      <div className="container-fluid">
+        <Header/>
+        <div className="login" id="Login">
+          <form>
+            <div className="error">{this.state.error}</div>
+            <div className="form-group">
+              <label htmlFor="email">Email address</label>
+              <input type="email"
+                     className="form-control"
+                     id="email"
+                     placeholder="Email"
+                     value={this.state.email}
+                     onChange={this.onChange} />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <input type="password"
+                     className="form-control"
+                     id="password"
+                     placeholder="Password"
+                     value={this.state.password}
+                     onChange={this.onChange}/>
+            </div>
+            <button type="submit"
+                    className="btn btn-primary submit"
+                    onClick={this.localLogin}>Login</button>
+            <button type="submit"
+                    className="btn btn-default submit"
+                    onClick={this.localSignup}>Sign up</button>
+            <div className="or">or</div>
+            <button type="submit"
+                    className="btn btn-primary facebook"
+                    onClick={this.facebookLogin}>Login with Facebook</button>
+          </form>
+        </div>
+        <Footer/>
       </div>
     );
   }
