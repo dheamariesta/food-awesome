@@ -1,15 +1,13 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
 import share from './share-icon-white.png'
 import image from './Japan.jpg';
 import './RestaurantItem.css'
-export class RestaurantItem extends Component {
+class RestaurantItem extends Component {
   // constructor(props) {
   //   super(props);
   // }
 
   render() {
-    console.log(this.props.restaurants);
     return (
       <div className="col-sm-3 item">
         <div className="col-sm-12">
@@ -17,22 +15,12 @@ export class RestaurantItem extends Component {
           <a href="#">
             <img src={share} id="share-button" className="hover"/>
           </a>
-          <h4>Restaurant Name</h4>
-          <span>Description: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua..</span>
+          <h4>{this.props.name}</h4>
+          <span>Description: {this.props.description}</span>
         </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    restaurants: state.admin
-  }
-}
-const mapDispatchToProps = (dispatch) => {
-  return {
-
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(RestaurantItem);
+export default RestaurantItem;
