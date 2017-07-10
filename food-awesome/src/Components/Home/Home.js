@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Header from '../Header/Header'
+import Header from '../Header/Header';
 import HomeContainer from './HomeContainer/HomeContainer';
 import Login from '../Login/Login';
 import Footer from '../Footer/Footer';
@@ -19,15 +19,9 @@ export class Home extends Component {
       <div className="container-fluid">
         <Header/>
         <div className="row">
-          {isLoggedIn ? (
-            <div className="isLoggedIn">
-              <HomeContainer/>
-            </div>
-          ) : (
-            <div className="col-md-4 col-md-offset-4" id="Login">
-              <Login/>
-            </div>
-          )}
+          <div className="isLoggedIn">
+            <HomeContainer/>
+          </div>
         </div>
         <Footer/>
       </div>
