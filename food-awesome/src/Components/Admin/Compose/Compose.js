@@ -38,16 +38,13 @@ class Compose extends Component {
       this.setState({
         picHome: event.target.files[0]
       })
-    }
-    if(event.target.id==="picIndividual"){
+    }else if(event.target.id==="picIndividual"){
       this.setState({
         picIndividual: event.target.files[0]
       })
+    }else{
+      newRestaurant[event.target.id] = event.target.value;
     }
-
-    newRestaurant[event.target.id] = event.target.value;
-
-    console.log(newRestaurant)
     this.setState({
       newRestaurant: newRestaurant
     })
@@ -62,7 +59,7 @@ class Compose extends Component {
 
   updateRestaurant = () => {
     let newRestraurant = this.state.newRestaurant;
-    this.props.updateRestaurant(newRestraurant);
+    this.props.updateRestaurant(this.state.picHome, newRestraurant);
   }
 
   deleteRestaurant = () => {
@@ -122,13 +119,13 @@ class Compose extends Component {
                className="form-control-file"
                aria-describedby="fileHelp"
                onChange={this.onChange}
-               value={this.state.newRestaurant.picHome? this.state.newRestaurant.picHome: ""}/>
+               />
          <input id="picIndividual"
                 type="file"
                 className="form-control-file"
                 aria-describedby="fileHelp"
                 onChange={this.onChange}
-                value={this.state.newRestaurant.picIndividual? this.state.newRestaurant.picIndividual: ""}/>
+                />
         <small>please press "shift" or "control" on your own for multiple selection</small>
       </div>
       <button type="submit" className="btn btn-primary" onClick={this.addNewRestaurant}>Add New Restaurant</button>
@@ -148,7 +145,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addRestaurant: (picHome, picIndividual, newRestraurant) => {dispatch(addRestaurant(picHome, picIndividual, newRestraurant));},
-    updateRestaurant: (newRestraurant) => {dispatch(updateRestaurant(newRestraurant));},
+    updateRestaurant: (picHome, newRestraurant) => {dispatch(updateRestaurant(picHome, newRestraurant));},
     deleteRestaurant: (_id) => {dispatch(deleteRestaurant(_id));}
   }
 }

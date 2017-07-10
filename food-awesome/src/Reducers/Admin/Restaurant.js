@@ -18,6 +18,7 @@ const Restaurant = (state = initialRestaurant, action) => {
                 if(restaurant.id === action.newRestaurantId){
                   restaurant._id = action.newRestaurant_id
                   restaurant.picHome = action.newRestaurantPicHome
+                  restaurant.picHomePublicId = action.newRestaurantPicHomePublicId
                 }
                 return restaurant
               })
@@ -26,6 +27,14 @@ const Restaurant = (state = initialRestaurant, action) => {
       return state.map((restaurant,index) => {
                 if(restaurant.id === action.restaurant.id){
                   restaurant = action.restaurant
+                }
+                return restaurant
+              })
+      break;
+    case 'UPDATE_RESTAURENT_PIC_URL':
+      return state.map((restaurant,index) => {
+                if(restaurant.id === action.id){
+                  restaurant.picHome = action.url
                 }
                 return restaurant
               })
