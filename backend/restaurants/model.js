@@ -8,7 +8,8 @@ const restaurantSchema = new mongoose.Schema({
   picHome: String,
   picHomePublicId: String,
   picIndividual:String,
-  id: String
+  id: String,
+  reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Reviews' }],
 },{timestamp: true})
 
 const Restaurant = mongoose.model('Restaurant', restaurantSchema)
