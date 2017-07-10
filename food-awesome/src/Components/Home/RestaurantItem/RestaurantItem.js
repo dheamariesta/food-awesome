@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import share from './share-icon-white.png'
+import share from './glyphicons-309-share-alt.png'
 import image from './Japan.jpg';
 import './RestaurantItem.css'
 class RestaurantItem extends Component {
