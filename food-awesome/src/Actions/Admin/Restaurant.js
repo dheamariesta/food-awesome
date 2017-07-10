@@ -92,7 +92,7 @@ const updateRestaurantInStorePicURL = (url, id) => {
 }
 
 
-export const updateRestaurant = (restaurant) => {
+export const updateRestaurant = (picHome,restaurant) => {
   return (dispatch) => {                //thunk allows functions inside actions
     // dispatch function to send info to store first
     dispatch(updateRestaurantInStore(restaurant));
