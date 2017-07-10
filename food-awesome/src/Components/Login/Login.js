@@ -69,7 +69,6 @@ export class Login extends Component { // eslint-disable-line react/prefer-state
     e.preventDefault();
     axios.post('/auth/signup', this.state)
       .then( (response) => {
-
         let data = response.data;
         if(data.error){
           console.log(data.message)
@@ -79,6 +78,9 @@ export class Login extends Component { // eslint-disable-line react/prefer-state
         }else{
           console.log("AJAX: Signed up @ '/auth/signup'");
           window.location.href = "/";
+          this.setState({
+            error:"Sign up successful!"
+          });
         }
       })
       .catch((error)=> {
