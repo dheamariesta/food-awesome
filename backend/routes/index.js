@@ -4,7 +4,7 @@ import multer from 'multer';
 import cloudinary from 'cloudinary';
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
-import fileUploadMiddleware from '../fileUploadMiddleware';
+import fileUploadMiddleware from '../fileUploadMiddleWare';
 
 
 const router = express.Router();

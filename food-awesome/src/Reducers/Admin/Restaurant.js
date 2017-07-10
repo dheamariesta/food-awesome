@@ -2,7 +2,7 @@ import {getAdmin} from '../../API/AdminAPI';
 const initialRestaurant = getAdmin();
 
 
-const Restaurant = (state = [], action) => {
+const Restaurant = (state = initialRestaurant, action) => {
   switch (action.type) {
     case 'STORE_RESTAURANT':
       return state = action.restaurant
