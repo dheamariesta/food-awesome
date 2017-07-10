@@ -53,11 +53,11 @@ class RestaurantItem extends Component {
 
           <h4>{this.props.name}</h4>
           <div className="star-rating" id={this.props.id}>
-            <span className="fa fa-star-o star" data-rating="1"></span>
-            <span className="fa fa-star-o star" data-rating="2"></span>
-            <span className="fa fa-star-o star" data-rating="3"></span>
-            <span className="fa fa-star-o star" data-rating="4"></span>
-            <span className="fa fa-star-o star" data-rating="5"></span>
+            <span className="fa fa-star-0 star" data-rating="1"></span>
+            <span className="fa fa-star-0 star" data-rating="2"></span>
+            <span className="fa fa-star-0 star" data-rating="3"></span>
+            <span className="fa fa-star-0 star" data-rating="4"></span>
+            <span className="fa fa-star-0 star" data-rating="5"></span>
             <input type="hidden" name="whatever1" className="rating-value" value="2.56"/>
           </div>
           <span>{this.props.description}</span>

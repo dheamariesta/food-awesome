@@ -8,6 +8,7 @@ import path from 'path';
 import lessMiddleware from 'less-middleware';
 import index from './routes/index';
 import auth from './routes/auth';
+import review from './routes/review';
 import mongoose from 'mongoose';
 import multer from 'multer';
 import cloudinary from 'cloudinary';
@@ -62,6 +63,7 @@ app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api', index);
+app.use('/review',review);
 app.use('/auth', auth);
 
 // catch 404 and forward to error handler

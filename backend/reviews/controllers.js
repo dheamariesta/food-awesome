@@ -1,4 +1,5 @@
 import Review from './model';
+import Restaurant from '../restaurants/model';
 import cloudinary from 'cloudinary';
 import fs from 'fs';
 
@@ -21,10 +22,26 @@ exports.postReview = (req, res) => {
     votes: req.body.votes||"",
     description: req.body.description||"",
     id: req.body.id||"",
+    //to be configured
+    //user: req.body.user_id
   });
   cloudinary.uploader.upload(req.file.path,(result) => {
-    newReview.pic = result.secure_url
-    newReview.picPublicId = result.public_id
+    newReview.picReview = result.secure_url
+    newReview.picReviewPublicId = result.public_id
+    newReview.save((err) => {
+      if(err){console.log(err); return;}
+    });
+    console.log("line 44 reached");
+    Restaurant.findOne({"_id": req.params.restaurant_id}, (err,restaurant) => {
+      restaurant.reviews.push(newReview._id)
+      restaurant.save((err)=>{
+        if(err){console.log(err); return;}
+      });
+      res.json({
+        newReview,
+        restaurant
+      });
+    })
   })
   .then(
     fs.unlink(req.file.path, (err) => {
@@ -35,10 +52,7 @@ exports.postReview = (req, res) => {
         }
     })
   );
-  newReview.save((err) => {
-    if(err){console.log(err); return;}
-    res.json(newReview);
-  });
+
 }
 
 exports.updateReview = (req,res) => {
@@ -49,8 +63,8 @@ exports.updateReview = (req,res) => {
     review.description = req.body.description || review.description,
 
     cloudinary.uploader.upload(req.file.path,(result) => {
-        review.picHome = result.secure_url || review.picHome,
-    }, {public_id: req.body.picHomePublicId})
+        review.picReview = result.secure_url || review.picReview;
+    }, {public_id: req.body.picReviewPublicId})
     .then(
       fs.unlink(req.file.path, (err) => {
         if (err) {
@@ -60,6 +74,7 @@ exports.updateReview = (req,res) => {
           }
       })
     );
+
     review.save((err)=>{
       if(err){console.log(err); return;}
       res.json(review)
