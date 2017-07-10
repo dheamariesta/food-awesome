@@ -7,9 +7,15 @@ import logger from 'morgan';
 import path from 'path';
 import lessMiddleware from 'less-middleware';
 import index from './routes/index';
+import auth from './routes/auth';
 import mongoose from 'mongoose';
 import multer from 'multer';
 import cloudinary from 'cloudinary';
+
+/**
+ * API keys and Passport configuration.
+ */
+const passportConfig = require('./config/passport');
 
 mongoose.connect('mongodb://admin:admin@ds151242.mlab.com:51242/food-awesome');
 
@@ -39,6 +45,7 @@ app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api', index);
+app.use('/auth', auth);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
