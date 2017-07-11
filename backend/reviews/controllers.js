@@ -24,8 +24,8 @@ exports.postReview = (req, res) => {
     votes: req.body.votes||"",
     description: req.body.description||"",
     id: req.body.id||"",
-    //to be configured
-    //user: req.body.user_id
+
+    user: req.body.user_id
   });
   cloudinary.uploader.upload(req.file.path,(result) => {
     newReview.picReview = result.secure_url

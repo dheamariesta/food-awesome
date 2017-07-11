@@ -8,13 +8,21 @@ const addReviewInStore = (newReview) => {
   }
 }
 
-const addRestaurant_id = (newRestaurantPicReview, newRestaurantPicReviewPublicId, newReviewId,newReview_id) => {
+const addReview_id = (picReview, picReviewPublicId, reviewId, review_id) => {
   return {
     type: 'ADD_RESTAURENT_ID',
-    newRestaurantPicReview,
-    newRestaurantPicReviewPublicId,
-    newReviewId,
-    newReview_id
+    picReview,
+    picReviewPublicId,
+    reviewId,
+    review_id
+  }
+}
+
+const addReviewIdIntoRestaurantInStore = (restaurantId, review_id) => {
+  return {
+    type: 'ADD_REVIEW_ID_TO_RESTAURANT',
+    restaurantId,
+    review_id
   }
 }
 
@@ -37,10 +45,10 @@ export const addReview = (picReview, newReview) =>{
     picReviewToBackEnd.append('star', newReview.star);
     picReviewToBackEnd.append('description', newReview.description);
     picReviewToBackEnd.append('id', newReview.id);
-    // picReviewToBackEnd.append('user', newReview.user_id);
+    picReviewToBackEnd.append('user', newReview.user_id);
 
     //sending newReview to backend. no special argument, returns url, public_id, database id
-    axios.post('/review/5962f7b05007ef2218921355',picReviewToBackEnd)
+    axios.post('/review/'+ newReview.restaurant_id, picReviewToBackEnd)
     .then( (response)=>{
       console.log(response.data)
       // here picHome is a url. needs local uuid to update restaurant with database id
@@ -48,6 +56,5 @@ export const addReview = (picReview, newReview) =>{
     }).catch( (error) =>{
       dispatch(loadingReviewError(error));
     })
-
   }
 }

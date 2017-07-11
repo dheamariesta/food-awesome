@@ -4,7 +4,9 @@ import MidSect from './MidSect/MidSect';
 import Notes from './Notes/Notes';
 import Reviews from './Reviews/Reviews';
 import AddReview from '../AddReview/AddReview';
+
 import axios from 'axios'
+import { connect } from 'react-redux';
 import './Scroll.css'
 
 export class Scroll extends Component {
@@ -12,6 +14,7 @@ export class Scroll extends Component {
     super(props);
     this.state = {
     isAddReviewOpen: false,
+    popUp: false,
 }
   }
 
@@ -20,7 +23,24 @@ export class Scroll extends Component {
   }
 
   reviewBoxOpen = () => {
-    this.setState({ isAddReviewOpen: true })
+    let isLoggedIn = false
+    if(this.props.user.hasOwnProperty('_id')){
+      isLoggedIn = true
+    }
+    console.log(isLoggedIn)
+    if(!isLoggedIn){
+      this.setState({
+        popUp: true
+      })
+    }else{
+      this.setState({
+        isAddReviewOpen: true
+      })
+    }
+  }
+
+  adminMessage = () => {
+    return (<div>Please Login to post review</div>)
   }
 
   render() {
@@ -39,6 +59,9 @@ export class Scroll extends Component {
           <MidSect description={this.props.restaurant.describeIndividual}/>
           <Reviews id={this.props.restaurant.reviews}/>
         </div>
+        {
+          this.state.popUp? this.adminMessage(): null
+        }
         <button type="submit" className="btn btn-primary" onClick={this.reviewBoxOpen}>Write a Review</button>
         {
           this.state.isAddReviewOpen ? (
@@ -53,4 +76,16 @@ export class Scroll extends Component {
   }
 }
 
-export default Scroll;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Scroll);
