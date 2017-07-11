@@ -31,12 +31,9 @@ class App extends Component {
       <Router>
         <Switch>
           <Route exact path="/" component={Home}/>
-
           <Route path={"/individual"}  component={Individual}/>
           <Route path="/account"  component={AccountPage}/>
-
           <Route exact path="/login" component={Login}/>
-
           <Route path="/admin" component={Admin}/>
         </Switch>
       </Router>
