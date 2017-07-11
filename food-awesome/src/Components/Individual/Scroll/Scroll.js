@@ -28,12 +28,9 @@ export class Scroll extends Component {
       <div className="col-sm-7 item">
         <div className="col-sm-12">
           <h4>Scroll</h4>
-          <RestTitle />
+          <RestTitle name={this.props.restaurant.name}/>
           <MidSect />
-          <Notes />
-          <Notes />
           <Reviews />
-          <span>Description: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua..</span>
         </div>
         <button type="submit" className="btn btn-primary" onClick={this.reviewBoxOpen}>Write a Review</button>
         {

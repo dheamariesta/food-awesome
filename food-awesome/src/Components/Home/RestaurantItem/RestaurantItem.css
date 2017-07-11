@@ -1,5 +1,5 @@
 #image {
-   height: 40vh;
+   width: 20vw;
    overflow: hidden;
 }
 
@@ -29,4 +29,3 @@ span{
 }
 
 .star-rating .fa-star{color: orange;}
-

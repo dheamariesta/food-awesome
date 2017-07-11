@@ -12,8 +12,8 @@ export class IndividualContainer extends Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <Scroll/>
-          <Poster/>
+          <Scroll restaurant={this.props.restaurant}/>
+          <Poster img={this.props.restaurant.img}/>
         </div>
       </div>
     );

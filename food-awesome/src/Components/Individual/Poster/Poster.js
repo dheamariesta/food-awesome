@@ -11,10 +11,7 @@ export class Poster extends Component {
     return (
       <div className="col-sm-5 item">
         <div className="col-sm-12">
-          <h4>Poster</h4>
-          <img src={Havana} className="restaurant-image" />
-          <div>Description: Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua..</div>
+          <img src={this.props.img} className="restaurant-image" />
         </div>
       </div>
     );

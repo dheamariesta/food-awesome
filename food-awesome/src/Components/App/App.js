@@ -10,7 +10,7 @@ import {connect} from 'react-redux'
 import Home from "../Home/Home";
 import Individual from "../Individual/Individual";
 import Admin from "../Admin/Admin";
-
+import Error from '../Error/Error';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import AccountPage from '../AccountPage/AccountPage';
@@ -24,7 +24,7 @@ import './App.css';
 
 class App extends Component {
   render() {
-    console.log('props at app', this.props)
+
     return (
       <div>
       <Header/>
@@ -35,6 +35,7 @@ class App extends Component {
           <Route path="/account"  component={AccountPage}/>
           <Route exact path="/login" component={Login}/>
           <Route path="/admin" component={Admin}/>
+          <Route component={Error}/>
         </Switch>
       </Router>
       <Footer/>
@@ -44,14 +45,12 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('state at app', state)
   return {
-    restaurant: state.activeHome.restaurant
+    activeHome: state.activeHome
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App);
