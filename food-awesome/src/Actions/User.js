@@ -12,7 +12,7 @@ export const getUser = () => {
     axios.get('/auth/user')
       .then( (response) => {
         const user = response.data;
-        console.log(response.data);
+        // console.log(response.data);
         dispatch(updateUser(user));
       })
       .catch((error)=> {

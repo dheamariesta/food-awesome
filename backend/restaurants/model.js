@@ -10,7 +10,7 @@ const restaurantSchema = new mongoose.Schema({
   picHomePublicId: String,
   picIndividual:String,
   id: String,
-  reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Reviews' }],
+  reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
 },{timestamp: true})
 
 const Restaurant = mongoose.model('Restaurant', restaurantSchema)

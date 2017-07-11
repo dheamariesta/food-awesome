@@ -12,7 +12,7 @@ class RestaurantItem extends Component {
   // }
 
   componentDidMount(){
-    console.log('componentDidMount')
+    // console.log('componentDidMount')
     let stars = document.getElementById(this.props.id).childNodes;
 
     let rating = this.props.star;
