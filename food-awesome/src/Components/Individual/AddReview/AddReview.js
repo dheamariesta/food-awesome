@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { addReview } from '../../../Actions/Review';
+import Star from './Star/Star';
 
 import './AddReview.css';
 
@@ -9,8 +10,9 @@ class AddReview extends React.Component {
     super(props);
     this.state = {
       review: {},
-      starClicked: false,
-      pic: null
+      pic: null,
+      adminMessage:"",
+      isLoggedIn: false
     }
   }
 
@@ -24,32 +26,11 @@ class AddReview extends React.Component {
 // id: String,
 // user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 
-  starEnter = (event) => {
-    if(!this.state.starClicked){
-      let stars = document.getElementById('starImages').childNodes;
-      for (var i = 0; i < event.target.dataset.rating ; i++) {
-        stars[i].classList.remove('fa-star-o');
-        stars[i].classList.add('fa-star');
-      }
-    }
-  }
-
-  starLeave = (event) => {
-    if(!this.state.starClicked){
-      let stars = document.getElementById('starImages').childNodes;
-      stars.forEach((star,index) => {
-        star.classList.remove('fa-star');
-        star.classList.add('fa-star-o');
-      })
-    }
-  }
-
-  starClicked = (event) => {
+  passStarValue = (noOfStar) => {
     let newReview = this.state.review;
-    newReview.star = event.target.dataset.rating
+    newReview.star = noOfStar;
     this.setState({
-      review: newReview,
-      starClicked: true
+      review: newReview
     })
   }
 
@@ -61,7 +42,6 @@ class AddReview extends React.Component {
       })
     }else{
       newReview[event.target.id] = event.target.value;
-      // newReview["user"] = this.props.currentUser._id
     }
     this.setState({
       review: newReview
@@ -69,7 +49,26 @@ class AddReview extends React.Component {
   }
 
   addReview = () => {
-    this.props.addReview(this.state.pic,this.state.review);//,this.props.user_id);
+    let newReview = this.state.review;
+    let propArray = ['title', 'description', 'star'];
+    let missing = false;
+    let messageTemplate = "please enter ";
+    propArray.forEach((prop,index) => {
+      if(!(prop in newReview)){
+        messageTemplate+= (prop + ", ");
+        missing = true;
+      }
+    })
+    this.setState({
+      missing: missing,
+      adminMessage: messageTemplate
+    })
+
+    if(!missing){
+      newReview.user_id = this.props.user._id;
+      newReview.restaurant_id = this.props.activeHome._id;
+      this.props.addReview(this.state.pic,newReview);
+    }
   }
 
   closeReviewBox = () => {
@@ -79,6 +78,9 @@ class AddReview extends React.Component {
   render() {
     return (
       <div id="reviewContainer">
+        <div className="adminMessage">{
+          this.state.missing? (this.state.adminMessage) : null
+        }</div>
         <h4>Your Review</h4>
           <div className="form-group">
             <label>Title</label>
@@ -89,37 +91,7 @@ class AddReview extends React.Component {
                       onChange={this.onChange}
                       value={this.state.review.title? this.state.review.title: ""}/>
           </div>
-          <div className="form-group">
-            <label>Star</label>
-            <div className="star-rating" id='starImages'>
-              <span className="fa fa-star-o star"
-                    data-rating="1"
-                    onMouseEnter={this.starEnter}
-                    onMouseLeave={this.starLeave}
-                    onClick = {this.starClicked}></span>
-              <span className="fa fa-star-o star"
-                    data-rating="2"
-                    onMouseEnter={this.starEnter}
-                    onMouseLeave={this.starLeave}
-                    onClick = {this.starClicked}></span>
-              <span className="fa fa-star-o star"
-                    data-rating="3"
-                    onMouseEnter={this.starEnter}
-                    onMouseLeave={this.starLeave}
-                    onClick = {this.starClicked}></span>
-              <span className="fa fa-star-o star"
-                    data-rating="4"
-                    onMouseEnter={this.starEnter}
-                    onMouseLeave={this.starLeave}
-                    onClick = {this.starClicked}></span>
-              <span className="fa fa-star-o star"
-                    data-rating="5"
-                    onMouseEnter={this.starEnter}
-                    onMouseLeave={this.starLeave}
-                    onClick = {this.starClicked}></span>
-              <input type="hidden" name="whatever1" className="rating-value" value="2.56"/>
-            </div>
-          </div>
+          <Star passStarValue={this.passStarValue}/>
           <div className="form-group">
             <label>Say something?</label>
             <textarea id="description"
@@ -147,7 +119,8 @@ class AddReview extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    restaurants: state.restaurants,
+    user: state.user,
+    activeHome: state.activeHome
   }
 }
 
