@@ -14,7 +14,7 @@ export let initStore = () => {
     restaurants: RestaurantReducer,
     activeRestaurant: ActiveRestaurantReducer,
 
-    activeHome: activeHomeReducer
+    activeHome: activeHomeReducer,
 
     user: UserReducer
 
