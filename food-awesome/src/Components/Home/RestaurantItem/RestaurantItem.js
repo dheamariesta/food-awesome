@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
+
 import {connect} from 'react-redux';
 import share from './share-icon-white.png'
 import './RestaurantItem.css'
 
 import { activeHome } from '../../../Actions/Home/activeHome'
 //import FB from 'fb';
+
 class RestaurantItem extends Component {
   // constructor(props) {
   //   super(props);
@@ -27,6 +29,7 @@ class RestaurantItem extends Component {
     // );
   }
 
+
   navigate = () => {
     this.props.activeHome(this.props);
   }
@@ -43,13 +46,17 @@ class RestaurantItem extends Component {
       }
     })
   }
+
   //{"/individual/" + this.props.name}
+
   render() {
     return (
       <div className="col-sm-3 item">
         <div className="col-sm-12">
           <div id="image">
+
             <a href={ "/individual/" + this.props.name} onClick={this.navigate}>
+
               <img src={this.props.img} className="restaurant-image" />
             </a>
           </div>
@@ -62,6 +69,7 @@ class RestaurantItem extends Component {
             <span className="fa fa-star-o star" data-rating="3"></span>
             <span className="fa fa-star-o star" data-rating="4"></span>
             <span className="fa fa-star-o star" data-rating="5"></span>
+
             <input type="hidden" name="whatever1" className="rating-value" value="2.56"/>
           </div>
           <span>{this.props.description}</span>

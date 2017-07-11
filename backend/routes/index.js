@@ -2,7 +2,7 @@ import express from 'express';
 import restaurantController from '../restaurants/controllers';
 import multer from 'multer';
 import cloudinary from 'cloudinary';
-const upload = multer({ dest: './uploads/' });
+const upload = multer({ dest: './uploads/restaurant' });
 
 const router = express.Router();
 

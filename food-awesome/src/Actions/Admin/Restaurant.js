@@ -65,7 +65,7 @@ export const addRestaurant = (picHome, picIndividual, newRestaurant) => {
     picHomeToBackEnd.append('id', newRestaurant.id);
 
     //sending newRestaurant to backend
-    axios.post('/api/files',picHomeToBackEnd)
+    axios.post('/api/',picHomeToBackEnd)
     .then( (response)=>{
       // here picHome is a url. needs local uuid to update restaurant with database id
       dispatch(addRestaurant_id(response.data.picHome,response.data.picHomePublicId, response.data.id,response.data._id));
