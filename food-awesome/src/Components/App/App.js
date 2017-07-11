@@ -31,7 +31,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home}/>
 
-          <Route path="/individual" component={Individual}/>
+          <Route path={"/individual"} component={Individual}/>
 
 
           <Route exact path="/login" component={Login}/>
@@ -48,6 +48,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    activeHome: state.activeHome
   }
 }
 const mapDispatchToProps = (dispatch) => {

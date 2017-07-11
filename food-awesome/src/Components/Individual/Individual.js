@@ -12,17 +12,21 @@ export class Individual extends Component {
       restaurant: this.props.active
     }
   }
-  componentWillReceiveProps(nextProps){
-    let restaurants = nextProps.restaurants;
-    let restaurantObj = restaurants.filter((el) => {
-      return el.name === this.props.active.name
-    })
-    console.log('componentDidMount',restaurantObj)
-    this.setState({
-      restaurant: restaurantObj
-    })
-  }
+  // componentWillReceiveProps(nextProps){
+  //   let restaurants = nextProps.restaurants;
+  //   let restaurantObj = restaurants.filter((el) => {
+  //     return el.name === this.props.active.name
+  //   })
+  //   console.log('componentDidMount',restaurantObj)
+  //   this.setState({
+  //     restaurant: restaurantObj
+  //   })
+  // }
   render() {
+    console.log('thispropsactive',this.props.active)
+    if(!this.props.active.hasOwnProperty('name')){
+      window.location.href = "/"
+    }
     return (
       <div className="container-fluid">
         <IndividualContainer restaurant={this.state.restaurant}/>

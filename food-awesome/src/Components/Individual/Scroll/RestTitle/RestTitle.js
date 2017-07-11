@@ -10,7 +10,7 @@ export class RestTitle extends Component {
   render() {
     return (
       <div>
-        <div className="title">Havana on Foot</div>
+        <div className="title"></div>
         <span>Havana</span>
         <span> . </span>
         <span>Tune into daily rhythms with a Cuban scholars Team</span>

@@ -51,7 +51,7 @@ export class HomeContainer extends Component {
       return restaurants.map((restaurant) => {
         console.log('map')
         return (
-          <Link to={'/individual/' + restaurant.name} key={restaurant.id}>
+          <Link to={'/individual/' + restaurant.name} key={restaurant.id} >
           <RestaurantItem name={restaurant.name}
                         id = {restaurant.id}
                         description={restaurant.describeHome}
