@@ -51,15 +51,10 @@ export const addReview = (picReview, newReview) =>{
     axios.post('/review/'+ newReview.restaurant_id, picReviewToBackEnd)
     .then( (response)=>{
       console.log(response.data)
-      namefunction()
       // here picHome is a url. needs local uuid to update restaurant with database id
       //dispatch(addRestaurant_id(response.data.picReview, response.data.picReviewPublicId, response.data.id, response.data._id));
     }).catch( (error) =>{
       dispatch(loadingReviewError(error));
     })
-
-    namefunction = () => {
-      axios.get
-    }
   }
 }
