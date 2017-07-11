@@ -58,7 +58,9 @@ export class HomeContainer extends Component {
                         img={restaurant.picHome}
                         star={restaurant.star}
                         onClick={this.onClick}
-                        _id = {restaurant._id}/>
+                        _id = {restaurant._id}
+                        describeIndividual={restaurant.describeIndividual}
+                        reviews={restaurant.reviews}/>
           </Link>
         )
       });

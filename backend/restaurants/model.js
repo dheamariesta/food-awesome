@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 const restaurantSchema = new mongoose.Schema({
   name: String,
   star: Number,
+  address: String,
   describeHome: String,
   describeIndividual: String,
   picHome: String,

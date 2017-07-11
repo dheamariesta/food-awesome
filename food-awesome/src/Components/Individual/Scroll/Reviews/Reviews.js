@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-// import './Notes.css'
+import './Reviews.css'
 
 export class Reviews extends Component {
   // constructor(props) {
@@ -9,9 +9,9 @@ export class Reviews extends Component {
 
   render() {
     return (
-      <div>
+      <div className="review">
         <span className="col-sm-3">
-          Sample Reviews
+          Sample Reviews id={this.props.id}
         </span>
         <span className="col-sm-9">
           The restaurant was really good and the food was really nice.

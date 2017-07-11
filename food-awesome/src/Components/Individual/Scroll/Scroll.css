@@ -1,14 +1,7 @@
-restTitle {
-  border-bottom: 1px solid #DBDBDB;
-  margin-bottom: 10px;
+.scroll-item{
+  overflow: scroll;
+  overflow-x: hidden;
 }
-
-midSect {
-  border-bottom: 1px solid #DBDBDB;
-  margin-bottom: 10px;
-}
-
-notes {
-  border-bottom: 1px solid #DBDBDB;
-  margin-bottom: 10px;
+.btn.btn-primary{
+  margin-top: 20px;
 }

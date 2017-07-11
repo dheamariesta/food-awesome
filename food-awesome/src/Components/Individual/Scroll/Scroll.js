@@ -24,13 +24,13 @@ export class Scroll extends Component {
   }
 
   render() {
+    console.log('reviews', this.props.restaurant.reviews)
     return (
-      <div className="col-sm-7 item">
+      <div className="col-sm-7 scroll-item">
         <div className="col-sm-12">
-          <h4>Scroll</h4>
           <RestTitle name={this.props.restaurant.name}/>
-          <MidSect />
-          <Reviews />
+          <MidSect description={this.props.restaurant.describeIndividual}/>
+          <Reviews id={this.props.restaurant.reviews}/>
         </div>
         <button type="submit" className="btn btn-primary" onClick={this.reviewBoxOpen}>Write a Review</button>
         {

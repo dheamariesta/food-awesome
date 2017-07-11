@@ -19,6 +19,7 @@ exports.postRestaurant = (req, res) => {
     const newRestaurant = new Restaurant({
       name: req.body.name||"",
       star : req.body.star||"",
+      address: req.body.address || "",
       describeHome : req.body.describeHome||"",
       describeIndividual : req.body.describeIndividual||"",
       picHome : result.secure_url||"",
@@ -48,12 +49,13 @@ exports.updateRestaurant = (req,res) => {
   // if(typeof(req.file)!=="undefined"){
     cloudinary.uploader.upload(req.file.path,(result) => {
       Restaurant.findOne({'_id':req.params.id}, (err,restaurant) => {
-        restaurant.name = req.body.name || restaurant.name,
-        restaurant.star = req.body.star ||restaurant.star,
-        restaurant.describeHome = req.body.describeHome || restaurant.describeHome,
-        restaurant.describeIndividual = req.body.describeIndividual|| restaurant.describeIndividual,
-        restaurant.picHome = result.secure_url || restaurant.picHome,
-        restaurant.picIndividual = req.body.picIndividual || restaurant.picIndividual,
+        restaurant.name = req.body.name || restaurant.name;
+        restaurant.star = req.body.star ||restaurant.star;
+        restaurant.address = req.body.address || restaurant.address;
+        restaurant.describeHome = req.body.describeHome || restaurant.describeHome;
+        restaurant.describeIndividual = req.body.describeIndividual|| restaurant.describeIndividual;
+        restaurant.picHome = result.secure_url || restaurant.picHome;
+        restaurant.picIndividual = req.body.picIndividual || restaurant.picIndividual;
         restaurant.save((err)=>{
           if(err){console.log(err); return;}
           res.json(restaurant)
