@@ -14,12 +14,11 @@ class Header extends Component {
           <input type="text" className="form-control" id="exampleInputEmail1" placeholder="Search" />
         </div>
         <div className="col-sm-1">
-          <a href="/login" id="signup">Signup</a>
-        </div>
-        <div className="col-sm-1">
           <a href="/login">Login</a>
         </div>
-
+        <div className="col-sm-1">
+          <a href="/login" id="signup">Create Account</a>
+        </div>
       </div>
 
     );
