@@ -27,6 +27,10 @@
     "/auth": {
       "target": "http://localhost:3001",
       "ws": false
+    },
+    "/review": {
+      "target": "http://localhost:3001",
+      "ws": false
     }
   },
   "scripts": {

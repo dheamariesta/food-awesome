@@ -4,8 +4,10 @@ import cloudinary from 'cloudinary';
 import fs from 'fs';
 
 exports.getReview = (req, res) => {
-  Review.find({},(err,review) => {
-    res.json(review);
+  console.log('req param id', req.params.restaurant_id)
+  Restaurant.findById(req.params.restaurant_id).populate('Reviews').exec((err,reviewContent) => {
+    console.log('review content',reviewContent)
+    res.json(reviewContent)
   })
 }
 
