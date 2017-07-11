@@ -21,7 +21,7 @@ store.subscribe( () => {
 })
 
 store.dispatch(getRestaurant())
-
+// PUT GET USER HERE
 ReactDOM.render(
   <Provider store={store}>
     <App />

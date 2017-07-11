@@ -2,10 +2,8 @@
 const ActiveHome = (state = {}, action) => {
   switch (action.type) {
     case 'ACTIVE_HOME':
-      return {
-        ...state,
-        restaurant: action.restaurant
-      }
+      return action.restaurant
+      
       break;
     default:
       return state

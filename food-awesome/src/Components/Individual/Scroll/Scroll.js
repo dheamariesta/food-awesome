@@ -28,7 +28,7 @@ export class Scroll extends Component {
       <div className="col-sm-7 item">
         <div className="col-sm-12">
           <h4>Scroll</h4>
-          <RestTitle />
+          <RestTitle name={this.props.restaurant.name}/>
           <MidSect />
           <Notes />
           <Notes />
