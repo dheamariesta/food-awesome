@@ -5,9 +5,9 @@ import fs from 'fs';
 
 exports.getReview = (req, res) => {
   console.log('req param id', req.params.restaurant_id)
-  Restaurant.findById(req.params.restaurant_id).populate('Reviews').exec((err,reviewContent) => {
-    console.log('review content',reviewContent)
-    res.json(reviewContent)
+  Restaurant.findById(req.params.restaurant_id).populate('reviews').exec((err,reviewContent) => {
+    console.log('review content',reviewContent.reviews)
+    res.json(reviewContent.reviews)
   })
 }
 

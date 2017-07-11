@@ -28,7 +28,7 @@ export class HomeContainer extends Component {
   }
 
   onClick = (id, active) => {
-    console.log('active home', active)
+    // console.log('active home', active)
     this.props.activeHome(active)
     // console.log('clicked id', id)
     // axios.get('/api/' + id)
@@ -49,7 +49,7 @@ export class HomeContainer extends Component {
       return  (<div>Loading restaurant list...</div>)
     } else {
       return restaurants.map((restaurant) => {
-        console.log('map')
+        // console.log('map')
         return (
           <Link to={'/individual/' + restaurant.name} key={restaurant.id} >
           <RestaurantItem name={restaurant.name}

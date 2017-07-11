@@ -16,8 +16,8 @@ export class Home extends Component {
 
   render() {
     const isLoggedIn = this.props.user._id;
-    console.log(this.props.user);
-    console.log(isLoggedIn);
+    // console.log(this.props.user);
+    // console.log(isLoggedIn);
 
     return (
       <div className="container-fluid">
@@ -32,6 +32,9 @@ export class Home extends Component {
 }
 
 const mapStateToProps = (state) => {
+  // console.log("map");
+  // console.log(state);
+  // console.log(state.user);
     return {
       user: state.user
     }
