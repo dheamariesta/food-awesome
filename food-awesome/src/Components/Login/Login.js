@@ -53,7 +53,7 @@ export class Login extends Component { // eslint-disable-line react/prefer-state
           });
           console.log(this.state);
           this.props.getUser();
-          // window.location.href = "/";
+          window.location.href = "/";
         }
       })
       .catch((error)=> {

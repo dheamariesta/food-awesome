@@ -3,6 +3,14 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
 export class AccountPage extends Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      user:""
+    }
+  }
+
   render() {
     return (
       <div className="container">
@@ -38,24 +46,6 @@ export class AccountPage extends Component {
                 <input type="radio" name="gender" defaultValue="other" data-toggle="radio" />
                 <span>Other</span>
               </label>
-            </div>
-          </div>
-          <div className="form-group">
-            <label className="col-sm-3 control-label" htmlFor="location">Location</label>
-            <div className="col-sm-7">
-              <input className="form-control" type="text" name="location" id="location" />
-            </div>
-          </div>
-          <div className="form-group">
-            <label className="col-sm-3 control-label" htmlFor="website">Website</label>
-            <div className="col-sm-7">
-              <input className="form-control" type="text" name="website" id="website" />
-            </div>
-          </div>
-          <div className="form-group">
-            <label className="col-sm-3 control-label">Gravatar</label>
-            <div className="col-sm-4">
-              <img className="profile" src="https://gravatar.com/avatar/79c650ccd7de7772dc870b135eec6657?s=200&d=retro" width={100} height={100} />
             </div>
           </div>
           <div className="form-group">
@@ -127,8 +117,9 @@ export class AccountPage extends Component {
 };
 
 const mapStateToProps = (state) => {
+  console.log("in mapStateToProps " + state.user.id);
   return {
-
+    user: state.user
   }
 }
 
