@@ -33,7 +33,7 @@ class RestaurantItem extends Component {
   render() {
     return (
       <div className="col-sm-3 item" onClick = {this.onClick}>
-        <div className="col-sm-12">
+        <div className="col-sm-12 restaurant-box">
           <div id="image">
             <img src={this.props.img} className="restaurant-image" />
           </div>

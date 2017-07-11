@@ -11,7 +11,7 @@ span{
 .item{
   margin-bottom: 20px;
 }
-.col-sm-12:hover{
+.restaurant-box:hover{
   background-color: rgba(185, 192, 204, .3);
 }
 #share-button{

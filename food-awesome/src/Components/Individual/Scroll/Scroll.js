@@ -4,8 +4,9 @@ import MidSect from './MidSect/MidSect';
 import Notes from './Notes/Notes';
 import Reviews from './Reviews/Reviews';
 import AddReview from '../AddReview/AddReview';
-import { connect } from 'react-redux';
 
+import axios from 'axios'
+import { connect } from 'react-redux';
 import './Scroll.css'
 
 export class Scroll extends Component {
@@ -43,13 +44,20 @@ export class Scroll extends Component {
   }
 
   render() {
+    console.log('reviews', this.props.restaurant.reviews)
+    axios.get('/review/' + this.props.restaurant._id)
+    .then((response) => {
+      console.log('response from get review', response);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
     return (
-      <div className="col-sm-7 item">
+      <div className="col-sm-7 scroll-item">
         <div className="col-sm-12">
-          <h4>Scroll</h4>
           <RestTitle name={this.props.restaurant.name}/>
-          <MidSect />
-          <Reviews />
+          <MidSect description={this.props.restaurant.describeIndividual}/>
+          <Reviews id={this.props.restaurant.reviews}/>
         </div>
         {
           this.state.popUp? this.adminMessage(): null

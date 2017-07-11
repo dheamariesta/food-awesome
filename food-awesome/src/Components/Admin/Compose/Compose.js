@@ -93,6 +93,16 @@ class Compose extends Component {
                value={this.state.newRestaurant.star? this.state.newRestaurant.star: ""}/>
       </div>
       <div className="form-group">
+        <label>Address</label>
+        <textarea id="address"
+                  className="form-control"
+                  name="address"
+                  rows={3}
+                  placeholder="address"
+                  onChange={this.onChange}
+                  value={this.state.newRestaurant.address? this.state.newRestaurant.address: ""}/>
+      </div>
+      <div className="form-group">
         <label>desciption in home page</label>
         <textarea id="describeHome"
                   className="form-control"
@@ -102,6 +112,7 @@ class Compose extends Component {
                   onChange={this.onChange}
                   value={this.state.newRestaurant.describeHome? this.state.newRestaurant.describeHome: ""}/>
       </div>
+
       <div className="form-group">
         <label>desciption in individual page</label>
         <textarea id="describeIndividual"

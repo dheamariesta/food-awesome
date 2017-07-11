@@ -102,12 +102,13 @@ export const updateRestaurant = (picHome,restaurant) => {
     picHomeToBackEnd.append('picHome', picHome);
     picHomeToBackEnd.append('name', restaurant.name);
     picHomeToBackEnd.append('star', restaurant.star);
+    picHomeToBackEnd.append('address', restaurant.address);
     picHomeToBackEnd.append('describeHome', restaurant.describeHome);
     picHomeToBackEnd.append('describeIndividual', restaurant.describeIndividual);
     picHomeToBackEnd.append('picHomePublicId', restaurant.picHomePublicId)
 
     // axios function to send info to backend database
-    axios.put('/api/'+restaurant._id,restaurant)
+    axios.put('/api/'+restaurant._id,picHomeToBackEnd)
     .then( (response)=>{
       // here picHome is a new url
       dispatch(updateRestaurantInStorePicURL(response.data.picHome, response.data.id))
