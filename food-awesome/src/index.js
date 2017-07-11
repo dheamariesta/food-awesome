@@ -6,6 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 import { getRestaurant } from './Actions/Admin/Restaurant';
+import { getUser} from './Actions/User';
 
 // Redux
 import { Provider } from 'react-redux';   // yarn add react-redux
@@ -20,7 +21,8 @@ store.subscribe( () => {
   setAdmin(state.admin);
 })
 
-store.dispatch(getRestaurant())
+store.dispatch(getRestaurant());
+store.dispatch(getUser());
 
 // PUT GET USER HERE
 ReactDOM.render(

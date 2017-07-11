@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { getUser } from '../../Actions/User';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
 import './Login.css';
 
 /**
@@ -53,10 +51,9 @@ export class Login extends Component { // eslint-disable-line react/prefer-state
           this.setState({
             user:data._id
           });
-          console.log("hello");
           console.log(this.state);
           this.props.getUser();
-          // window.location.href = "/";
+          window.location.href = "/";
         }
       })
       .catch((error)=> {
@@ -101,7 +98,6 @@ export class Login extends Component { // eslint-disable-line react/prefer-state
   render() {
     return (
       <div className="container-fluid">
-        <Header/>
         <div className="login" id="Login">
           <form>
             <div className="error">{this.state.error}</div>
@@ -135,7 +131,6 @@ export class Login extends Component { // eslint-disable-line react/prefer-state
                     onClick={this.facebookLogin}>Login with Facebook</button>
           </form>
         </div>
-        <Footer/>
       </div>
     );
   }
