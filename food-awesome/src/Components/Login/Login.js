@@ -136,15 +136,14 @@ export class Login extends Component { // eslint-disable-line react/prefer-state
   }
 }
 
+// update UI from state
 const mapStateToProps = (state) => {
-  console.log("map");
-  console.log(state);
-  console.log(state.user);
     return {
       user: state.user
     }
 }
 
+// update state in store
 const mapDispatchToProps = (dispatch) => {
   return {
     getUser:() => {dispatch(getUser());}

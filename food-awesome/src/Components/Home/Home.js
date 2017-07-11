@@ -5,7 +5,6 @@ import Login from '../Login/Login';
 
 import { connect } from 'react-redux';
 
-
 export class Home extends Component {
   constructor(props) {
     super(props);
@@ -18,24 +17,17 @@ export class Home extends Component {
 
     return (
       <div className="container-fluid">
-
-
-
         <div className="row">
           <div className="isLoggedIn">
             <HomeContainer/>
           </div>
         </div>
-
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  console.log("map");
-  console.log(state);
-  console.log(state.user);
     return {
       user: state.user
     }
