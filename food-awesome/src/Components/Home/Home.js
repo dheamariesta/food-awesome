@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
-import Header from '../Header/Header';
+
+
 import HomeContainer from './HomeContainer/HomeContainer';
 import Login from '../Login/Login';
-import Footer from '../Footer/Footer';
+
 import { connect } from 'react-redux';
+
 
 export class Home extends Component {
   constructor(props) {
@@ -17,13 +19,15 @@ export class Home extends Component {
 
     return (
       <div className="container-fluid">
-        <Header/>
+
+
+
         <div className="row">
           <div className="isLoggedIn">
             <HomeContainer/>
           </div>
         </div>
-        <Footer/>
+
       </div>
     );
   }

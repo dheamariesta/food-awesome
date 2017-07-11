@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import Header from '../Header/Header'
+import {connect} from 'react-redux';
 import IndividualContainer from './IndividualContainer/IndividualContainer';
-import Footer from '../Footer/Footer';
+
 
 import './Individual.css';
 
@@ -11,14 +11,24 @@ export class Individual extends Component {
   // }
 
   render() {
+    console.log('propss at indiv', this.props)
     return (
-      <div className="container-fluid scrollDisplay">
-        <Header/>
+      <div className="container-fluid">
         <IndividualContainer/>
-        <Footer/>
       </div>
     );
   }
 }
 
-export default Individual;
+const mapStateToProps = (state) => {
+  console.log('state at individual', state)
+  return {
+    active: state.activeHome
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Individual);
