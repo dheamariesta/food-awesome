@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+import './Star.css';
+
 class Star extends Component {
   constructor(props) {
     super(props);
@@ -53,8 +55,8 @@ class Star extends Component {
   render() {
     return (
       <div className="form-group">
-        <label>Star</label>
-        <div className="star-rating" id='starImages'>
+        <label>Rate this restaurant</label>
+        <span className="star-rating" id='starImages'>
           <span className="fa fa-star-o star"
                 data-rating="1"
                 onMouseEnter={this.starEnter}
@@ -82,8 +84,8 @@ class Star extends Component {
                 onClick = {this.starClicked}></span>
 
           <input type="hidden" name="whatever1" className="rating-value" value="2.56"/>
-        </div>
-        <button type="submit" className="btn btn-danger" onClick={this.clearStar}>Clear</button>
+        </span>
+        <button id="starClearButton" type="submit" className="btn btn-danger" onClick={this.clearStar}>Clear</button>
       </div>
     );
   }
