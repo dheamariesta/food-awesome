@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { addReview } from '../../../Actions/Review';
+import { addReviewWithPic, addReviewWithoutPic } from '../../../Actions/Review';
 import Star from './Star/Star';
 
 import './AddReview.css';
@@ -10,7 +10,7 @@ class AddReview extends React.Component {
     super(props);
     this.state = {
       review: {},
-      pic: null,
+      picReview: null,
       adminMessage:"",
       isLoggedIn: false,
       submitSuccessful: false
@@ -22,10 +22,11 @@ class AddReview extends React.Component {
 // star: Number,
 // votes: Number,
 // description: String,
-// pic: String,
-// picPublicId:String,
+// picReview: String,
+// picReviewPublicId:String,
 // id: String,
 // user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+//restaurant: { type: mongoose.Schema.Types.ObjectId, ref: 'Restaurant' },
 
   passStarValue = (noOfStar) => {
     let newReview = this.state.review;
@@ -37,9 +38,9 @@ class AddReview extends React.Component {
 
   onChange = (event) => {
     let newReview = this.state.review;
-    if(event.target.id==="pic"){
+    if(event.target.id==="picReview"){
       this.setState({
-        pic: event.target.files[0]
+        picReview: event.target.files[0]
       })
     }else{
       newReview[event.target.id] = event.target.value;
@@ -47,6 +48,7 @@ class AddReview extends React.Component {
     this.setState({
       review: newReview
     })
+
   }
 
   addReview = () => {
@@ -55,9 +57,16 @@ class AddReview extends React.Component {
     let missing = false;
     let messageTemplate = "please enter ";
     propArray.forEach((prop,index) => {
-      if(!(prop in newReview)){
-        messageTemplate+= (prop + ", ");
-        missing = true;
+      if(prop==="star"){
+        if(!(prop in newReview)||newReview.star===0){
+          messageTemplate+= ("and rating.");
+          missing = true;
+        }
+      }else{
+        if(!(prop in newReview)){
+          messageTemplate+= (prop + ", ");
+          missing = true;
+        }
       }
     })
     this.setState({
@@ -68,7 +77,12 @@ class AddReview extends React.Component {
     if(!missing){
       newReview.user_id = this.props.user._id;
       newReview.restaurant_id = this.props.activeHome._id;
-      this.props.addReview(this.state.pic,newReview);
+      if(this.state.picReview===null){
+        this.props.addReviewWithoutPic(newReview);
+      }else{
+        this.props.addReviewWithPic(this.state.picReview,newReview);
+      }
+
       this.setState({
         submitSuccessful: true
       })
@@ -106,8 +120,8 @@ class AddReview extends React.Component {
                       value={this.state.review.description? this.state.review.description: ""}/>
           </div>
           <div className="form-group">
-            <label>Your Favorite Food</label>
-            <input id="pic"
+            <label>Upload your favorite food</label>
+            <input id="picReview"
                    type="file"
                    className="form-control-file"
                    aria-describedby="fileHelp"
@@ -138,7 +152,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addReview: (pic, newReview) => {dispatch(addReview(pic, newReview));},
+    addReviewWithPic: (picReview, newReview) => {dispatch(addReviewWithPic(picReview, newReview));},
+    addReviewWithoutPic: (newReview) => {dispatch(addReviewWithoutPic(newReview));},
   }
 }
 
