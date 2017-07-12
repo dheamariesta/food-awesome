@@ -125,33 +125,44 @@ exports.getAccount = (req, res) => {
  * Update profile information.
  */
 exports.postUpdateProfile = (req, res, next) => {
-  req.assert('email', 'Please enter a valid email address.').isEmail();
-  req.sanitize('email').normalizeEmail({ remove_dots: false });
+  let emailInput = req.body.data
+  console.log(emailInput)
+  // req.assert(emailInput, 'Please enter a valid email address.').isEmail();
+  // req.sanitize('email').normalizeEmail({ remove_dots: false });
+  console.log("still okay");
 
-  const errors = req.validationErrors();
+  // const errors = req.validationErrors();
+  // console.log(errors);
 
-  if (errors) {
-    req.flash('errors', errors);
-    return res.redirect('/account');
-  }
+  // if (errors) {
+  //   console.log(errors);
+  //   // req.flash('errors', errors);
+  //   return res.redirect('/account');
+  // }
 
-  User.findById(req.user.id, (err, user) => {
+  console.log(req.user);
+
+  User.findById(req.user._id, (err, user) => {
+
     if (err) { return next(err); }
-    user.email = req.body.email || '';
-    user.profile.name = req.body.name || '';
-    user.profile.gender = req.body.gender || '';
-    user.profile.location = req.body.location || '';
-    user.profile.website = req.body.website || '';
+    console.log(req.body.data);
+    // console.log(user)
+    user.email = req.body.data || '';
+    // user.profile.name = req.body.name || '';
+    // user.profile.gender = req.body.gender || '';
+    // user.profile.location = req.body.location || '';
+    // user.profile.website = req.body.website || '';
     user.save((err) => {
       if (err) {
         if (err.code === 11000) {
-          req.flash('errors', { msg: 'The email address you have entered is already associated with an account.' });
-          return res.redirect('/account');
+          // req.flash('errors', { msg: 'The email address you have entered is already associated with an account.' });
+          return res.json("error");
         }
         return next(err);
       }
-      req.flash('success', { msg: 'Profile information has been updated.' });
-      res.redirect('/account');
+      // req.flash('success', { msg: 'Profile information has been updated.' });
+      console.log('saved');
+      res.send('saved');
     });
   });
 };
