@@ -1,14 +1,24 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
+import { getReviewOfUser } from '../../Actions/Review';
+import Review from './Review/Review';
 
 export class AccountPage extends Component {
   constructor(props){
     super(props);
 
     this.state = {
-      user:""
+      user:"",
+      seeReview: false,
     }
+  }
+
+  getReviewOfUser = () => {
+    this.props.getReviewOfUser(this.props.user._id)
+    this.setState({
+      seeReview: true
+    })
   }
 
   render() {
@@ -111,6 +121,12 @@ export class AccountPage extends Component {
             </div>
           </div>
         </div>
+        <button type="submit" className="btn btn-primary" onClick={this.getReviewOfUser}>View my Reviews</button>
+        {
+          this.state.seeReview? (
+            <Review/>
+          ): null
+        }
       </div>
     );
   }
@@ -125,7 +141,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
+    getReviewOfUser: (user_id) => { dispatch(getReviewOfUser(user_id))}
   }
 }
 

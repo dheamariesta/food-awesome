@@ -12,7 +12,8 @@ class AddReview extends React.Component {
       review: {},
       pic: null,
       adminMessage:"",
-      isLoggedIn: false
+      isLoggedIn: false,
+      submitSuccessful: false
     }
   }
 
@@ -68,6 +69,9 @@ class AddReview extends React.Component {
       newReview.user_id = this.props.user._id;
       newReview.restaurant_id = this.props.activeHome._id;
       this.props.addReview(this.state.pic,newReview);
+      this.setState({
+        submitSuccessful: true
+      })
     }
   }
 
@@ -79,7 +83,7 @@ class AddReview extends React.Component {
     return (
       <div id="reviewContainer">
         <div className="adminMessage">{
-          this.state.missing? (this.state.adminMessage) : null
+          this.state.missing? (this.state.adminMessage) : (this.state.submitSuccessful? "Submited successfully" : null)
         }</div>
         <h4>Your Review</h4>
           <div className="form-group">
@@ -110,8 +114,16 @@ class AddReview extends React.Component {
                    onChange={this.onChange}
                    />
           </div>
-          <button type="submit" className="btn btn-primary" onClick={this.addReview}>Submit</button>
-          <button type="submit" className="btn btn-danger" onClick={this.closeReviewBox}>Discard</button>
+          {
+            this.state.submitSuccessful ? (
+              <button type="submit" className="btn btn-primary" onClick={this.closeReviewBox}>Close</button>
+            ):(
+              <div>
+              <button type="submit" className="btn btn-primary" onClick={this.addReview}>Submit</button>
+              <button type="submit" className="btn btn-danger" onClick={this.closeReviewBox}>Discard</button>
+              </div>
+            )
+          }
       </div>
     );
   }

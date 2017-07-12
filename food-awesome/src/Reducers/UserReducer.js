@@ -6,7 +6,6 @@ const UserReducer = (state = {}, action) => {
     case "USER_UPDATE":
       // console.log("user update");
       return action.user || {};
-
     default:
       return state;
   }
