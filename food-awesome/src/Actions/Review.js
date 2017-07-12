@@ -18,9 +18,10 @@ import uuid from 'uuid';
 //   }
 // }
 
-const addReviewIdIntoRestaurantInStore = (review_id) => {
+const addReviewIdIntoRestaurantInStore = (restaurant_id, review_id) => {
   return {
     type: 'ADD_REVIEW_ID_TO_RESTAURANT',
+    restaurant_id,
     review_id,
   }
 }
@@ -48,7 +49,7 @@ export const addReview = (picReview, newReview) =>{
     //sending newReview to backend. no special argument, returns url, public_id, database id
     axios.post('/review/postReview/'+ newReview.restaurant_id, picReviewToBackEnd)
     .then( (response)=>{
-      dispatch(addReviewIdIntoRestaurantInStore(response.data._id));
+      dispatch(addReviewIdIntoRestaurantInStore(newReview.restaurant_id,response.data._id));
     }).catch( (error) =>{
       dispatch(loadingReviewError(error));
     })
