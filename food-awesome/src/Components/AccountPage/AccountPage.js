@@ -12,6 +12,8 @@ export class AccountPage extends Component {
   }
 
   render() {
+    console.log(this.props.user.email);
+
     return (
       <div className="container">
         <div className="page-header">
@@ -22,30 +24,13 @@ export class AccountPage extends Component {
           <div className="form-group">
             <label className="col-sm-3 control-label" htmlFor="email">Email</label>
             <div className="col-sm-7">
-              <input className="form-control" type="email" name="email" id="email" defaultValue="" />
+              <input className="form-control" type="email" name="email" id="email" value={this.props.user.email} />
             </div>
           </div>
           <div className="form-group">
             <label className="col-sm-3 control-label" htmlFor="name">Name</label>
             <div className="col-sm-7">
-              <input className="form-control" type="text" name="name" id="name" defaultValue="" />
-            </div>
-          </div>
-          <div className="form-group">
-            <label className="col-sm-3 control-label">Gender</label>
-            <div className="col-sm-6">
-              <label className="radio col-sm-3">
-                <input type="radio" name="gender" defaultValue="male" data-toggle="radio" />
-                <span>Male</span>
-              </label>
-              <label className="radio col-sm-3">
-                <input type="radio" name="gender" defaultValue="female" data-toggle="radio" />
-                <span>Female</span>
-              </label>
-              <label className="radio col-sm-3">
-                <input type="radio" name="gender" defaultValue="other" data-toggle="radio" />
-                <span>Other</span>
-              </label>
+              <input className="form-control" type="text" name="name" id="name" value="" />
             </div>
           </div>
           <div className="form-group">
