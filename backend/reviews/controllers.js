@@ -1,19 +1,25 @@
 import Review from './model';
 import Restaurant from '../restaurants/model';
+import User from '../user/model';
 import cloudinary from 'cloudinary';
 import fs from 'fs';
 
+exports.getAllReview = (req,res) => {
+  Review.find({}, (err,restaurant) => {
+    res.json(restaurant);
+  })
+}
+
+
 exports.getReview = (req, res) => {
-  console.log('req param id', req.params.restaurant_id)
   Restaurant.findById(req.params.restaurant_id).populate('reviews').exec((err,reviewContent) => {
-    console.log('review content',reviewContent.reviews)
     res.json(reviewContent.reviews)
   })
 }
 
-exports.getSpecificReview = (req, res) => {
-  Review.findOne({'_id':req.params.id},(err,review) => {
-    res.json(review);
+exports.getUserReview = (req, res) => {
+  User.findById(req.params.user_id).populate('reviews').exec( (err,user) => {
+    res.json(user.reviews);
   })
 }
 
@@ -24,8 +30,8 @@ exports.postReview = (req, res) => {
     votes: req.body.votes||"",
     description: req.body.description||"",
     id: req.body.id||"",
-
-    user: req.body.user_id
+    user: req.body.user_id,
+    restaurant: req.params.restaurant_id
   });
   cloudinary.uploader.upload(req.file.path,(result) => {
     newReview.picReview = result.secure_url
@@ -33,17 +39,20 @@ exports.postReview = (req, res) => {
     newReview.save((err) => {
       if(err){console.log(err); return;}
     });
-    console.log("line 44 reached");
+
     Restaurant.findOne({"_id": req.params.restaurant_id}, (err,restaurant) => {
       restaurant.reviews.push(newReview._id)
       restaurant.save((err)=>{
         if(err){console.log(err); return;}
       });
-      res.json({
-        newReview,
-        restaurant
+    })
+    User.findOne({"_id": req.body.user_id}, (err,user) => {
+      user.reviews.push(newReview._id)
+      user.save((err)=>{
+        if(err){console.log(err); return;}
       });
     })
+    res.json(newReview);
   })
   .then(
     fs.unlink(req.file.path, (err) => {
@@ -86,7 +95,21 @@ exports.updateReview = (req,res) => {
 
 exports.deleteReview = (req,res) => {
   Review.findOneAndRemove({'_id':req.params.id}, (err,review) => {
+
+    Restaurant.findOneAndUpdate({'_id':review.restaurant}, {
+      '$pull':{'reviews': req.params.id}
+    },(err, restraurant) => {
       if(err){console.log(err); return;}
-      res.json(review);
+    })
+
+    User.findOneAndUpdate({'_id':review.user},{
+      '$pull':{'reviews': req.params.id}
+    },(err, user) => {
+      if(err){console.log(err); return;}
+    })
+
+    if(err){console.log(err); return;}
+    res.json(review);
   })
+
 }

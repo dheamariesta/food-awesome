@@ -1,42 +1,42 @@
 import axios from 'axios';
 import uuid from 'uuid';
 
-const addReviewInStore = (newReview) => {
-  return {
-    type: 'ADD_REVIEW',
-    newReview
-  }
-}
+// const addReviewInStore = (newReview) => {
+//   return {
+//     type: 'ADD_REVIEW',
+//     newReview
+//   }
+// }
 
-const addReview_id = (picReview, picReviewPublicId, reviewId, review_id) => {
-  return {
-    type: 'ADD_RESTAURENT_ID',
-    picReview,
-    picReviewPublicId,
-    reviewId,
-    review_id
-  }
-}
+// const addReview_id = (picReview, picReviewPublicId, reviewId, review_id) => {
+//   return {
+//     type: 'ADD_RESTAURENT_ID',
+//     picReview,
+//     picReviewPublicId,
+//     reviewId,
+//     review_id
+//   }
+// }
 
-const addReviewIdIntoRestaurantInStore = (restaurantId, review_id) => {
+const addReviewIdIntoRestaurantInStore = (restaurant_id, review_id) => {
   return {
     type: 'ADD_REVIEW_ID_TO_RESTAURANT',
-    restaurantId,
-    review_id
+    restaurant_id,
+    review_id,
   }
 }
 
 const loadingReviewError = (error) => {
   return{
-    type: "LOAD_RESTAURANT_ERROR",
+    type: "LOAD_REVIEW_ERROR",
     error
   }
 }
 
 export const addReview = (picReview, newReview) =>{
   return (dispatch) => {
-    newReview.id = uuid.v4();
-    dispatch(addReviewInStore(newReview));
+    // newReview.id = uuid.v4();
+    // dispatch(addReviewInStore(newReview));
 
     // here picReview is a file
     let picReviewToBackEnd = new FormData();
@@ -44,15 +44,87 @@ export const addReview = (picReview, newReview) =>{
     picReviewToBackEnd.append('title', newReview.title);
     picReviewToBackEnd.append('star', newReview.star);
     picReviewToBackEnd.append('description', newReview.description);
-    picReviewToBackEnd.append('id', newReview.id);
-    picReviewToBackEnd.append('user', newReview.user_id);
+    picReviewToBackEnd.append('user_id', newReview.user_id);
 
     //sending newReview to backend. no special argument, returns url, public_id, database id
-    axios.post('/review/'+ newReview.restaurant_id, picReviewToBackEnd)
+    axios.post('/review/postReview/'+ newReview.restaurant_id, picReviewToBackEnd)
     .then( (response)=>{
+      dispatch(addReviewIdIntoRestaurantInStore(newReview.restaurant_id,response.data._id));
+    }).catch( (error) =>{
+      dispatch(loadingReviewError(error));
+    })
+  }
+}
+
+const addUserReviewToStore = (reviews) => {
+  return {
+    type: 'ADD_USER_REVIEW_TO_STORE',
+    reviews
+  }
+}
+
+export const getReviewOfUser = (user_id) => {
+  return (dispatch) => {
+    axios.get('/review/userReviews/'+user_id)
+    .then( (response) => {
       console.log(response.data)
-      // here picHome is a url. needs local uuid to update restaurant with database id
-      //dispatch(addRestaurant_id(response.data.picReview, response.data.picReviewPublicId, response.data.id, response.data._id));
+      dispatch(addUserReviewToStore(response.data))
+    }).catch( (error) => {
+      dispatch(loadingReviewError(error));
+    })
+  }
+}
+
+export const activeReviewDetails = (review_id) => {
+  return {
+    type: "ACTIVE_USER_REVIEW",
+    review_id
+  }
+}
+
+const updateUserReviewInStore = (picReview, public_id,_id) => {
+  return {
+    type: "UPDATE_REVIEW_IN_STORE",
+    picReview,
+    public_id,
+    _id
+  }
+}
+
+export const updateReview = (picReview, review) => {
+  return (dispatch) => {
+    // here picReview is a file
+    let picReviewToBackEnd = new FormData();
+    picReviewToBackEnd.append('picReview', picReview);
+    picReviewToBackEnd.append('title', review.title);
+    picReviewToBackEnd.append('star', review.star);
+    picReviewToBackEnd.append('description', review.description);
+    picReviewToBackEnd.append('picReviewPublicId', review.picReviewPublicId)
+
+    // axios function to send info to backend database
+    axios.put('/review/updateReview/'+review._id,picReviewToBackEnd)
+    .then( (response)=>{
+      // here picReview is a new url
+      dispatch(updateUserReviewInStore(response.data.picReview, response.data.picReviewPublicId,response.data._id))
+    }).catch( (error) =>{
+      dispatch(loadingReviewError(error));
+    })
+  }
+}
+
+const deleteUserReviewInStore = (_id) => {
+  return {
+    type: "DELETE_REVIEW_IN_STORE",
+    _id
+  }
+}
+
+export const deleteReview = (_id) => {
+  return (dispatch) => {
+    dispatch(deleteUserReviewInStore(_id));
+    axios.delete('/review/deleteReview/'+_id)
+    .then( (response)=>{
+
     }).catch( (error) =>{
       dispatch(loadingReviewError(error));
     })

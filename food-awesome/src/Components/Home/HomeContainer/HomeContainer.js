@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import {activeHome} from '../../../Actions/Home/activeHome'
+import {activeHome, getReviewOfActive} from '../../../Actions/Home/activeHome'
 import RestaurantItem from '../RestaurantItem/RestaurantItem';
 import axios from 'axios';
 import {
@@ -30,16 +30,8 @@ export class HomeContainer extends Component {
   onClick = (id, active) => {
     // console.log('active home', active)
     this.props.activeHome(active)
-    // console.log('clicked id', id)
-    // axios.get('/api/' + id)
-    // .then((response) =>{
-    //   //dispatch(activeHome(response.data))
-    //   console.log(response.data);
-    //
-    // })
-    // .catch((error) =>{
-    //   console.log(error);
-    // });
+    this.props.getReviewOfActive(id)
+
   }
   //console.log('restaurants', restaurants)
   renderRestaurants = () => {
@@ -49,7 +41,6 @@ export class HomeContainer extends Component {
       return  (<div>Loading restaurant list...</div>)
     } else {
       return restaurants.map((restaurant) => {
-        // console.log('map')
         return (
           <Link to={'/individual/' + restaurant.name} key={restaurant.id} >
           <RestaurantItem name={restaurant.name}
@@ -91,7 +82,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    activeHome: (active) => {dispatch(activeHome(active));}
+    activeHome: (active) => {dispatch(activeHome(active));},
+    getReviewOfActive: (id) => {dispatch(getReviewOfActive(id));}
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);
