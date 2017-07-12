@@ -15,7 +15,7 @@ class Header extends Component {
     }
   }
 
-  logout = (e) =>{
+  logout = (e) => {
     e.preventDefault();
     axios.get('/auth/logout')
     .then( (response) => {

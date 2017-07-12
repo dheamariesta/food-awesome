@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
+import axios from 'axios';
 import { getReviewOfUser } from '../../Actions/Review';
 import Review from './Review/Review';
 
@@ -9,6 +10,52 @@ export class AccountPage extends Component {
     super(props);
 
     this.state = {
+      user: "",
+      email: ""
+    }
+  }
+
+  deleteAccount = (e) =>  {
+    e.preventDefault();
+    console.log("deleteAccount called");
+    axios.post('/auth/account/delete')
+    .then( (response) => {
+      console.log("AJAX: Deleted @ '/auth/account/delete'");
+      window.location.href = "/";
+    })
+    .catch((error)=> {
+      console.log(error);
+    });
+  }
+
+  onChange = (e) => {
+    var state = this.state;
+    var key = e.target.id;
+    var value = e.target.value;
+
+    state[key] = value;
+    //console.log(state);
+    this.setState(state);
+    console.log(state);
+  }
+
+  updateProfile = (e) => {
+    e.preventDefault();
+    console.log("updateProfile called");
+    let data = this.state.email;
+    console.log(data);
+    axios.post('/auth/account/profile', {
+      data: data
+    })
+    .then( (response) => {
+      console.log(response);
+      console.log("AJAX: Updated @ '/auth/account/profile'");
+      window.location.href = "/";
+    })
+    .catch((error)=> {
+      console.log(error);
+    });
+
       user:"",
       seeReview: false,
     }
@@ -19,48 +66,29 @@ export class AccountPage extends Component {
     this.setState({
       seeReview: true
     })
+
   }
 
   render() {
+    console.log(this.props.user.email);
+    console.log(this.state.email);
+
     return (
       <div className="container">
         <div className="page-header">
           <h3>Profile Information</h3>
         </div>
-        <form className="form-horizontal" action="/account/profile" method="POST">
+        <form className="form-horizontal">
 
           <div className="form-group">
             <label className="col-sm-3 control-label" htmlFor="email">Email</label>
             <div className="col-sm-7">
-              <input className="form-control" type="email" name="email" id="email" defaultValue="" />
-            </div>
-          </div>
-          <div className="form-group">
-            <label className="col-sm-3 control-label" htmlFor="name">Name</label>
-            <div className="col-sm-7">
-              <input className="form-control" type="text" name="name" id="name" defaultValue="" />
-            </div>
-          </div>
-          <div className="form-group">
-            <label className="col-sm-3 control-label">Gender</label>
-            <div className="col-sm-6">
-              <label className="radio col-sm-3">
-                <input type="radio" name="gender" defaultValue="male" data-toggle="radio" />
-                <span>Male</span>
-              </label>
-              <label className="radio col-sm-3">
-                <input type="radio" name="gender" defaultValue="female" data-toggle="radio" />
-                <span>Female</span>
-              </label>
-              <label className="radio col-sm-3">
-                <input type="radio" name="gender" defaultValue="other" data-toggle="radio" />
-                <span>Other</span>
-              </label>
+              <input className="form-control" type="email" name="email" id="email" ref={(email) => this.email = email} onChange={this.onChange}/>
             </div>
           </div>
           <div className="form-group">
             <div className="col-sm-offset-3 col-sm-4">
-              <button className="btn btn btn-primary" type="submit">
+              <button className="btn btn btn-primary" type="submit" onClick={this.updateProfile}>
                 <i className="fa fa-pencil">
                 </i>Update Profile
               </button>
@@ -96,37 +124,19 @@ export class AccountPage extends Component {
         <div className="page-header">
           <h3>Delete Account</h3>
         </div>
-        <form className="form-horizontal" action="/account/delete" method="POST">
+        <form className="form-horizontal">
           <div className="form-group">
             <p className="col-sm-offset-3 col-sm-4">You can delete your account, but keep in mind this action is irreversible.
             </p>
             <input type="hidden" name="_csrf" defaultValue="El4kNAmRej76CfRNhiFTwFwmB3CgmHRe0B6sM=" />
             <div className="col-sm-offset-3 col-sm-4">
-              <button className="btn btn-danger" type="submit">
+              <button className="btn btn-danger" type="submit" onClick={this.deleteAccount}>
                 <i className="fa fa-trash">
                 </i>Delete my account
               </button>
             </div>
           </div>
         </form>
-        <div className="page-header">
-          <h3>Linked Accounts</h3>
-        </div>
-        <div className="form-horizontal">
-          <div className="form-group">
-            <div className="col-sm-offset-3 col-sm-4">
-              <p>
-                <a className="text-danger" href="/account/unlink/facebook">Unlink your Facebook account</a>
-              </p>
-            </div>
-          </div>
-        </div>
-        <button type="submit" className="btn btn-primary" onClick={this.getReviewOfUser}>View my Reviews</button>
-        {
-          this.state.seeReview? (
-            <Review/>
-          ): null
-        }
       </div>
     );
   }
