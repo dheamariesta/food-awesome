@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 export class AccountPage extends Component {
   constructor(props){
@@ -11,8 +12,36 @@ export class AccountPage extends Component {
     }
   }
 
+  deleteAccount = (e) =>  {
+    e.preventDefault();
+    axios.post('/auth/account/delete')
+    .then( (response) => {
+      console.log("AJAX: Deleted @ '/auth/account/delete'");
+      window.location.href = "/";
+    })
+    .catch((error)=> {
+      console.log(error);
+    });
+  }
+
   render() {
     console.log(this.props.user.email);
+    const element = (
+      <div>
+        <div className="page-header">
+          <h3>Linked Accounts</h3>
+        </div>
+        <div className="form-horizontal">
+          <div className="form-group">
+            <div className="col-sm-offset-3 col-sm-4">
+              <p>
+                <a className="text-danger" href="/account/unlink/facebook">Unlink your Facebook account</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
 
     return (
       <div className="container">
@@ -71,31 +100,19 @@ export class AccountPage extends Component {
         <div className="page-header">
           <h3>Delete Account</h3>
         </div>
-        <form className="form-horizontal" action="/account/delete" method="POST">
+        <form className="form-horizontal">
           <div className="form-group">
             <p className="col-sm-offset-3 col-sm-4">You can delete your account, but keep in mind this action is irreversible.
             </p>
             <input type="hidden" name="_csrf" defaultValue="El4kNAmRej76CfRNhiFTwFwmB3CgmHRe0B6sM=" />
             <div className="col-sm-offset-3 col-sm-4">
-              <button className="btn btn-danger" type="submit">
+              <button className="btn btn-danger" type="submit" onClick={this.deleteAccount}>
                 <i className="fa fa-trash">
                 </i>Delete my account
               </button>
             </div>
           </div>
         </form>
-        <div className="page-header">
-          <h3>Linked Accounts</h3>
-        </div>
-        <div className="form-horizontal">
-          <div className="form-group">
-            <div className="col-sm-offset-3 col-sm-4">
-              <p>
-                <a className="text-danger" href="/account/unlink/facebook">Unlink your Facebook account</a>
-              </p>
-            </div>
-          </div>
-        </div>
       </div>
     );
   }

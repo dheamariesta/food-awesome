@@ -1,6 +1,8 @@
 import express from 'express';
-import passport from 'passport';
 import User from '../user/model';
+import passport from 'passport';
+import passportConfig from '../config/passport';
+import userController from '../user/controller';
 
 const router = express.Router();
 
@@ -14,7 +16,7 @@ router.get('/facebook/callback', passport.authenticate('facebook', { failureRedi
   res.redirect(req.session.returnTo || '/');
 });
 
-
+// login
 router.post('/login', function(req, res, next) {
     passport.authenticate('local', function(error, user, info) {
         if(error) {
@@ -35,32 +37,7 @@ router.post('/login', function(req, res, next) {
     })(req, res, next);
 });
 
-// router.post('/login', function(req, res, next) {
-//
-//     console.log("Data: ",req.body.email, req.body.password)
-//
-//     console.log("passport.authenticate before",passport.authenticate);
-//     passport.authenticate('local', function(err, user, info) {
-//       console.log("passport.authenticate", err,user,info);
-//
-//         if (err) {
-//           console.log("Passport err", err);
-//           return res.json({'error':'database','message': "Something went seriously wrong. Contact the dev team."});
-//         }
-//         if (!user) {
-//           console.log("Could not find e-mail");
-//           return res.json({'error':'user','message': "Could not find e-mail"});
-//         }
-//         req.logIn(user, function(err) {
-//             if (err) {
-//               console.log("Login err", "Wrong password");
-//               return res.json({'error':'user','message': "Wrong password"})
-//             }
-//             return res.json({detail: info});
-//         });
-//     });
-// });
-
+// signup
 router.post('/signup', function(req, res, next) {
     User.findOne({ email: req.body.email }, (err, existingUser) => {
 
@@ -92,9 +69,11 @@ router.post('/signup', function(req, res, next) {
     });
 });
 
-router.get('/logout',(req, res, next) => {
+router.get('/logout', (req, res, next) => {
   req.logout();
   res.redirect('/');
 });
+
+router.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 
 export default router;
