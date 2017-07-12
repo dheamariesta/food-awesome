@@ -7,8 +7,8 @@ const reviewSchema = new mongoose.Schema({
   description: String,
   picReview: String,
   picReviewPublicId:String,
-  id: String,
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  restaurant: { type: mongoose.Schema.Types.ObjectId, ref: 'Restaurant' },
 },{timestamp: true})
 
 const Review = mongoose.model('Review', reviewSchema)

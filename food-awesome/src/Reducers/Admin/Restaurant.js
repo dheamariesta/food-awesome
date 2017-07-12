@@ -43,6 +43,14 @@ const Restaurant = (state = initialRestaurant, action) => {
                 return restaurant._id!==action._id
               })
       break;
+    case 'ADD_REVIEW_ID_TO_RESTAURANT':
+      return state.map((restaurant,index) => {
+                if(restaurant._id === action.restaurant_id){
+                  restaurant.reviews.push(action.review_id)
+                }
+                return restaurant
+              })
+      break;
     default:
       return state
   }
