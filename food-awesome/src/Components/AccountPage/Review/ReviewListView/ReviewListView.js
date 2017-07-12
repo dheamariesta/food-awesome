@@ -13,7 +13,7 @@ class ReviewListView extends Component {
   render() {
     return (
       <div className="col-md-12 reviewmini " onClick={this.onClick}>
-        <div className="title">{this.props.review.title}</div>
+        <div className="review-list-view-title">{this.props.review.title}</div>
       </div>
     );
   }

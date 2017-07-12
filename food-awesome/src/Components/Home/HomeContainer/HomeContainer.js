@@ -42,17 +42,18 @@ export class HomeContainer extends Component {
     } else {
       return restaurants.map((restaurant) => {
         return (
-          <Link to={'/individual/' + restaurant.name} key={restaurant.id} >
+
           <RestaurantItem name={restaurant.name}
                         id = {restaurant.id}
                         description={restaurant.describeHome}
                         img={restaurant.picHome}
                         star={restaurant.star}
                         onClick={this.onClick}
+                        key={restaurant.id}
                         _id = {restaurant._id}
                         describeIndividual={restaurant.describeIndividual}
                         reviews={restaurant.reviews}/>
-          </Link>
+
         )
       });
     }

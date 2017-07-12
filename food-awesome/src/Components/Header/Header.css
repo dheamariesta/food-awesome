@@ -2,8 +2,9 @@
   height: 100%;
   display: flex;
   margin-bottom: 20px;
-  border-bottom: 3px solid rgba(0,0,0,0.2);
-  padding: 10px;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+  padding-top: 5px;
+  padding-bottom: 10px;
 }
 
 .col-sm-2 img{
@@ -19,11 +20,25 @@
 .col-sm-1{
   margin-top:15px;
 }
-
-.login {
+.col-sm-2 a:hover, .col-sm-2 a:focus{
+  text-decoration: none;
+}
+.create{
   font-size: 14px;
+  margin-top: 20px;
+  color:black;
+  text-decoration: none;
+  /*text-transform: capitalize;*/
+  /*text-shadow: 0 0 1px rgba(0,0,0,0.3);*/
+  /*font-size: 1.35em;*/
 }
 
-.create {
-  font-size: 14px;
+
+.create:hover{
+  color: rgba(92, 137, 214, 1);
+
+  text-decoration: none;
+}
+#logo{
+  margin-left: 40px;
 }

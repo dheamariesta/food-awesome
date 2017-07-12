@@ -17,12 +17,10 @@ export class Individual extends Component {
   componentWillMount() {
     if(!this.props.active.hasOwnProperty('name')){
       window.location.href = "/"
-    } else {
-      console.log('axios got called')
     }
   }
   render() {
-    console.log('thispropsactive',this.props.active)
+    //console.log('thispropsactive',this.props.active)
 
 
     return (

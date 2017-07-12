@@ -12,6 +12,7 @@ router.get('/:restaurant_id', reviewController.getReview);
 router.get('/userReviews/:user_id', reviewController.getUserReview);
 router.post('/postReview/:restaurant_id',upload.single('picReview'),reviewController.postReview);
 router.put('/updateReview/:id', upload.single('picReview'),reviewController.updateReview);
+router.put('/updateVote/:id', reviewController.updateVote)
 router.delete('/deleteReview/:id', reviewController.deleteReview);
 
 export default router;

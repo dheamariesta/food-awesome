@@ -4,6 +4,7 @@ const Review = (state=[], actions) => {
     case "ADD_USER_REVIEW_TO_STORE":
       return actions.reviews || {};
       break;
+    
     default:
       return state
   }

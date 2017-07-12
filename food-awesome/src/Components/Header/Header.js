@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import { getUser } from '../../Actions/User';
-
+import {
+  Link
+} from 'react-router-dom';
 import './Header.css';
 import logo from './logo.png'
 
@@ -30,19 +32,19 @@ class Header extends Component {
   render() {
     return (
       <div className="row header">
-        <div className="col-sm-2">
+        <div className="col-sm-2" id="logo">
           <a href="/">
             <img src={logo} />
           </a>
         </div>
         <div className="col-sm-6">
-          <input type="text" className="form-control" id="exampleInputEmail1" placeholder="Search" />
+          {/*<input type="text" className="form-control" id="exampleInputEmail1" placeholder="Search" />*/}
         </div>
         <div className="col-sm-2">
-          { this.props.user.email === undefined ? <a href="/login" className="login">Login</a> : <a href="/account" className="login">{this.props.user.email}</a> }
+          { this.props.user.email === undefined ? <a href="/login"><div className="create">Login</div></a> : <a href="/account"><div className="create">{this.props.user.email}</div></a> }
         </div>
         <div className="col-sm-2">
-          { this.props.user.email === undefined ? <a href="/login" className="create">Create Account</a> : <a href="/" className="create" onClick={this.logout}>Logout</a> }
+          { this.props.user.email === undefined ? <a href="/login"><div className="create">Create Account</div></a> : <a href="/" onClick={this.logout}><div className="create">Logout</div></a> }
         </div>
       </div>
 

@@ -1,27 +1,29 @@
 .footer{
-  margin: 20px;
-  padding-top: 10px;
-  border-top: 1px solid black;
+  margin: 10px;
+  /*padding-top: 10px;*/
+  border-top: 1px solid  rgba(0,0,0,0.2);
 }
 .about{
-  margin-left: 20px;
+  margin-left: 40px;
+  margin-top: 15px;
 }
-#about{
-  font-weight: bold;
-  font-size: 16px;
+
+#github{
+  /*margin-top:15px;*/
+  font-size: 14px;
+  position: relative;
+  top: 5px;
 }
-p{
-  font-size: 12px;
-}
-.share{
-  margin-top: 20px;
-  font-size: 12px;
-}
-.share img{
-  width: 20px;
-  height: 100%;
-}
-#facebook-logo:hover{
+.fa.fa-github.fa-2x:hover{
   opacity: 0.5;
   filter: alpha(opacity=50);
 }
+.fa.fa-github.fa-2x{
+  position: relative;
+  top: 10px;
+  left: 10px;
+  color:black;
+}
+/*.fa-github{
+  margin-top: 5px;
+}*/

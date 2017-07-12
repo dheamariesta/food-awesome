@@ -93,6 +93,18 @@ exports.updateReview = (req,res) => {
   });
 }
 
+exports.updateVote = (req, res) => {
+  console.log('reqbody', req.body)
+  Review.findOne({'_id': req.params.id}, (err, review) => {
+    //console.log('review',review)
+    review.votes = req.body.vote || review.vote;
+    console.log('review again', review)
+    review.save((err) => {
+      if(err) {console.log(err); return;}
+      res.json(review)
+    })
+  })
+}
 exports.deleteReview = (req,res) => {
   let restaurant_id;
   let user_id;

@@ -1,21 +1,38 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {updateVote} from '../../../../Actions/Review'
 import './Reviews.css'
 
 export class Reviews extends Component {
   // constructor(props) {
   //   super(props);
   // }
+
+  upVote = (e) => {
+    let vote  = this.props.review.votes;
+    if(vote === null) {
+      vote = 1;
+    } else {
+      vote =+ 1;
+    }
+    console.log('up', this.props.review._id)
+    this.props.updateVote(this.props.review._id, vote)
+
+  }
+
+  downVote = (e) => {
+    console.log('down')
+  }
   showArrow = () => {
     let isLoggedIn = false
     if(this.props.user.hasOwnProperty('_id')){
       isLoggedIn=true
       return (<div>
-        <button>
+        <button onClick={this.upVote}>
           <span className="glyphicon glyphicon-menu-up"></span>
         </button>
         <div>vote: {this.props.review.vote}</div>
-        <button>
+        <button onClick={this.downVote}>
           <span className="glyphicon glyphicon-menu-down"></span>
         </button>
       </div>)
@@ -70,7 +87,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
+    updateVote: (review_id, vote) => {dispatch(updateVote(review_id, vote))}
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Reviews);
