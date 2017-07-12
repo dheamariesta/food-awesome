@@ -16,7 +16,8 @@ export let initStore = () => {
 
     activeHome: activeHomeReducer,
 
-    user: UserReducer
+    user: UserReducer,
+
 
   });
 
