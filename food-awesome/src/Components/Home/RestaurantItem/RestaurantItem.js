@@ -34,6 +34,7 @@ class RestaurantItem extends Component {
     return (
       <div className="col-sm-3 item" onClick = {this.onClick}>
         <div className="col-sm-12 restaurant-box">
+
           <div id="image">
             <img src={this.props.img} className="restaurant-image" />
           </div>
@@ -46,10 +47,9 @@ class RestaurantItem extends Component {
             <span className="fa fa-star-o star" data-rating="3"></span>
             <span className="fa fa-star-o star" data-rating="4"></span>
             <span className="fa fa-star-o star" data-rating="5"></span>
-
-            <input type="hidden" name="whatever1" className="rating-value" value="2.56"/>
           </div>
           <span>{this.props.description}</span>
+
         </div>
       </div>
     );

@@ -2,31 +2,29 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import IndividualContainer from './IndividualContainer/IndividualContainer';
 import {activeHome} from '../../Actions/Home/activeHome'
-
+import axios from 'axios'
 import './Individual.css';
 
 export class Individual extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      restaurant: this.props.active
+      restaurant: this.props.active,
+      reviews: null
     }
   }
-  // componentWillReceiveProps(nextProps){
-  //   let restaurants = nextProps.restaurants;
-  //   let restaurantObj = restaurants.filter((el) => {
-  //     return el.name === this.props.active.name
-  //   })
-  //   console.log('componentDidMount',restaurantObj)
-  //   this.setState({
-  //     restaurant: restaurantObj
-  //   })
-  // }
-  render() {
-    console.log('thispropsactive',this.props.active)
+
+  componentWillMount() {
     if(!this.props.active.hasOwnProperty('name')){
       window.location.href = "/"
+    } else {
+      console.log('axios got called')
     }
+  }
+  render() {
+    console.log('thispropsactive',this.props.active)
+
+
     return (
       <div className="container-fluid">
         <IndividualContainer restaurant={this.state.restaurant}/>

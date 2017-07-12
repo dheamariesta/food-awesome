@@ -15,6 +15,7 @@ export class Scroll extends Component {
     this.state = {
     isAddReviewOpen: false,
     popUp: false,
+    reviews: this.props.activeHome.reviews
 }
   }
 
@@ -43,21 +44,39 @@ export class Scroll extends Component {
     return (<div>Please Login to post review</div>)
   }
 
-  render() {
-    console.log('reviews', this.props.restaurant.reviews)
-    axios.get('/review/' + this.props.restaurant._id)
-    .then((response) => {
-      console.log('response from get review', response);
+
+  renderReviewItem = () => {
+    let reviews = this.state.reviews
+    console.log('renderReviewItem')
+    return reviews.map((el) => {
+      console.log(el)
+      if(!el.hasOwnProperty('description')){
+        console.log('inside if')
+        return (<div key={el}>Loading reviews</div>)
+      } else {
+        console.log('inside else')
+        return <Reviews key={el._id} review={el}/>
+      }
+
     })
-    .catch((error) => {
-      console.log(error);
-    });
+  }
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      reviews: nextProps.activeHome.reviews
+    })
+  }
+  render() {
+    //console.log('reviews', this.props.restaurant.reviews)
+    console.log('render')
+    const renderReview = this.renderReviewItem()
     return (
-      <div className="col-sm-7 scroll-item">
-        <div className="col-sm-12">
+      <div className="col-sm-7">
+        <div className="col-sm-12 scroll-item">
+        <div className="restaurant-description">
           <RestTitle name={this.props.restaurant.name}/>
           <MidSect description={this.props.restaurant.describeIndividual}/>
-          <Reviews id={this.props.restaurant.reviews}/>
+          <div>{renderReview}</div>
+        </div>
         </div>
         {
           this.state.popUp? this.adminMessage(): null
@@ -79,6 +98,7 @@ export class Scroll extends Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user,
+    activeHome: state.activeHome
   }
 }
 

@@ -31,7 +31,9 @@ class Header extends Component {
     return (
       <div className="row header">
         <div className="col-sm-2">
-          <img src={logo} />
+          <a href="/">
+            <img src={logo} />
+          </a>
         </div>
         <div className="col-sm-6">
           <input type="text" className="form-control" id="exampleInputEmail1" placeholder="Search" />
