@@ -5,6 +5,8 @@ import ActiveRestaurantReducer from '../Reducers/Admin/ActiveRestaurant';
 import activeHomeReducer from '../Reducers/Home/activeHome'
 
 import UserReducer from '../Reducers/UserReducer';
+import UserReviewReducer from '../Reducers/User/Review';
+import ActiveUserReviewReducer from '../Reducers/User/ActiveUserReview';
 
 import thunk from 'redux-thunk';
 
@@ -17,6 +19,9 @@ export let initStore = () => {
     activeHome: activeHomeReducer,
 
     user: UserReducer,
+
+    userReview: UserReviewReducer,
+    activeUserReview: ActiveUserReviewReducer,
 
 
   });

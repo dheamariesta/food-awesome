@@ -7,10 +7,11 @@ const upload = multer({ dest: './uploads/review' });
 const router = express.Router();
 
 /* GET index page. */
+router.get('/',reviewController.getAllReview);
 router.get('/:restaurant_id', reviewController.getReview);
-//router.get('/:id', reviewController.getSpecificReview);
-router.post('/:restaurant_id',upload.single('picReview'),reviewController.postReview);
-//router.put('/:id', upload.single('picReview'),reviewController.updateReview);
-//router.delete('/:id', reviewController.deleteReview);
+router.get('/userReviews/:user_id', reviewController.getUserReview);
+router.post('/postReview/:restaurant_id',upload.single('picReview'),reviewController.postReview);
+router.put('/updateReview/:id', upload.single('picReview'),reviewController.updateReview);
+router.delete('/deleteReview/:id', reviewController.deleteReview);
 
 export default router;
