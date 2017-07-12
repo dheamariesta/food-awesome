@@ -11,7 +11,8 @@ export class AccountPage extends Component {
 
     this.state = {
       user: "",
-      email: ""
+      email: "",
+      seeReview: false
     }
   }
 
@@ -55,10 +56,6 @@ export class AccountPage extends Component {
     .catch((error)=> {
       console.log(error);
     });
-
-      user:"",
-      seeReview: false,
-    }
   }
 
   getReviewOfUser = () => {
