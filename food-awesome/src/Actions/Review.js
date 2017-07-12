@@ -31,6 +31,7 @@ export const addReviewWithPic = (picReview, newReview) =>{
     axios.post('/review/postReviewWithPic/'+ newReview.restaurant_id, picReviewToBackEnd)
     .then( (response)=>{
       dispatch(addReviewIdIntoRestaurantInStore(newReview.restaurant_id,response.data._id));
+
     }).catch( (error) =>{
       dispatch(loadingReviewError(error));
     })
