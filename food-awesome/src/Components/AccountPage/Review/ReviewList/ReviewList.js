@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import ReviewListView from '../ReviewListView/ReviewListView';
-import { searchFunction } from '../../../../API/adminAPI';
+import { searchFunction } from '../../../../API/AdminAPI';
 
 
 class ReviewList extends Component {
