@@ -140,7 +140,7 @@ export const updateReviewWithoutPic = (review) => {
 
 const deleteUserReviewInStore = (_id) => {
   return {
-    type: "DELETE_REVIEW_IN_STORE",
+    type: "DELETE_USER_REVIEW_IN_STORE",
     _id
   }
 }
