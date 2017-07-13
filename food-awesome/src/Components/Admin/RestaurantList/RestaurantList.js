@@ -1,20 +1,8 @@
-import React, {Component, propTypes} from 'react';
+import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import RestaurantListView from '../RestaurantListView/RestaurantListView';
 
-
 class RestaurantList extends Component {
-  constructor(props) {
-    super(props);
-    // this.state = {
-    //   activeRestaurant:""
-    // }
-  }
-
-  addNewRestaurant = () => {
-
-  }
-
   renderRestaurants = () => {
     let restaurantArray = this.props.restaurants;
     console.log(restaurantArray)

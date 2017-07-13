@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { addReviewWithPic, addReviewWithoutPic } from '../../../Actions/Review';
 import Star from './Star/Star';
-import { calculateStar } from '../../../API/AdminAPI';
+// import { calculateStar } from '../../../API/AdminAPI';
 
 import './AddReview.css';
 
-class AddReview extends React.Component {
+class AddReview extends Component {
   constructor(props) {
     super(props);
     this.state = {

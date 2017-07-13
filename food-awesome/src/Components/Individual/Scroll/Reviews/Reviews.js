@@ -96,7 +96,7 @@ export class Reviews extends Component {
         <div className="col-xs-3 reviewImage">
           <img src={
             this.props.review.picReview==="" ? noImage : this.props.review.picReview
-          }/>
+          } alt="picReview"/>
         </div>
         <div className="col-xs-5">
           <h4>{this.props.review.title}</h4>

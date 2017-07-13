@@ -1,11 +1,11 @@
 import axios from 'axios';
 import uuid from 'uuid';
 
-const loadingRestaurant = () => {
-  return{
-    type: "LOADING_RESTAURANT"
-  }
-}
+// const loadingRestaurant = () => {
+//   return{
+//     type: "LOADING_RESTAURANT"
+//   }
+// }
 
 const storeRestaurant = (restaurant) => {
   return{

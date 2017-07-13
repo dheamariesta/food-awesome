@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import IndividualContainer from './IndividualContainer/IndividualContainer';
 import {activeHome} from '../../Actions/Home/activeHome'
-import axios from 'axios'
 import './Individual.css';
 
 export class Individual extends Component {

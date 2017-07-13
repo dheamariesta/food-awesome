@@ -2,10 +2,6 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {activeHome, getReviewOfActive} from '../../../Actions/Home/activeHome'
 import RestaurantItem from '../RestaurantItem/RestaurantItem';
-import axios from 'axios';
-import {
-  Link
-} from 'react-router-dom';
 
 export class HomeContainer extends Component {
   constructor(props) {

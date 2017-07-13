@@ -1,5 +1,4 @@
 import axios from 'axios';
-import uuid from 'uuid';
 
 const addReviewIdIntoRestaurantInStore = (restaurant_id, review_id) => {
   return {

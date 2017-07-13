@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
-
 import HomeContainer from './HomeContainer/HomeContainer';
-import Login from '../Login/Login';
-import Loading from '../Loading/Loading';
 
 import { connect } from 'react-redux';
 
@@ -20,8 +17,6 @@ export class Home extends Component {
   }
 
   render() {
-    const isLoggedIn = this.props.user._id;
-
     return (
       <div className="container-fluid">
         <div className="row">

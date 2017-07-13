@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Loading from '../../Loading/Loading';
-import {connect} from 'react-redux';
-import share from './share-icon-white.png'
+// import share from './share-icon-white.png'
 import './RestaurantItem.css'
 import {
   Link
@@ -57,7 +56,7 @@ class RestaurantItem extends Component {
           <Link to={'/individual/' + this.props.name}>
           {this.renderSpinner()}
             <div id="image">
-              <img src={this.props.img} onLoad={this.handleImageLoaded} className="restaurant-image" />
+              <img src={this.props.img} onLoad={this.handleImageLoaded} className="restaurant-image" alt="rest"/>
             </div>
           </Link>
           {/*<img src=share id="share-button" className="hover"/>*/}

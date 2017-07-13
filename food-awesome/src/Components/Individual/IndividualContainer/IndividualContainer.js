@@ -4,10 +4,6 @@ import Scroll from '../Scroll/Scroll';
 import Poster from '../Poster/Poster';
 
 export class IndividualContainer extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="container-fluid">

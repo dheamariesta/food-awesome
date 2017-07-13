@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import facebooklogo from './glyphicons-social-31-facebook.png';
 import './Footer.css'
 export class Footer extends Component {
   // constructor(props) {

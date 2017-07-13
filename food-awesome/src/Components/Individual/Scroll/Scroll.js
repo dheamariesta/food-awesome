@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import RestTitle from './RestTitle/RestTitle';
 import MidSect from './MidSect/MidSect';
-import Notes from './Notes/Notes';
 import Reviews from './Reviews/Reviews';
 import AddReview from '../AddReview/AddReview';
-import axios from 'axios'
 import { connect } from 'react-redux';
 import './Scroll.css'
 

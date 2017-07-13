@@ -1,12 +1,6 @@
 import React, {Component} from 'react';
-import {
-  Link
-} from 'react-router-dom';
 
-class RestaurantDetail extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+class RestaurantDetail extends Component {
   componentDidMount(){
     // console.log('componentDidMount')
     let stars = document.getElementById(this.props.restaurantDetail._id).childNodes;
@@ -28,7 +22,7 @@ class RestaurantDetail extends React.Component {
     return (
       <div className="row review">
         <div className="col-xs-3 reviewImage">
-          <img src={this.props.restaurantDetail.picHome}/>
+          <img src={this.props.restaurantDetail.picHome} alt="restaurantPicture"/>
           <div className="star-rating" id={this.props.restaurantDetail._id}>
             <span className="fa fa-star-o star" data-rating="1"></span>
             <span className="fa fa-star-o star" data-rating="2"></span>

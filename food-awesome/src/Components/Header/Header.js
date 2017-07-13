@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import { getUser } from '../../Actions/User';
-import {
-  Link
-} from 'react-router-dom';
 import './Header.css';
 import logo from './logo.png'
 
@@ -34,7 +31,7 @@ class Header extends Component {
       <div className="row header">
         <div className="col-sm-2" id="logo">
           <a href="/">
-            <img src={logo} />
+            <img src={logo} alt="logo"/>
           </a>
         </div>
         <div className="col-sm-6">

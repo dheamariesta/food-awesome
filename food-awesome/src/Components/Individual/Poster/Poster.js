@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Havana from './havana.jpg';
 import './Poster.css'
 
 export class Poster extends Component {
@@ -11,7 +10,7 @@ export class Poster extends Component {
     return (
       <div className="col-sm-5 item">
         <div className="col-sm-12">
-          <img src={this.props.img} className="restaurant-image" />
+          <img src={this.props.img} className="restaurant-image" alt="rest"/>
         </div>
       </div>
     );

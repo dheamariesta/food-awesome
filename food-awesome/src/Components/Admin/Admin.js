@@ -1,4 +1,4 @@
-import React, {Component, propTypes} from 'react';
+import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import Compose from './Compose/Compose';
 import RestaurantList from './RestaurantList/RestaurantList';
@@ -28,7 +28,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    
+
   }
 }
 
