@@ -140,13 +140,14 @@ export const updateReviewWithoutPic = (review) => {
 
 const deleteUserReviewInStore = (_id) => {
   return {
-    type: "DELETE_REVIEW_IN_STORE",
+    type: "DELETE_USER_REVIEW_IN_STORE",
     _id
   }
 }
 
 export const deleteReview = (_id) => {
   return (dispatch) => {
+    console.log('actions reached', _id)
     dispatch(deleteUserReviewInStore(_id));
     axios.delete('/review/deleteReview/'+_id)
     .then( (response)=>{
