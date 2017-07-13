@@ -15,9 +15,9 @@ export const getAdmin = () => {
   return Array.isArray(restaurants) ? restaurants: [];
 }
 
-export const searchReviewInUser = (reviews,nameToSearch) => {
-  reviewsToShow = reviews.filter((elem,index) => {
-    return elem.title.includes(nameToSearch);
-  })
-  return reviewsToShow;
-}
+// export const searchReviewInUser = (reviews,nameToSearch) => {
+//   reviewsToShow = reviews.filter((elem,index) => {
+//     return elem.title.includes(nameToSearch);
+//   })
+//   return reviewsToShow;
+// }
