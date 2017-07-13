@@ -76,5 +76,6 @@ router.get('/logout', (req, res, next) => {
 
 router.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 router.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
+router.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
 
 export default router;

@@ -131,15 +131,6 @@ exports.postUpdateProfile = (req, res, next) => {
   // req.sanitize('email').normalizeEmail({ remove_dots: false });
   console.log("still okay");
 
-  // const errors = req.validationErrors();
-  // console.log(errors);
-
-  // if (errors) {
-  //   console.log(errors);
-  //   // req.flash('errors', errors);
-  //   return res.redirect('/account');
-  // }
-
   console.log(req.user);
 
   User.findById(req.user._id, (err, user) => {
@@ -172,23 +163,16 @@ exports.postUpdateProfile = (req, res, next) => {
  * Update current password.
  */
 exports.postUpdatePassword = (req, res, next) => {
-  req.assert('password', 'Password must be at least 4 characters long').len(4);
-  req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
-
-  const errors = req.validationErrors();
-
-  if (errors) {
-    req.flash('errors', errors);
-    return res.redirect('/account');
-  }
+  let password = req.body.data;
+  console.log(password);
 
   User.findById(req.user.id, (err, user) => {
     if (err) { return next(err); }
-    user.password = req.body.password;
+    user.password = req.body.data;
     user.save((err) => {
       if (err) { return next(err); }
-      req.flash('success', { msg: 'Password has been changed.' });
-      res.redirect('/account');
+      console.log('updated password');
+      res.send('updated password');
     });
   });
 };

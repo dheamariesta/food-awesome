@@ -12,6 +12,7 @@ export class AccountPage extends Component {
     this.state = {
       user: "",
       email: "",
+      password: "",
       seeReview: false
     }
   }
@@ -58,6 +59,24 @@ export class AccountPage extends Component {
     });
   }
 
+  updatePassword = (e) => {
+    e.preventDefault();
+    console.log("updatePassword called");
+    let data = this.state.password;
+    console.log(data);
+    axios.post('/auth/account/password', {
+      data: data
+    })
+    .then( (response) => {
+      console.log(response);
+      console.log("AJAX: Updated @ '/auth/account/password'");
+      window.location.href = "/";
+    })
+    .catch((error)=> {
+      console.log(error);
+    });
+  }
+
   getReviewOfUser = () => {
     this.props.getReviewOfUser(this.props.user._id)
     this.setState({
@@ -80,7 +99,8 @@ export class AccountPage extends Component {
           <div className="form-group">
             <label className="col-sm-3 control-label" htmlFor="email">Email</label>
             <div className="col-sm-7">
-              <input className="form-control" type="email" name="email" id="email" ref={(email) => this.email = email} onChange={this.onChange}/>
+              <input className="form-control" type="email" name="email" id="email"
+              ref={(email) => this.email = email} onChange={this.onChange}/>
             </div>
           </div>
           <div className="form-group">
@@ -95,23 +115,25 @@ export class AccountPage extends Component {
         <div className="page-header">
           <h3>Change Password</h3>
         </div>
-        <form className="form-horizontal" action="/account/password" method="POST">
+        <form className="form-horizontal">
           <input type="hidden" name="_csrf" defaultValue="El4kNAmRej76CfRNhiFTwFwmB3CgmHRe0B6sM=" />
           <div className="form-group">
             <label className="col-sm-3 control-label" htmlFor="password">New Password</label>
             <div className="col-sm-7">
-              <input className="form-control" type="password" name="password" id="password" />
+              <input className="form-control" type="password" name="password" id="password"
+              ref={(password) => this.password = password} onChange={this.onChange}/>
             </div>
           </div>
           <div className="form-group">
             <label className="col-sm-3 control-label" htmlFor="confirmPassword">Confirm Password</label>
             <div className="col-sm-7">
-              <input className="form-control" type="password" name="confirmPassword" id="confirmPassword" />
+              <input className="form-control" type="password" name="confirmPassword" id="confirmPassword"
+              ref={(confirmPassword) => this.confirmPassword = confirmPassword} onChange={this.onChange}/>
             </div>
           </div>
           <div className="form-group">
             <div className="col-sm-offset-3 col-sm-4">
-              <button className="btn btn-primary" type="submit">
+              <button className="btn btn-primary" type="submit" onClick={this.updatePassword}>
                 <i className="fa fa-lock">
                 </i>Change Password
               </button>
