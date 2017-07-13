@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { addReviewWithPic, addReviewWithoutPic } from '../../../Actions/Review';
 import Star from './Star/Star';
+import { calculateStar } from '../../../API/generalAPI';
 
 import './AddReview.css';
 
@@ -73,6 +74,10 @@ class AddReview extends React.Component {
       missing: missing,
       adminMessage: messageTemplate
     })
+
+    console.log(newReview.star)
+    let updateRestaurantStar = calculateStar(this.props.activeHome,"POST",newReview.star)
+    console.log(updateRestaurantStar)
 
     if(!missing){
       newReview.user_id = this.props.user._id;
