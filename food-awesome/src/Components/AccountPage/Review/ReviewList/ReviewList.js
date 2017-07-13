@@ -17,17 +17,19 @@ class ReviewList extends Component {
       return (<div>Loading Reviews</div>)
     }
     return reviewArray.map( (review,index) => {
-      return (<ReviewListView review={review} key={review._id}/>)
+      return (
+          <ReviewListView review={review} key={review._id}/>
+      )
     })
   }
 
   render() {
     return (
-      <div className="row" id="ReviewList">
+      <div className="row reviewListContainer">
         <div className="col-md-12" id="search">
-        <input className="form-control" type="text" placeholder="Search"/>
+          <input className="form-control" type="text" placeholder="Search"/>
         </div>
-        <div id="reviewListViewContainer">
+        <div className="col-md-12 list-group" id="reviewListViewContainer">
           {this.renderReviews()}
         </div>
       </div>

@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { activeReviewDetails } from '../../../../Actions/Review';
 
-import './ReviewListView.css'
 
 class ReviewListView extends Component {
 
@@ -12,8 +11,9 @@ class ReviewListView extends Component {
 
   render() {
     return (
-      <div className="col-md-12 reviewmini " onClick={this.onClick}>
-        <div className="title">{this.props.review.title}</div>
+
+      <div className="col-md-12 reviewmini list-group-item" onClick={this.onClick}>
+        <div className="review-list-view-title">{this.props.review.title}</div>
       </div>
     );
   }

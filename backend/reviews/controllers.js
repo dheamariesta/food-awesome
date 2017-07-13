@@ -23,7 +23,7 @@ exports.getUserReview = (req, res) => {
   })
 }
 
-exports.postReview = (req, res) => {
+exports.postReviewWithPic = (req, res) => {
   const newReview = new Review({
     title: req.body.title||"",
     star: req.body.star||"",
@@ -33,7 +33,8 @@ exports.postReview = (req, res) => {
     user: req.body.user_id,
     restaurant: req.params.restaurant_id
   });
-  cloudinary.uploader.upload(req.file.path,(result) => {
+
+  cloudinary.uploader.upload(filePath,(result) => {
     newReview.picReview = result.secure_url
     newReview.picReviewPublicId = result.public_id
     newReview.save((err) => {
@@ -66,7 +67,40 @@ exports.postReview = (req, res) => {
 
 }
 
-exports.updateReview = (req,res) => {
+exports.postReviewWithoutPic = (req, res) => {
+  const newReview = new Review({
+    title: req.body.title||"",
+    star: req.body.star||"",
+    votes: req.body.votes||"",
+    description: req.body.description||"",
+    id: req.body.id||"",
+    picReview: "",
+    picReviewPublicId: "",
+    user: req.body.user_id,
+    restaurant: req.params.restaurant_id
+  });
+
+  newReview.save((err) => {
+    if(err){console.log(err); return;}
+  });
+
+  Restaurant.findOne({"_id": req.params.restaurant_id}, (err,restaurant) => {
+    restaurant.reviews.push(newReview._id)
+    restaurant.save((err)=>{
+      if(err){console.log(err); return;}
+    });
+  })
+  User.findOne({"_id": req.body.user_id}, (err,user) => {
+    user.reviews.push(newReview._id)
+    user.save((err)=>{
+      if(err){console.log(err); return;}
+    });
+  })
+  res.json(newReview);
+
+}
+
+exports.updateReviewWithPic = (req,res) => {
   Review.findOne({'_id':req.params.id}, (err,review) => {
     review.title = req.body.title || review.title,
     review.star = req.body.star || review.star,
@@ -74,7 +108,12 @@ exports.updateReview = (req,res) => {
     review.description = req.body.description || review.description,
 
     cloudinary.uploader.upload(req.file.path,(result) => {
+      console.log(result.secure_url);
         review.picReview = result.secure_url || review.picReview;
+        review.save((err)=>{
+          if(err){console.log(err); return;}
+          res.json(review)
+        });
     }, {public_id: req.body.picReviewPublicId})
     .then(
       fs.unlink(req.file.path, (err) => {
@@ -85,6 +124,15 @@ exports.updateReview = (req,res) => {
           }
       })
     );
+  });
+}
+
+exports.updateReviewWithoutPic = (req,res) => {
+  Review.findOne({'_id':req.params.id}, (err,review) => {
+    review.title = req.body.title || review.title,
+    review.star = req.body.star || review.star,
+    review.votes = req.body.votes|| review.votes,
+    review.description = req.body.description || review.description,
 
     review.save((err)=>{
       if(err){console.log(err); return;}
@@ -93,6 +141,18 @@ exports.updateReview = (req,res) => {
   });
 }
 
+exports.updateVote = (req, res) => {
+  console.log('reqbody', req.body)
+  Review.findOne({'_id': req.params.id}, (err, review) => {
+    //console.log('review',review)
+    review.votes = req.body.vote || review.vote;
+    console.log('review again', review)
+    review.save((err) => {
+      if(err) {console.log(err); return;}
+      res.json(review)
+    })
+  })
+}
 exports.deleteReview = (req,res) => {
   Review.findOneAndRemove({'_id':req.params.id}, (err,review) => {
 

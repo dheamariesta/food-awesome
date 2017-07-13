@@ -1,23 +1,6 @@
 import axios from 'axios';
 import uuid from 'uuid';
 
-// const addReviewInStore = (newReview) => {
-//   return {
-//     type: 'ADD_REVIEW',
-//     newReview
-//   }
-// }
-
-// const addReview_id = (picReview, picReviewPublicId, reviewId, review_id) => {
-//   return {
-//     type: 'ADD_RESTAURENT_ID',
-//     picReview,
-//     picReviewPublicId,
-//     reviewId,
-//     review_id
-//   }
-// }
-
 const addReviewIdIntoRestaurantInStore = (restaurant_id, review_id) => {
   return {
     type: 'ADD_REVIEW_ID_TO_RESTAURANT',
@@ -33,10 +16,8 @@ const loadingReviewError = (error) => {
   }
 }
 
-export const addReview = (picReview, newReview) =>{
+export const addReviewWithPic = (picReview, newReview) =>{
   return (dispatch) => {
-    // newReview.id = uuid.v4();
-    // dispatch(addReviewInStore(newReview));
 
     // here picReview is a file
     let picReviewToBackEnd = new FormData();
@@ -47,7 +28,22 @@ export const addReview = (picReview, newReview) =>{
     picReviewToBackEnd.append('user_id', newReview.user_id);
 
     //sending newReview to backend. no special argument, returns url, public_id, database id
-    axios.post('/review/postReview/'+ newReview.restaurant_id, picReviewToBackEnd)
+    axios.post('/review/postReviewWithPic/'+ newReview.restaurant_id, picReviewToBackEnd)
+    .then( (response)=>{
+      dispatch(addReviewIdIntoRestaurantInStore(newReview.restaurant_id,response.data._id));
+
+    }).catch( (error) =>{
+      dispatch(loadingReviewError(error));
+    })
+  }
+}
+
+
+export const addReviewWithoutPic = (newReview) =>{
+  return (dispatch) => {
+
+    //sending newReview to backend. no special argument, returns url, public_id, database id
+    axios.post('/review/postReviewWithoutPic/'+ newReview.restaurant_id, newReview)
     .then( (response)=>{
       dispatch(addReviewIdIntoRestaurantInStore(newReview.restaurant_id,response.data._id));
     }).catch( (error) =>{
@@ -82,16 +78,33 @@ export const activeReviewDetails = (review_id) => {
   }
 }
 
-const updateUserReviewInStore = (picReview, public_id,_id) => {
+const updateUserReviewInStore = (reviewUpdated) => {
   return {
-    type: "UPDATE_REVIEW_IN_STORE",
-    picReview,
-    public_id,
-    _id
+    type: "UPDATE_USER_REVIEW_IN_STORE",
+    reviewUpdated
+  }
+}
+const updateVoteReviewInStore = (vote, review_id) => {
+  return {
+    type: 'UPDATE_VOTE_REVIEW_IN_STORE',
+    vote,
+    review_id
+  }
+}
+export const updateVote = (review_id, vote) => {
+
+  return (dispatch) => {
+    axios.put('/review/updateVote/' + review_id, {vote: vote})
+    .then( (response) => {
+      console.log(response.data)
+      dispatch(updateVoteReviewInStore(response.data.votes, response.data._id))
+    }).catch( (error) => {
+      dispatch(loadingReviewError(error))
+    })
   }
 }
 
-export const updateReview = (picReview, review) => {
+export const updateReviewWithPic = (picReview, review) => {
   return (dispatch) => {
     // here picReview is a file
     let picReviewToBackEnd = new FormData();
@@ -102,10 +115,23 @@ export const updateReview = (picReview, review) => {
     picReviewToBackEnd.append('picReviewPublicId', review.picReviewPublicId)
 
     // axios function to send info to backend database
-    axios.put('/review/updateReview/'+review._id,picReviewToBackEnd)
+    axios.put('/review/updateReviewWithPic/'+review._id,picReviewToBackEnd)
     .then( (response)=>{
       // here picReview is a new url
-      dispatch(updateUserReviewInStore(response.data.picReview, response.data.picReviewPublicId,response.data._id))
+      dispatch(updateUserReviewInStore(response.data))
+    }).catch( (error) =>{
+      dispatch(loadingReviewError(error));
+    })
+  }
+}
+
+export const updateReviewWithoutPic = (review) => {
+  return (dispatch) => {
+    // axios function to send info to backend database
+    axios.put('/review/updateReviewWithoutPic/'+review._id,review)
+    .then( (response)=>{
+      // here picReview is a new url
+      dispatch(updateUserReviewInStore(response.data))
     }).catch( (error) =>{
       dispatch(loadingReviewError(error));
     })

@@ -1,8 +1,9 @@
 #Login {
-  margin-top: 100px;
   border: solid 1px #CCCCCC;
   border-radius: 20px;
   padding: 30px;
+  margin-bottom: 50px;
+  margin-top:20px;
 }
 
 .or {

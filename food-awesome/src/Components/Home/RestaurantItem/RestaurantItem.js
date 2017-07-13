@@ -3,7 +3,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import share from './share-icon-white.png'
 import './RestaurantItem.css'
-
+import {
+  Link
+} from 'react-router-dom';
 
 
 class RestaurantItem extends Component {
@@ -34,11 +36,12 @@ class RestaurantItem extends Component {
     return (
       <div className="col-sm-3 item" onClick = {this.onClick}>
         <div className="col-sm-12 restaurant-box">
-
-          <div id="image">
-            <img src={this.props.img} className="restaurant-image" />
-          </div>
-          <img src={share} id="share-button" className="hover"/>
+          <Link to={'/individual/' + this.props.name}>
+            <div id="image">
+              <img src={this.props.img} className="restaurant-image" />
+            </div>
+          </Link>
+          {/*<img src=share id="share-button" className="hover"/>*/}
 
           <h4>{this.props.name}</h4>
           <div className="star-rating" id={this.props.id}>
