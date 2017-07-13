@@ -12,6 +12,8 @@ import review from './routes/review';
 import mongoose from 'mongoose';
 import multer from 'multer';
 import cloudinary from 'cloudinary';
+import dotenv from 'dotenv';
+dotenv.load( {path: '.env'} )
 
 import session from 'express-session';
 import passport from 'passport';
@@ -23,7 +25,7 @@ const app = express();
  */
 const passportConfig = require('./config/passport');
 
-mongoose.connect('mongodb://admin:admin@ds151242.mlab.com:51242/food-awesome');
+mongoose.connect(process.env.MONGOLAB_URI);
 app.use(session({
   resave: true,
   saveUninitialized: true,
@@ -38,9 +40,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 cloudinary.config({
-  cloud_name: 'dxmdjcspm',
-  api_key: '326963819454321',
-  api_secret: '7A0-lZzv7kBuQnpBrs5vlnKAk7s'
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API,
+  api_secret: process.env.CLOUD_SECRET
 });
 
 
