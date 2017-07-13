@@ -134,6 +134,10 @@ export class AccountPage extends Component {
             </div>
           </div>
         </form>
+        <button className="btn btn-primary" type="submit" onClick={this.getReviewOfUser}>View my Reviews</button>
+        {
+          this.state.seeReview ? (<Review/>) : null
+        }
       </div>
     );
   }
