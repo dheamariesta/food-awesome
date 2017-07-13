@@ -3,8 +3,11 @@ import cloudinary from 'cloudinary';
 import fs from 'fs';
 
 exports.getRestaurant = (req, res) => {
-  Restaurant.find({},(err,restaurant) => {
-    res.json(restaurant);
+  // Restaurant.find({},(err,restaurant) => {
+  //   res.json(restaurant);
+  // })
+  Restaurant.find({}).populate('reviews').exec((err,restaurant) => {
+    res.json(restaurant)
   })
 }
 
