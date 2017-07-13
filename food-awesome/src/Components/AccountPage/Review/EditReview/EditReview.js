@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { updateReviewWithPic, updateReviewWithoutPic, deleteReview } from '../../../../Actions/Review';
 import Star from '../../../Individual/AddReview/Star/Star';
 import RestaurantDetail from '../RestaurantDetail/RestaurantDetail';
+import {activeHome, getReviewOfActive} from '../../../../Actions/Home/activeHome';
 
 import './EditReview.css';
 import '../../../Individual/AddReview/Star/Star.css';
@@ -83,13 +84,18 @@ class EditReview extends Component {
     this.props.deleteReview(this.state.review._id);
   }
 
+  onClick = (id, active) => {
+    this.props.activeHome(active)
+    this.props.getReviewOfActive(id)
+  }
+
   render() {
     return (
       <div>
       {
         "_id" in this.state.review ? (
           <div>
-          <RestaurantDetail restaurantDetail={this.state.restaurantDetail}/>
+          <RestaurantDetail restaurantDetail={this.state.restaurantDetail} onClick={this.onClick}/>
           <div className="form-group">
             <label>Title</label>
             <input id = "title"
@@ -123,7 +129,7 @@ class EditReview extends Component {
           <button type="submit" className="btn btn-primary" onClick={this.updateReview}>Update</button>
           <button type="submit" className="btn btn-danger" onClick={this.deleteReview}>Delete</button>
           </div>
-        ): (<h1> PLease select a review</h1>)
+        ): (<h1 id="defaultEditReviewLook"> Please select a review</h1>)
       }
        </div>
     );
@@ -141,7 +147,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     updateReviewWithPic: (picReview, review) => {dispatch(updateReviewWithPic(picReview, review));},
     updateReviewWithoutPic: (review) => {dispatch(updateReviewWithoutPic(review));},
-    deleteReview: (_id) => {dispatch(deleteReview(_id));}
+    deleteReview: (_id) => {dispatch(deleteReview(_id));},
+    activeHome: (active) => {dispatch(activeHome(active));},
+    getReviewOfActive: (id) => {dispatch(getReviewOfActive(id));}
   }
 }
 

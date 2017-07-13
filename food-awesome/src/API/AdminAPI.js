@@ -23,23 +23,21 @@ export const searchFunction = (thingToSearchIn,nameToSearch) => {
 }
 
 export const calculateStar = (restaurant,postUpdateOrDelete,newStar,oldStar) => {
-  console.log(restaurant)
-  let total = restaurant.star * restaurant.reviews.length + 1 ;
+  let total = parseInt(restaurant.star) * (restaurant.reviews.length + 1) ;
   console.log(total)
   let average;
   switch (postUpdateOrDelete) {
     case "POST":
-      total += newStar
-      console.log(total)
-      average = total/(restaurant.reviews.length + 2);
+      let newtotal = parseInt(total) + parseInt(newStar)
+      average = Math.round(newtotal/(restaurant.reviews.length + 2));
       break;
     case "UPDATE":
-      total -= oldStar;
-      total += newStar;
+      total -= parseInt(oldStar);
+      total += parseInt(newStar);
       average = total/(restaurant.reviews.length);
       break;
     case "DELETE":
-      total -= oldStar;
+      total -= parseInt(oldStar);
       average = total/(restaurant.reviews.length - 1);
       break;
     default:
@@ -47,4 +45,3 @@ export const calculateStar = (restaurant,postUpdateOrDelete,newStar,oldStar) => 
   }
   return average
 }
-

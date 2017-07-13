@@ -74,10 +74,10 @@ class AddReview extends React.Component {
       missing: missing,
       adminMessage: messageTemplate
     })
-    
-    console.log(newReview.star)
-    let updateRestaurantStar = calculateStar(this.props.activeHome,"POST",newReview.star)
-    console.log(updateRestaurantStar)
+
+    // console.log(newReview.star)
+    // let updateRestaurantStar = calculateStar(this.props.activeHome,"POST",newReview.star)
+    // console.log(updateRestaurantStar)
 
     if(!missing){
       newReview.user_id = this.props.user._id;
