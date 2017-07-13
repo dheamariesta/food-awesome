@@ -75,6 +75,7 @@ class AddReview extends React.Component {
       adminMessage: messageTemplate
     })
 
+
     // console.log(newReview.star)
     // let updateRestaurantStar = calculateStar(this.props.activeHome,"POST",newReview.star)
     // console.log(updateRestaurantStar)

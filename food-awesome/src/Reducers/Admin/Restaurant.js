@@ -1,5 +1,4 @@
 
-
 const Restaurant = (state = [], action) => {
   switch (action.type) {
     case 'STORE_RESTAURANT':
