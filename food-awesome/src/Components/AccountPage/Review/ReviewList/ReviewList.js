@@ -1,14 +1,22 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import ReviewListView from '../ReviewListView/ReviewListView';
+import { searchFunction } from '../../../../API/adminAPI';
 
 
 class ReviewList extends Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   activeRestaurant:""
-    // }
+    this.state = {
+      // reviews:this.props.reviews,
+      titleToSearch: "",
+    }
+  }
+  
+    userReviewSearch = (event) => {
+    this.setState({
+      titleToSearch: event.target.value
+    })
   }
 
   renderReviews = () => {
@@ -27,7 +35,7 @@ class ReviewList extends Component {
     return (
       <div className="row reviewListContainer">
         <div className="col-md-12" id="search">
-          <input className="form-control" type="text" placeholder="Search"/>
+          <input className="form-control" type="text" placeholder="Search" onChange={this.userReviewSearch}/>
         </div>
         <div className="col-md-12 list-group" id="reviewListViewContainer">
           {this.renderReviews()}
