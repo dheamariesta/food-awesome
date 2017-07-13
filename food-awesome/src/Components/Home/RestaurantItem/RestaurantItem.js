@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import Loading from '../../Loading/Loading';
 import {connect} from 'react-redux';
 import share from './share-icon-white.png'
 import './RestaurantItem.css'
@@ -7,11 +7,14 @@ import {
   Link
 } from 'react-router-dom';
 
-
 class RestaurantItem extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loading: true
+    }
+  }
 
   componentDidMount(){
     // console.log('componentDidMount')
@@ -32,13 +35,29 @@ class RestaurantItem extends Component {
 
   //{"/individual/" + this.props.name}
 
+  handleImageLoaded = () => {
+    this.setState({ loading: false });
+  }
+
+  renderSpinner() {
+    if (this.state.loading) {
+      // Render nothing if not loading
+      return (
+        <Loading />
+      );
+    } else {
+      return null;
+    }
+  }
+
   render() {
     return (
       <div className="col-sm-3 item" onClick = {this.onClick}>
         <div className="col-sm-12 restaurant-box">
           <Link to={'/individual/' + this.props.name}>
+          {this.renderSpinner()}
             <div id="image">
-              <img src={this.props.img} className="restaurant-image" />
+              <img src={this.props.img} onLoad={this.handleImageLoaded} className="restaurant-image" />
             </div>
           </Link>
           {/*<img src=share id="share-button" className="hover"/>*/}

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import HomeContainer from './HomeContainer/HomeContainer';
 import Login from '../Login/Login';
+import Loading from '../Loading/Loading';
 
 import { connect } from 'react-redux';
 
@@ -14,10 +15,12 @@ export class Home extends Component {
     }
   }
 
+  componentDidMount() {
+    setTimeout(function() { this.setState({loading: false}); }.bind(this), 2000);
+  }
+
   render() {
     const isLoggedIn = this.props.user._id;
-    // console.log(this.props.user);
-    // console.log(isLoggedIn);
 
     return (
       <div className="container-fluid">
@@ -28,13 +31,11 @@ export class Home extends Component {
         </div>
       </div>
     );
+
   }
 }
 
 const mapStateToProps = (state) => {
-  // console.log("map");
-  // console.log(state);
-  // console.log(state.user);
     return {
       user: state.user
     }
