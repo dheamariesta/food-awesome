@@ -13,52 +13,66 @@ export class Reviews extends Component {
   }
 
   upVote = (e) => {
-    let vote  = this.props.review.votes;
-    if(vote === null) {
-      vote = 1;
+    let isLoggedIn = false
+    if(!this.props.user.hasOwnProperty('_id')){
+      return (alert('please log in'))
     } else {
-      vote += 1;
+      isLoggedIn=true
+      let vote  = this.props.review.votes;
+      if(vote === null) {
+        vote = 1;
+      } else {
+        vote += 1;
+      }
+
+      //console.log('up', this.props.review._id)
+      this.props.updateVote(this.props.review._id, vote)
+      this.setState({
+        votes: vote
+      })
+
     }
-    //console.log('up', this.props.review._id)
-    this.props.updateVote(this.props.review._id, vote)
-    this.setState({
-      votes: vote
-    })
+
 
   }
 
   downVote = (e) => {
-    console.log('down')
-    let vote  = this.props.review.votes;
-    if(vote === null) {
-      vote = 0;
+    let isLoggedIn = false
+    if(!this.props.user.hasOwnProperty('_id')){
+      return (alert('please log in'))
     } else {
-      vote -= 1;
+      isLoggedIn=true
+      let vote  = this.props.review.votes;
+      if(vote === null) {
+        vote = 0;
+      } else if(vote === 0){
+        return vote
+      } else {
+        vote--
+      }
+
+      //console.log('up', this.props.review._id)
+      this.props.updateVote(this.props.review._id, parseInt(vote))
+      this.setState({
+        votes: vote
+      })
+
     }
-    //console.log('up', this.props.review._id)
-    this.props.updateVote(this.props.review._id, vote)
-    this.setState({
-      votes: vote
-    })
   }
   showArrow = () => {
-    let isLoggedIn = false
-    if(this.props.user.hasOwnProperty('_id')){
-      isLoggedIn=true
       return (<div>
         <button type="button" className="btn btn-default" onClick={this.upVote}>
           <span className="glyphicon glyphicon-menu-up"></span>
         </button>
         <div className="vote-number">{
           this.state.votes
+
         }</div>
         <button type="button" className="btn btn-default" onClick={this.downVote}>
           <span className="glyphicon glyphicon-menu-down"></span>
         </button>
       </div>)
-    } else {
-      return ""
-    }
+
   }
   componentDidMount(){
     // console.log('componentDidMount')
