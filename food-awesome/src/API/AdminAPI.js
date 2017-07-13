@@ -47,3 +47,4 @@ export const calculateStar = (restaurant,postUpdateOrDelete,newStar,oldStar) => 
   }
   return average
 }
+

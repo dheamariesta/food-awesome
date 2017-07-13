@@ -96,7 +96,7 @@ export const updateVote = (review_id, vote) => {
   return (dispatch) => {
     axios.put('/review/updateVote/' + review_id, {vote: vote})
     .then( (response) => {
-      console.log(response.data)
+      //console.log('response data', response.data)
       dispatch(updateVoteReviewInStore(response.data.votes, response.data._id))
     }).catch( (error) => {
       dispatch(loadingReviewError(error))

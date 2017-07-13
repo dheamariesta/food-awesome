@@ -8,8 +8,9 @@ span{
   text-align: justify;
 }
 
-.item{
+.col-sm-3.item{
   margin-bottom: 20px;
+  height: 400px;
 }
 .restaurant-box:hover{
   background-color: rgba(185, 192, 204, .3);
