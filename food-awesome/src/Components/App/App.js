@@ -13,6 +13,7 @@ import Admin from "../Admin/Admin";
 import Error from '../Error/Error';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import Loading from '../Loading/Loading';
 import AccountPage from '../AccountPage/AccountPage';
 
 import Login from "../Login/Login";

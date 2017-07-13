@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import HomeContainer from './HomeContainer/HomeContainer';
 import Login from '../Login/Login';
+import Loading from '../Loading/Loading';
 
 import { connect } from 'react-redux';
 
@@ -10,24 +11,38 @@ export class Home extends Component {
     super(props);
 
     this.state = {
-      user: ""
+      user: "",
+      loading: true
     }
   }
 
   render() {
     const isLoggedIn = this.props.user._id;
+    const state = this.state;
+    console.log(state);
+    console.log(this.state.loading);
     // console.log(this.props.user);
     // console.log(isLoggedIn);
-
-    return (
-      <div className="container-fluid">
-        <div className="row">
-          <div className="isLoggedIn">
-            <HomeContainer/>
+    if (this.state.loading) {
+      return <Loading/>;
+    } else {
+      return (
+        <div className="container-fluid">
+          <div className="row">
+            <div className="isLoggedIn">
+              <HomeContainer/>
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
+  }
+
+  componentDidMount() {
+    const state = this.state;
+    this.setState({
+      loading: false
+    });
   }
 }
 
