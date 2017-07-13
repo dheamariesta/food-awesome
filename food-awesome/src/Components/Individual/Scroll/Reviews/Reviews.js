@@ -2,37 +2,57 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {updateVote} from '../../../../Actions/Review'
 import './Reviews.css'
-
+import noImage from '../../../../Assets/no_image_added.png'
 export class Reviews extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      votes: this.props.review.votes===null ? 0 : this.props.review.votes
+    }
+  }
 
   upVote = (e) => {
     let vote  = this.props.review.votes;
     if(vote === null) {
       vote = 1;
     } else {
-      vote =+ 1;
+      vote += 1;
     }
-    console.log('up', this.props.review._id)
+    //console.log('up', this.props.review._id)
     this.props.updateVote(this.props.review._id, vote)
+    this.setState({
+      votes: vote
+    })
 
   }
 
   downVote = (e) => {
     console.log('down')
+    let vote  = this.props.review.votes;
+    if(vote === null) {
+      vote = 0;
+    } else {
+      vote -= 1;
+    }
+    //console.log('up', this.props.review._id)
+    this.props.updateVote(this.props.review._id, vote)
+    this.setState({
+      votes: vote
+    })
   }
   showArrow = () => {
     let isLoggedIn = false
     if(this.props.user.hasOwnProperty('_id')){
       isLoggedIn=true
       return (<div>
-        <button onClick={this.upVote}>
+        <button type="button" className="btn btn-default" onClick={this.upVote}>
           <span className="glyphicon glyphicon-menu-up"></span>
         </button>
-        <div>vote: {this.props.review.vote}</div>
-        <button onClick={this.downVote}>
+        <div className="vote-number">{
+          this.state.votes
+        }</div>
+        <button type="button" className="btn btn-default" onClick={this.downVote}>
           <span className="glyphicon glyphicon-menu-down"></span>
         </button>
       </div>)
@@ -60,7 +80,9 @@ export class Reviews extends Component {
           {this.showArrow()}
         </div>
         <div className="col-xs-3 reviewImage">
-          <img src={this.props.review.picReview}/>
+          <img src={
+            this.props.review.picReview==="" ? noImage : this.props.review.picReview
+          }/>
         </div>
         <div className="col-xs-5">
           <h4>{this.props.review.title}</h4>
