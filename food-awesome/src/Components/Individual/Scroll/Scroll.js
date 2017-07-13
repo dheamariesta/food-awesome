@@ -4,7 +4,6 @@ import MidSect from './MidSect/MidSect';
 import Notes from './Notes/Notes';
 import Reviews from './Reviews/Reviews';
 import AddReview from '../AddReview/AddReview';
-
 import axios from 'axios'
 import { connect } from 'react-redux';
 import './Scroll.css'
@@ -48,6 +47,9 @@ export class Scroll extends Component {
   renderReviewItem = () => {
     let reviews = this.state.reviews
     //console.log('renderReviewItem')
+    reviews.sort( (a, b) => {
+      return b.votes - a.votes;
+    });
     return reviews.map((el) => {
       //console.log(el)
       if(!el.hasOwnProperty('description')){
