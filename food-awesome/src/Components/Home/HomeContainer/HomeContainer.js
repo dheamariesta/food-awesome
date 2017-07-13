@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import {activeHome, getReviewOfActive} from '../../../Actions/Home/activeHome'
 import RestaurantItem from '../RestaurantItem/RestaurantItem';
 import axios from 'axios';
-import Loading from '../../Loading/Loading';
-
 import {
   Link
 } from 'react-router-dom';
@@ -40,7 +38,7 @@ export class HomeContainer extends Component {
     //console.log('render_func', restaurants)
     let restaurants = this.props.restaurants;
     if (restaurants.length === 0) {
-      return  (<div>loading...</div>)
+      return  (<div>Loading restaurant list...</div>)
     } else {
       return restaurants.map((restaurant) => {
         return (

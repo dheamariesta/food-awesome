@@ -1,24 +1,17 @@
 import React, {Component} from 'react';
 
 import {connect} from 'react-redux';
-import share from './share-icon-white.png';
-import Loading from '../../Loading/Loading';
+import share from './share-icon-white.png'
 import './RestaurantItem.css'
 
-class RestaurantItem extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      loading: true
-    }
-  }
+
+class RestaurantItem extends Component {
+  // constructor(props) {
+  //   super(props);
+  // }
 
   componentDidMount(){
-    this.setState({
-      loading: false
-    });
-    debugger;
     // console.log('componentDidMount')
     let stars = document.getElementById(this.props.id).childNodes;
 
@@ -30,9 +23,7 @@ class RestaurantItem extends Component {
         e.classList.add('fa-star')
       }
     })
-
   }
-
   onClick = (e) => {
     this.props.onClick(this.props._id, this.props)
   }
@@ -40,32 +31,28 @@ class RestaurantItem extends Component {
   //{"/individual/" + this.props.name}
 
   render() {
-    if (this.state.loading) {
-      return <Loading/>;
-    } else {
-      return (
-        <div className="col-sm-3 item" onClick = {this.onClick}>
-          <div className="col-sm-12 restaurant-box">
+    return (
+      <div className="col-sm-3 item" onClick = {this.onClick}>
+        <div className="col-sm-12 restaurant-box">
 
-            <div id="image">
-              <img src={this.props.img} className="restaurant-image" />
-            </div>
-            <img src={share} id="share-button" className="hover"/>
-
-            <h4>{this.props.name}</h4>
-            <div className="star-rating" id={this.props.id}>
-              <span className="fa fa-star-o star" data-rating="1"></span>
-              <span className="fa fa-star-o star" data-rating="2"></span>
-              <span className="fa fa-star-o star" data-rating="3"></span>
-              <span className="fa fa-star-o star" data-rating="4"></span>
-              <span className="fa fa-star-o star" data-rating="5"></span>
-            </div>
-            <span>{this.props.description}</span>
-
+          <div id="image">
+            <img src={this.props.img} className="restaurant-image" />
           </div>
+          <img src={share} id="share-button" className="hover"/>
+
+          <h4>{this.props.name}</h4>
+          <div className="star-rating" id={this.props.id}>
+            <span className="fa fa-star-o star" data-rating="1"></span>
+            <span className="fa fa-star-o star" data-rating="2"></span>
+            <span className="fa fa-star-o star" data-rating="3"></span>
+            <span className="fa fa-star-o star" data-rating="4"></span>
+            <span className="fa fa-star-o star" data-rating="5"></span>
+          </div>
+          <span>{this.props.description}</span>
+
         </div>
-      );
-    }
+      </div>
+    );
   }
 }
 
