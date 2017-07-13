@@ -147,6 +147,7 @@ const deleteUserReviewInStore = (_id) => {
 
 export const deleteReview = (_id) => {
   return (dispatch) => {
+    console.log('actions reached', _id)
     dispatch(deleteUserReviewInStore(_id));
     axios.delete('/review/deleteReview/'+_id)
     .then( (response)=>{

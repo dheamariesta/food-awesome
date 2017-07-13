@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import {
+  Link
+} from 'react-router-dom';
 
 class RestaurantDetail extends React.Component {
   constructor(props) {
@@ -17,17 +20,15 @@ class RestaurantDetail extends React.Component {
       }
     })
   }
+
+  onClick = () => {
+    this.props.onClick(this.props.restaurantDetail, this.props.restaurantDetail._id);
+  }
   render() {
     return (
       <div className="row review">
         <div className="col-xs-3 reviewImage">
           <img src={this.props.restaurantDetail.picHome}/>
-        </div>
-        <div className="col-xs-9">
-          <h4>{this.props.restaurantDetail.name}</h4>
-          {this.props.restaurantDetail.describeIndividual}
-        </div>
-        <div className="col-xs-3">
           <div className="star-rating" id={this.props.restaurantDetail._id}>
             <span className="fa fa-star-o star" data-rating="1"></span>
             <span className="fa fa-star-o star" data-rating="2"></span>
@@ -35,6 +36,13 @@ class RestaurantDetail extends React.Component {
             <span className="fa fa-star-o star" data-rating="4"></span>
             <span className="fa fa-star-o star" data-rating="5"></span>
           </div>
+          {/*<Link to='/individual/' + this.props.restaurantDetail.name>
+            <button type="submit" className="btn btn-info" onClick=this.onClick>Go to restaurant page</button>
+          </Link>*/}
+        </div>
+        <div className="col-xs-9">
+          <h4>{this.props.restaurantDetail.name}</h4>
+          {this.props.restaurantDetail.describeIndividual}
         </div>
       </div>
     );

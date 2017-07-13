@@ -12,8 +12,8 @@ class ReviewList extends Component {
       titleToSearch: "",
     }
   }
-  
-    userReviewSearch = (event) => {
+
+  userReviewSearch = (event) => {
     this.setState({
       titleToSearch: event.target.value
     })
@@ -24,6 +24,7 @@ class ReviewList extends Component {
     if(reviewArray.length===0){
       return (<div>Loading Reviews</div>)
     }
+    reviewArray = searchFunction(reviewArray,this.state.titleToSearch)
     return reviewArray.map( (review,index) => {
       return (
           <ReviewListView review={review} key={review._id}/>
