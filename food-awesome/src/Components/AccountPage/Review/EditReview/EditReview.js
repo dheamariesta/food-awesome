@@ -123,7 +123,7 @@ class EditReview extends Component {
           <button type="submit" className="btn btn-primary" onClick={this.updateReview}>Update</button>
           <button type="submit" className="btn btn-danger" onClick={this.deleteReview}>Delete</button>
           </div>
-        ): (<h1> PLease select a review</h1>)
+        ): (<h1 id="defaultEditReviewLook"> Please select a review</h1>)
       }
        </div>
     );
