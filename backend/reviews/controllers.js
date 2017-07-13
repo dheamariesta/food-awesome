@@ -106,23 +106,19 @@ exports.updateVote = (req, res) => {
   })
 }
 exports.deleteReview = (req,res) => {
-  let restaurant_id;
-  let user_id;
   Review.findOneAndRemove({'_id':req.params.id}, (err,review) => {
 
-    // Restaurant.findOneAndUpdate({'_id':review.restaurant}, {
-    //   '$pull':{'reviews': req.params.id}}
-    // },{save: true},
-    // (err, restraurant) => {
-    //   if(err){console.log(err); return;}
-    // })
-    //
-    // User.findOneAndUpdate({'_id':review.user},{
-    //   '$pull':{'reviews': req.params.id}}
-    // },{save: true},
-    // (err, user) => {
-    //   if(err){console.log(err); return;}
-    // })
+    Restaurant.findOneAndUpdate({'_id':review.restaurant}, {
+      '$pull':{'reviews': req.params.id}
+    },(err, restraurant) => {
+      if(err){console.log(err); return;}
+    })
+
+    User.findOneAndUpdate({'_id':review.user},{
+      '$pull':{'reviews': req.params.id}
+    },(err, user) => {
+      if(err){console.log(err); return;}
+    })
 
     if(err){console.log(err); return;}
     res.json(review);
