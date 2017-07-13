@@ -4,6 +4,7 @@ const Review = (state=[], actions) => {
     case "ADD_USER_REVIEW_TO_STORE":
       return actions.reviews || {};
       break;
+
     case "UPDATE_USER_REVIEW_IN_STORE":
       return state.map( (review,index) => {
                 if(review._id===actions.reviewUpdated._id){
@@ -17,6 +18,7 @@ const Review = (state=[], actions) => {
                 return review._id !== actions._id
               })
       break;
+
     default:
       return state
   }

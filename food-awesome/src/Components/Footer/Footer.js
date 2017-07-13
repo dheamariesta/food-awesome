@@ -10,13 +10,11 @@ export class Footer extends Component {
     return (
       <div className="row footer">
         <div className="col-sm-4 about">
-          <span id="about">About us</span>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
+          Food Awesome &copy; 2017
         </div>
         <div className="col-sm-2 col-sm-offset-5 share">
-          Visit us at: <img src={facebooklogo} id="facebook-logo"/>
+          <span id="github">Visit our repo at: </span>
+          <a href="https://github.com/dheamariesta/food-awesome"><i className="fa fa-github fa-2x" aria-hidden="true"></i></a>{/*<img src=facebooklogo id="facebook-logo"/>*/}
         </div>
       </div>
 

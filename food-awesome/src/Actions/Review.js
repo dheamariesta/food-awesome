@@ -84,6 +84,25 @@ const updateUserReviewInStore = (reviewUpdated) => {
     reviewUpdated
   }
 }
+const updateVoteReviewInStore = (vote, review_id) => {
+  return {
+    type: 'UPDATE_VOTE_REVIEW_IN_STORE',
+    vote,
+    review_id
+  }
+}
+export const updateVote = (review_id, vote) => {
+
+  return (dispatch) => {
+    axios.put('/review/updateVote/' + review_id, {vote: vote})
+    .then( (response) => {
+      console.log(response.data)
+      dispatch(updateVoteReviewInStore(response.data.votes, response.data._id))
+    }).catch( (error) => {
+      dispatch(loadingReviewError(error))
+    })
+  }
+}
 
 export const updateReviewWithPic = (picReview, review) => {
   return (dispatch) => {

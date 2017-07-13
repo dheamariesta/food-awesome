@@ -28,7 +28,7 @@ export class Scroll extends Component {
     if(this.props.user.hasOwnProperty('_id')){
       isLoggedIn = true
     }
-    console.log(isLoggedIn)
+    //console.log(isLoggedIn)
     if(!isLoggedIn){
       this.setState({
         popUp: true
@@ -47,14 +47,14 @@ export class Scroll extends Component {
 
   renderReviewItem = () => {
     let reviews = this.state.reviews
-    console.log('renderReviewItem')
+    //console.log('renderReviewItem')
     return reviews.map((el) => {
-      console.log(el)
+      //console.log(el)
       if(!el.hasOwnProperty('description')){
-        console.log('inside if')
+        //console.log('inside if')
         return (<div key={el}>Loading reviews</div>)
       } else {
-        console.log('inside else')
+        //console.log('inside else')
         return <Reviews key={el._id} review={el}/>
       }
 
