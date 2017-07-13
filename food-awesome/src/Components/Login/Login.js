@@ -127,10 +127,6 @@ export class Login extends Component { // eslint-disable-line react/prefer-state
                 <button type="submit"
                         className="btn btn-default submit"
                         onClick={this.localSignup}>Sign up</button>
-                <div className="or">or</div>
-                <button type="submit"
-                        className="btn btn-primary facebook"
-                        onClick={this.facebookLogin}>Login with Facebook</button>
               </form>
             </div>
           </div>
