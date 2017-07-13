@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
+
+import './Loading.css';
 
 export class Loading extends Component {
   constructor(props) {
