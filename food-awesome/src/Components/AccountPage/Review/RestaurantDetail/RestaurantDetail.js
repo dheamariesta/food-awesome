@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import {
+  Link
+} from 'react-router-dom';
 
 class RestaurantDetail extends Component {
   componentDidMount(){
@@ -16,7 +19,7 @@ class RestaurantDetail extends Component {
   }
 
   onClick = () => {
-    this.props.onClick(this.props.restaurantDetail, this.props.restaurantDetail._id);
+    this.props.onClick();
   }
   render() {
     return (
@@ -30,9 +33,9 @@ class RestaurantDetail extends Component {
             <span className="fa fa-star-o star" data-rating="4"></span>
             <span className="fa fa-star-o star" data-rating="5"></span>
           </div>
-          {/*<Link to='/individual/' + this.props.restaurantDetail.name>
-            <button type="submit" className="btn btn-info" onClick=this.onClick>Go to restaurant page</button>
-          </Link>*/}
+          <Link to={'/individual/' + this.props.restaurantDetail.name}>
+            <button type="submit" className="btn btn-info" onClick={this.onClick}>Go to restaurant page</button>
+          </Link>
         </div>
         <div className="col-xs-9">
           <h4>{this.props.restaurantDetail.name}</h4>

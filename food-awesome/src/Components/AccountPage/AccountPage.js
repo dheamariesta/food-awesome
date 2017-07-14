@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { getReviewOfUser } from '../../Actions/Review';
 import Review from './Review/Review';
+import Header from '../Header/Header';
+
+import './AccountPage.css';
 
 export class AccountPage extends Component {
   constructor(props){
@@ -13,7 +16,6 @@ export class AccountPage extends Component {
       user: "",
       email: "",
       password: "",
-      seeReview: false
     }
   }
 
@@ -79,94 +81,131 @@ export class AccountPage extends Component {
 
   getReviewOfUser = () => {
     this.props.getReviewOfUser(this.props.user._id)
-    this.setState({
-      seeReview: true
-    })
+  }
+
+  onClick = (event) => {
+    let tab1 = document.getElementById("tab1");
+    let tab2 = document.getElementById("tab2");
+    let panel1 = document.getElementById("home");
+    let panel2 = document.getElementById("profile")
+
+    if(tab1.className==="active"){
+      tab2.classList.add("active");
+      panel2.classList.add("active");
+      tab1.classList.remove("active");
+      panel1.classList.remove("active");
+      this.getReviewOfUser();
+    }else{
+      tab1.classList.add("active");
+      panel1.classList.add("active");
+      tab2.classList.remove("active");
+      panel2.classList.remove("active");
+    }
 
   }
 
   render() {
-    console.log(this.props.user.email);
-    console.log(this.state.email);
+
 
     return (
-      <div className="container">
-        <div className="page-header">
-          <h3>Profile Information</h3>
-        </div>
-        <form className="form-horizontal">
+      <div>
+        <Header/>
+        <div className="container">
 
-          <div className="form-group">
-            <label className="col-sm-3 control-label" htmlFor="email">Email</label>
-            <div className="col-sm-7">
-              <input className="form-control" type="email" name="email" id="email"
-              ref={(email) => this.email = email} onChange={this.onChange}/>
+          <div className="row">
+            <div className="col-md-12">
+              <div className="card">
+                <ul className="nav nav-tabs" role="tablist">
+                    <li id="tab1" role="presentation" className="active" onClick={this.onClick} >
+                      <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Profile</a>
+                    </li>
+                    <li id="tab2" role="presentation" onClick={this.onClick}>
+                      <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">My Reviews</a>
+                    </li>
+                </ul>
+                <div className="tab-content">
+                  <div role="tabpanel" className="tab-pane active" id="home">
+                    <div className="page-header">
+                      <h3>Profile Information</h3>
+                    </div>
+                    <form className="form-horizontal">
+
+                      <div className="form-group">
+                        <label className="col-sm-3 control-label" htmlFor="email">Email</label>
+                        <div className="col-sm-7">
+                          <input className="form-control" type="email" name="email" id="email"
+                          ref={(email) => this.email = email} onChange={this.onChange}/>
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <div className="col-sm-offset-3 col-sm-4">
+                          <button className="btn btn btn-primary" type="submit" onClick={this.updateProfile}>
+                            <i className="fa fa-pencil">
+                            </i>Update Profile
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                    <div className="page-header">
+                      <h3>Change Password</h3>
+                    </div>
+                    <form className="form-horizontal">
+                      <input type="hidden" name="_csrf" defaultValue="El4kNAmRej76CfRNhiFTwFwmB3CgmHRe0B6sM=" />
+                      <div className="form-group">
+                        <label className="col-sm-3 control-label" htmlFor="password">New Password</label>
+                        <div className="col-sm-7">
+                          <input className="form-control" type="password" name="password" id="password"
+                          ref={(password) => this.password = password} onChange={this.onChange}/>
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <label className="col-sm-3 control-label" htmlFor="confirmPassword">Confirm Password</label>
+                        <div className="col-sm-7">
+                          <input className="form-control" type="password" name="confirmPassword" id="confirmPassword"
+                          ref={(confirmPassword) => this.confirmPassword = confirmPassword} onChange={this.onChange}/>
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <div className="col-sm-offset-3 col-sm-4">
+                          <button className="btn btn-primary" type="submit" onClick={this.updatePassword}>
+                            <i className="fa fa-lock">
+                            </i>Change Password
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                    <div className="page-header">
+                      <h3>Delete Account</h3>
+                    </div>
+                    <form className="form-horizontal">
+                      <div className="form-group">
+                        <p className="col-sm-offset-3 col-sm-4">You can delete your account, but keep in mind this action is irreversible.
+                        </p>
+                        <input type="hidden" name="_csrf" defaultValue="El4kNAmRej76CfRNhiFTwFwmB3CgmHRe0B6sM=" />
+                        <div className="col-sm-offset-3 col-sm-4">
+                          <button className="btn btn-danger" type="submit" onClick={this.deleteAccount}>
+                            <i className="fa fa-trash">
+                            </i>Delete my account
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                    </div>
+                    <div role="tabpanel" className="tab-pane" id="profile">
+                      <Review/>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="form-group">
-            <div className="col-sm-offset-3 col-sm-4">
-              <button className="btn btn btn-primary" type="submit" onClick={this.updateProfile}>
-                <i className="fa fa-pencil">
-                </i>Update Profile
-              </button>
-            </div>
-          </div>
-        </form>
-        <div className="page-header">
-          <h3>Change Password</h3>
         </div>
-        <form className="form-horizontal">
-          <input type="hidden" name="_csrf" defaultValue="El4kNAmRej76CfRNhiFTwFwmB3CgmHRe0B6sM=" />
-          <div className="form-group">
-            <label className="col-sm-3 control-label" htmlFor="password">New Password</label>
-            <div className="col-sm-7">
-              <input className="form-control" type="password" name="password" id="password"
-              ref={(password) => this.password = password} onChange={this.onChange}/>
-            </div>
-          </div>
-          <div className="form-group">
-            <label className="col-sm-3 control-label" htmlFor="confirmPassword">Confirm Password</label>
-            <div className="col-sm-7">
-              <input className="form-control" type="password" name="confirmPassword" id="confirmPassword"
-              ref={(confirmPassword) => this.confirmPassword = confirmPassword} onChange={this.onChange}/>
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="col-sm-offset-3 col-sm-4">
-              <button className="btn btn-primary" type="submit" onClick={this.updatePassword}>
-                <i className="fa fa-lock">
-                </i>Change Password
-              </button>
-            </div>
-          </div>
-        </form>
-        <div className="page-header">
-          <h3>Delete Account</h3>
-        </div>
-        <form className="form-horizontal">
-          <div className="form-group">
-            <p className="col-sm-offset-3 col-sm-4">You can delete your account, but keep in mind this action is irreversible.
-            </p>
-            <input type="hidden" name="_csrf" defaultValue="El4kNAmRej76CfRNhiFTwFwmB3CgmHRe0B6sM=" />
-            <div className="col-sm-offset-3 col-sm-4">
-              <button className="btn btn-danger" type="submit" onClick={this.deleteAccount}>
-                <i className="fa fa-trash">
-                </i>Delete my account
-              </button>
-            </div>
-          </div>
-        </form>
-        <button className="btn btn-primary" type="submit" onClick={this.getReviewOfUser}>View my Reviews</button>
-        {
-          this.state.seeReview ? (<Review/>) : null
-        }
       </div>
     );
   }
 };
 
 const mapStateToProps = (state) => {
-  console.log("in mapStateToProps " + state.user.id);
+
   return {
     user: state.user
   }

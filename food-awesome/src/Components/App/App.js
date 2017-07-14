@@ -11,7 +11,7 @@ import Home from "../Home/Home";
 import Individual from "../Individual/Individual";
 import Admin from "../Admin/Admin";
 import Error from '../Error/Error';
-import Header from '../Header/Header';
+
 import Footer from '../Footer/Footer';
 import AccountPage from '../AccountPage/AccountPage';
 
@@ -27,12 +27,11 @@ class App extends Component {
 
     return (
       <div>
-      <Header/>
       <Router>
         <Switch>
           <Route exact path="/" component={Home}/>
-          <Route path={"/individual"}  component={Individual}/>
-          <Route path="/account"  component={AccountPage}/>
+          <Route path={"/individual"}  component={Individual} />
+          <Route exact path="/account"  component={AccountPage}/>
           <Route exact path="/login" component={Login}/>
           <Route path="/admin" component={Admin}/>
           <Route component={Error}/>

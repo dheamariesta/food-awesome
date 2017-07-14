@@ -9,7 +9,8 @@ export class IndividualContainer extends Component {
       <div className="container-fluid">
         <div className="row">
           <Scroll restaurant={this.props.restaurant} reviews={this.props.reviews}/>
-          <Poster img={this.props.restaurant.img}/>
+          <Poster img={this.props.restaurant.picHome}/>
+
         </div>
       </div>
     );
