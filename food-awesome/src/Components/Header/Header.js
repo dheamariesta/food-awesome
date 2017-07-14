@@ -34,8 +34,16 @@ class Header extends Component {
             <img src={logo} alt="logo"/>
           </a>
         </div>
-        <div className="col-sm-6">
-          {/*<input type="text" className="form-control" id="exampleInputEmail1" placeholder="Search" />*/}
+        <div className="col-sm-6" id="headerSearchBar">
+          {/*<div className="input-group stylish-input-group">
+            <input type="text" className="form-control"  placeholder="Search" />
+            <span className="input-group-addon">
+
+                <button type="submit" onClick=this.onClick>
+                    <span className="glyphicon glyphicon-search"></span>
+                </button>
+            </span>
+        </div>*/}
         </div>
         <div className="col-sm-2">
           { this.props.user.email === undefined ? <a href="/login"><div className="create">Login</div></a> : <a href="/account"><div className="create">{this.props.user.email}</div></a> }

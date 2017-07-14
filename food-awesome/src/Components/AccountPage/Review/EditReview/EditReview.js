@@ -44,7 +44,9 @@ class EditReview extends Component {
       review: activeReviewObject,
       restaurantDetail: restaurantDetail[0]
     })
+
   }
+
 
   passStarValue = (noOfStar) => {
     let review = this.state.review;
@@ -70,23 +72,28 @@ class EditReview extends Component {
   }
 
   updateReview = () => {
-    if(typeof (this.state.picReview) ==="object"){
-      console.log("with pic")
-      this.props.updateReviewWithPic(this.state.picReview, this.state.review);
 
-    }else{
+    if(this.state.picReview ===null){
       console.log("without pic")
       this.props.updateReviewWithoutPic(this.state.review);
+
+    }else{
+
+      console.log("with pic")
+      this.props.updateReviewWithPic(this.state.picReview, this.state.review);
     }
+    alert('update successful')
   }
 
   deleteReview = () => {
     this.props.deleteReview(this.state.review._id);
   }
 
-  onClick = (id, active) => {
-    this.props.activeHome(active)
-    this.props.getReviewOfActive(id)
+  onClick = () => {
+    console.log(this.state.restaurantDetail)
+    console.log(this.state.restaurantDetail._id)
+    this.props.activeHome(this.state.restaurantDetail)
+    this.props.getReviewOfActive(this.state.restaurantDetail._id)
   }
 
   render() {
@@ -96,6 +103,7 @@ class EditReview extends Component {
         "_id" in this.state.review ? (
           <div>
           <RestaurantDetail restaurantDetail={this.state.restaurantDetail} onClick={this.onClick}/>
+          <h4>Your review</h4>
           <div className="form-group">
             <label>Title</label>
             <input id = "title"

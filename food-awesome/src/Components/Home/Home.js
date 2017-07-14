@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import HomeContainer from './HomeContainer/HomeContainer';
+import Header from '../Header/Header';
 
 import { connect } from 'react-redux';
 
@@ -18,10 +19,13 @@ export class Home extends Component {
 
   render() {
     return (
-      <div className="container-fluid">
-        <div className="row">
-          <div className="isLoggedIn">
-            <HomeContainer/>
+      <div>
+        <Header/>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="isLoggedIn">
+              <HomeContainer/>
+            </div>
           </div>
         </div>
       </div>

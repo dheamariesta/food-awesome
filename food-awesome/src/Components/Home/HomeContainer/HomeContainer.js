@@ -42,7 +42,7 @@ export class HomeContainer extends Component {
           <RestaurantItem name={restaurant.name}
                         id = {restaurant.id}
                         description={restaurant.describeHome}
-                        img={restaurant.picHome}
+                        picHome={restaurant.picHome}
                         star={restaurant.star}
                         onClick={this.onClick}
                         key={restaurant.id}

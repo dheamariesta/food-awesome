@@ -10,7 +10,7 @@ class RestaurantListView extends Component {
 
   render() {
     return (
-      <div className="col-md-12 restaurantmini " onClick={this.onClick}>
+      <div className="col-md-12 restaurantmini list-group-item" onClick={this.onClick}>
         <div className="name">{this.props.restaurant.name}</div>
       </div>
     );

@@ -2,15 +2,41 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import RestaurantListView from '../RestaurantListView/RestaurantListView';
 
+
 class RestaurantList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+
+      nameToSearch: "",
+    }
+  }
+
+  adminSearch = (event) => {
+    this.setState({
+      nameToSearch: event.target.value
+    })
+  }
+
+  searchFunction = (thingToSearchIn,nameToSearch) => {
+    nameToSearch = nameToSearch.toLowerCase();
+    let thingToShow = thingToSearchIn.filter((elem,index) => {
+      return elem.name.toLowerCase().includes(nameToSearch);
+    })
+    return thingToShow;
+  }
+
   renderRestaurants = () => {
+
     let restaurantArray = this.props.restaurants;
-    console.log(restaurantArray)
     if(restaurantArray.length===0){
       return (<div>no Restaurant yet</div>)
     }
+    restaurantArray = this.searchFunction(restaurantArray,this.state.nameToSearch)
     return restaurantArray.map( (restaurant,index) => {
-      return (<RestaurantListView restaurant={restaurant} key={restaurant._id}/>)
+      console.log('render')
+      console.log(restaurant.name)
+      return (<RestaurantListView restaurant={restaurant} key={restaurant.id}/>)
     })
   }
 
@@ -18,9 +44,8 @@ class RestaurantList extends Component {
     return (
       <div className="row" id="restaurantList">
         <div className="col-md-12" id="search">
-        <button type="submit" className="btn btn-primary" onClick={this.addNewRestaurant}>Add New Restaurant</button>
-        <input className="form-control" type="text" placeholder="Search"/>
-        <div>
+          <input className="form-control" type="text" placeholder="Search" onChange={this.adminSearch}/>
+        <div className="col-md-12 list-group" id="renderRestaurants">
           {this.renderRestaurants()}
         </div>
         </div>

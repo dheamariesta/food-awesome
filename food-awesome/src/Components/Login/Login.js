@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { getUser } from '../../Actions/User';
+import Header from '../Header/Header';
 import './Login.css';
 
 /**
@@ -97,6 +98,8 @@ export class Login extends Component { // eslint-disable-line react/prefer-state
 
   render() {
     return (
+      <div>
+      <Header/>
       <div className="container-fluid">
         <div className="row">
           <div className="col-sm-6 col-sm-offset-3">
@@ -132,6 +135,7 @@ export class Login extends Component { // eslint-disable-line react/prefer-state
           </div>
         </div>
       </div>
+    </div>
     );
   }
 }

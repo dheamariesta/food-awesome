@@ -34,7 +34,7 @@ exports.postReviewWithPic = (req, res) => {
     restaurant: req.params.restaurant_id
   });
 
-  cloudinary.uploader.upload(filePath,(result) => {
+  cloudinary.uploader.upload(req.file.path,(result) => {
     newReview.picReview = result.secure_url
     newReview.picReviewPublicId = result.public_id
     newReview.save((err) => {

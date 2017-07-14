@@ -131,13 +131,6 @@ class Compose extends Component {
                aria-describedby="fileHelp"
                onChange={this.onChange}
                />
-         <input id="picIndividual"
-                type="file"
-                className="form-control-file"
-                aria-describedby="fileHelp"
-                onChange={this.onChange}
-                />
-        <small>please press "shift" or "control" on your own for multiple selection</small>
       </div>
       <button type="submit" className="btn btn-primary" onClick={this.addNewRestaurant}>Add New Restaurant</button>
       <button type="submit" className="btn btn-primary" onClick={this.updateRestaurant}>Update</button>

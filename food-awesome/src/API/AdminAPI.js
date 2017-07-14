@@ -16,32 +16,9 @@ export const getAdmin = () => {
 }
 
 export const searchFunction = (thingToSearchIn,nameToSearch) => {
+  nameToSearch = nameToSearch.toLowerCase();
   let thingToShow = thingToSearchIn.filter((elem,index) => {
-    return elem.title.includes(nameToSearch);
+    return elem.title.toLowerCase().includes(nameToSearch);
   })
   return thingToShow;
-}
-
-export const calculateStar = (restaurant,postUpdateOrDelete,newStar,oldStar) => {
-  let total = parseInt(restaurant.star) * (restaurant.reviews.length + 1) ;
-  console.log(total)
-  let average;
-  switch (postUpdateOrDelete) {
-    case "POST":
-      let newtotal = parseInt(total) + parseInt(newStar)
-      average = Math.round(newtotal/(restaurant.reviews.length + 2));
-      break;
-    case "UPDATE":
-      total -= parseInt(oldStar);
-      total += parseInt(newStar);
-      average = total/(restaurant.reviews.length);
-      break;
-    case "DELETE":
-      total -= parseInt(oldStar);
-      average = total/(restaurant.reviews.length - 1);
-      break;
-    default:
-      console.log("wrong type")
-  }
-  return average
 }

@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import IndividualContainer from './IndividualContainer/IndividualContainer';
-import {activeHome} from '../../Actions/Home/activeHome'
+import {activeHome} from '../../Actions/Home/activeHome';
+import Header from '../Header/Header';
 import './Individual.css';
 
 export class Individual extends Component {
@@ -23,8 +24,11 @@ export class Individual extends Component {
 
 
     return (
-      <div className="container-fluid">
-        <IndividualContainer restaurant={this.state.restaurant}/>
+      <div>
+        <Header/>
+        <div className="container-fluid">
+          <IndividualContainer restaurant={this.state.restaurant}/>
+        </div>
       </div>
     );
   }

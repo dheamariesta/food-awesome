@@ -56,7 +56,7 @@ class RestaurantItem extends Component {
           <Link to={'/individual/' + this.props.name}>
           {this.renderSpinner()}
             <div id="image">
-              <img src={this.props.img} onLoad={this.handleImageLoaded} className="restaurant-image" alt="rest"/>
+              <img src={this.props.picHome} onLoad={this.handleImageLoaded} className="restaurant-image" alt="rest"/>
             </div>
           </Link>
           {/*<img src=share id="share-button" className="hover"/>*/}
