@@ -41,14 +41,23 @@ const Restaurant = (state = [], action) => {
                 return restaurant._id!==action._id
               })
       break;
-    case 'ADD_REVIEW_ID_TO_RESTAURANT':
+    case 'ADD_REVIEW_TO_RESTAURANT':
       return state.map((restaurant,index) => {
                 if(restaurant._id === action.restaurant_id){
-                  restaurant.reviews.push(action.review_id)
+                  restaurant.reviews.push(action.review)
                 }
                 return restaurant
               })
       break;
+    case 'DELETE_REVIEW_FROM_RESTAURANT_IN_STORE':
+      return state.map((restaurant,index) => {
+              if(restaurant._id===action.restaurant_id){
+                restaurant.reviews = restaurant.reviews.filter( (review,index) => {
+                  return review._id !== action.review_id;
+                })
+              }
+              return restaurant
+            })
     default:
       return state
   }

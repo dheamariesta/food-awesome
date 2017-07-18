@@ -31,7 +31,7 @@ class EditReview extends Component {
 
   componentWillReceiveProps(nextProps){
     let activeReviewObject = {};
-    nextProps.reviews.forEach((review,index,arr) => {
+    nextProps.user.reviews.forEach((review,index,arr) => {
       if(review._id===nextProps.activeUserReview){
          activeReviewObject = review
       }
@@ -59,7 +59,6 @@ class EditReview extends Component {
   onChange = (event) => {
     let review = this.state.review;
     if(event.target.id==="picReview"){
-      console.log(event.target.files[0])
       this.setState({
         picReview: event.target.files[0]
       })
@@ -86,12 +85,10 @@ class EditReview extends Component {
   }
 
   deleteReview = () => {
-    this.props.deleteReview(this.state.review._id);
+    this.props.deleteReview(this.state.review._id, this.state.review.restaurant);
   }
 
   onClick = () => {
-    console.log(this.state.restaurantDetail)
-    console.log(this.state.restaurantDetail._id)
     this.props.activeHome(this.state.restaurantDetail)
     this.props.getReviewOfActive(this.state.restaurantDetail._id)
   }
@@ -146,7 +143,7 @@ class EditReview extends Component {
 const mapStateToProps = (state) => {
   return {
     restaurants: state.restaurants,
-    reviews: state.userReview,
+    user: state.user,
     activeUserReview: state.activeUserReview
   }
 }
@@ -155,7 +152,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     updateReviewWithPic: (picReview, review) => {dispatch(updateReviewWithPic(picReview, review));},
     updateReviewWithoutPic: (review) => {dispatch(updateReviewWithoutPic(review));},
-    deleteReview: (_id) => {dispatch(deleteReview(_id));},
+    deleteReview: (review_id, restaurant_id) => {dispatch(deleteReview(review_id, restaurant_id));},
     activeHome: (active) => {dispatch(activeHome(active));},
     getReviewOfActive: (id) => {dispatch(getReviewOfActive(id));}
   }

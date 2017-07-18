@@ -8,7 +8,10 @@ const router = express.Router();
 
 /* GET index page. */
 router.get('/user', (req, res, next) => {
-  res.json(req.user);
+  User.findOne({'_id': req.user._id}).populate('reviews').exec((err,user) => {
+    if(err){console.log(err); return;}
+    res.json(user);
+  })
 });
 
 router.get('/facebook', passport.authenticate('facebook', { scope: ['email', 'public_profile'] }));

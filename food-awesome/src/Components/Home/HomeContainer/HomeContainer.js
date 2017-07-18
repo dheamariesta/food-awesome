@@ -7,14 +7,8 @@ export class HomeContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      restaurants: null
-    }
-  }
-
-  componentDidMount(){
-    this.setState({
       restaurants: this.props.restaurants
-    })
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -24,10 +18,7 @@ export class HomeContainer extends Component {
   }
 
   onClick = (id, active) => {
-    // console.log('active home', active)
     this.props.activeHome(active)
-    this.props.getReviewOfActive(id)
-
   }
   //console.log('restaurants', restaurants)
   renderRestaurants = () => {
@@ -80,7 +71,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     activeHome: (active) => {dispatch(activeHome(active));},
-    getReviewOfActive: (id) => {dispatch(getReviewOfActive(id));}
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);

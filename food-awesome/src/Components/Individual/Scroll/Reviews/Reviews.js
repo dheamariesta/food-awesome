@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {updateVote} from '../../../../Actions/Review'
 import './Reviews.css'
 import noImage from '../../../../Assets/no_image_added.png'
+
 export class Reviews extends Component {
   constructor(props) {
     super(props);

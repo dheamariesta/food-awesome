@@ -10,10 +10,9 @@ export class Scroll extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    isAddReviewOpen: false,
-    popUp: false,
-    reviews: this.props.activeHome.reviews
-}
+      isAddReviewOpen: false,
+      popUp: false,
+    }
   }
 
   closeReviewBox = () => {
@@ -25,15 +24,11 @@ export class Scroll extends Component {
     if(this.props.user.hasOwnProperty('_id')){
       isLoggedIn = true
     }
-    //console.log(isLoggedIn)
+
     if(!isLoggedIn){
-      this.setState({
-        popUp: true
-      })
+      this.setState({ popUp: true })
     }else{
-      this.setState({
-        isAddReviewOpen: true
-      })
+      this.setState({ isAddReviewOpen: true })
     }
   }
 
@@ -43,50 +38,33 @@ export class Scroll extends Component {
 
 
   renderReviewItem = () => {
-    let reviews = this.state.reviews
+    let reviews = this.props.restaurant.reviews
     //console.log('renderReviewItem')
     reviews.sort( (a, b) => {
       return b.votes - a.votes;
     });
     return reviews.map((el) => {
-      //console.log(el)
-      if(!el.hasOwnProperty('description')){
-        //console.log('inside if')
-        return (<div key={el}>Loading reviews</div>)
-      } else {
-        //console.log('inside else')
-        return <Reviews key={el._id} review={el}/>
-      }
+        return (<Reviews key={el._id} review={el}/>)
 
     })
   }
-  componentWillReceiveProps(nextProps){
-    this.setState({
-      reviews: nextProps.activeHome.reviews
-    })
-  }
+
   render() {
-    //console.log('reviews', this.props.restaurant.reviews)
-    console.log('render')
-    const renderReview = this.renderReviewItem()
     return (
       <div className="col-sm-7">
         <div className="col-sm-12 scroll-item">
         <div className="restaurant-description">
           <RestTitle name={this.props.restaurant.name}/>
           <MidSect description={this.props.restaurant.describeIndividual}/>
-          <div>{renderReview}</div>
+          <div>{this.renderReviewItem()}</div>
         </div>
         </div>
-        {
-          this.state.popUp? this.adminMessage(): null
-        }
+        { this.state.popUp? this.adminMessage(): null }
         <button id="writeReviewButton" type="submit" className="btn btn-primary" onClick={this.reviewBoxOpen}>Write a Review</button>
         {
           this.state.isAddReviewOpen ? (
             <div>
             <AddReview closeReviewBox={this.closeReviewBox}/>
-
             </div>
           ) :null
         }
@@ -102,10 +80,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-
-  }
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(Scroll);
+export default connect(mapStateToProps)(Scroll);
