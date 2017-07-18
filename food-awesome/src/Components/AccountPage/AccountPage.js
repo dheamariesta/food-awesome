@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { getReviewOfUser } from '../../Actions/Review';
+// import { getReviewOfUser } from '../../Actions/Review';
 import Review from './Review/Review';
 import Header from '../Header/Header';
 
@@ -79,9 +79,9 @@ export class AccountPage extends Component {
     });
   }
 
-  getReviewOfUser = () => {
-    this.props.getReviewOfUser(this.props.user._id)
-  }
+  // getReviewOfUser = () => {
+  //   this.props.getReviewOfUser(this.props.user._id)
+  // }
 
   onClick = (event) => {
     let tab1 = document.getElementById("tab1");
@@ -94,7 +94,7 @@ export class AccountPage extends Component {
       panel2.classList.add("active");
       tab1.classList.remove("active");
       panel1.classList.remove("active");
-      this.getReviewOfUser();
+      // this.getReviewOfUser();
     }else{
       tab1.classList.add("active");
       panel1.classList.add("active");
@@ -213,7 +213,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getReviewOfUser: (user_id) => { dispatch(getReviewOfUser(user_id))}
+    // getReviewOfUser: (user_id) => { dispatch(getReviewOfUser(user_id))}
   }
 }
 

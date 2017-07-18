@@ -4,11 +4,6 @@ const ActiveHome = (state = {}, action) => {
     case 'ACTIVE_HOME':
       return action.restaurant
       break;
-    case 'GET_REVIEWS':
-      return Object.assign({}, state, {
-        reviews: action.reviews
-      })
-      break;
     case 'UPDATE_VOTE_REVIEW_IN_STORE':
       let reviews = state.reviews;
       reviews.map( (review) => {

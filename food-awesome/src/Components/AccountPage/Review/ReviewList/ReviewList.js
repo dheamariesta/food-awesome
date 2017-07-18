@@ -20,16 +20,17 @@ class ReviewList extends Component {
   }
 
   renderReviews = () => {
-    let reviewArray = this.props.reviews;
-    if(reviewArray.length===0){
+    let reviewArray = this.props.user.reviews;
+    if(typeof(reviewArray)==="undefined"){
       return (<div>Loading Reviews</div>)
+    }else{
+      reviewArray = searchFunction(reviewArray,this.state.titleToSearch)
+      return reviewArray.map( (review,index) => {
+        return (
+            <ReviewListView review={review} key={review._id}/>
+        )
+      })
     }
-    reviewArray = searchFunction(reviewArray,this.state.titleToSearch)
-    return reviewArray.map( (review,index) => {
-      return (
-          <ReviewListView review={review} key={review._id}/>
-      )
-    })
   }
 
   render() {
@@ -48,7 +49,7 @@ class ReviewList extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    reviews: state.userReview
+    user: state.user
   }
 }
 

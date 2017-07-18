@@ -3,7 +3,10 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import { getUser } from '../../Actions/User';
 import './Header.css';
-import logo from './logo.png'
+import logo from './logo.png';
+import {
+  Link
+} from 'react-router-dom';
 
 class Header extends Component {
   constructor(props) {
@@ -30,9 +33,9 @@ class Header extends Component {
     return (
       <div className="row header">
         <div className="col-sm-2" id="logo">
-          <a href="/">
+          <Link to="/">
             <img src={logo} alt="logo"/>
-          </a>
+          </Link>
         </div>
         <div className="col-sm-6" id="headerSearchBar">
           {/*<div className="input-group stylish-input-group">
@@ -46,7 +49,7 @@ class Header extends Component {
         </div>*/}
         </div>
         <div className="col-sm-2">
-          { this.props.user.email === undefined ? <a href="/login"><div className="create">Login</div></a> : <a href="/account"><div className="create">{this.props.user.email}</div></a> }
+          { this.props.user.email === undefined ? <Link to="/login"><div className="create">Login</div></Link> : <Link to="/account"><div className="create">{this.props.user.email}</div></Link> }
         </div>
         <div className="col-sm-2">
           { this.props.user.email === undefined ? <a href="/login"><div className="create">Create Account</div></a> : <a href="/" onClick={this.logout}><div className="create">Logout</div></a> }

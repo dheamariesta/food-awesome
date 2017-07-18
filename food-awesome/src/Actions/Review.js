@@ -1,17 +1,24 @@
 import axios from 'axios';
 
-const addReviewIdIntoRestaurantInStore = (restaurant_id, review_id) => {
-  return {
-    type: 'ADD_REVIEW_ID_TO_RESTAURANT',
-    restaurant_id,
-    review_id,
-  }
-}
-
 const loadingReviewError = (error) => {
   return{
     type: "LOAD_REVIEW_ERROR",
     error
+  }
+}
+
+const addReviewIntoRestaurantInStore = (restaurant_id, review) => {
+  return {
+    type: 'ADD_REVIEW_TO_RESTAURANT',
+    restaurant_id,
+    review,
+  }
+}
+
+const addReviewIntoUserInStore = (review) => {
+  return {
+    type: 'ADD_REVIEW_TO_USER',
+    review,
   }
 }
 
@@ -29,8 +36,8 @@ export const addReviewWithPic = (picReview, newReview) =>{
     //sending newReview to backend. no special argument, returns url, public_id, database id
     axios.post('/review/postReviewWithPic/'+ newReview.restaurant_id, picReviewToBackEnd)
     .then( (response)=>{
-      dispatch(addReviewIdIntoRestaurantInStore(newReview.restaurant_id,response.data._id));
-
+      dispatch(addReviewIntoRestaurantInStore(newReview.restaurant_id,response.data));
+      dispatch(addReviewIntoUserInStore(response.data));
     }).catch( (error) =>{
       dispatch(loadingReviewError(error));
     })
@@ -40,35 +47,36 @@ export const addReviewWithPic = (picReview, newReview) =>{
 
 export const addReviewWithoutPic = (newReview) =>{
   return (dispatch) => {
+    // dispatch(addReviewIntoRestaurantInStore(newReview.restaurant_id,newReview));
 
-    //sending newReview to backend. no special argument, returns url, public_id, database id
     axios.post('/review/postReviewWithoutPic/'+ newReview.restaurant_id, newReview)
     .then( (response)=>{
-      dispatch(addReviewIdIntoRestaurantInStore(newReview.restaurant_id,response.data._id));
+      dispatch(addReviewIntoRestaurantInStore(newReview.restaurant_id,response.data));
+      dispatch(addReviewIntoUserInStore(response.data));
     }).catch( (error) =>{
       dispatch(loadingReviewError(error));
     })
   }
 }
 
-const addUserReviewToStore = (reviews) => {
-  return {
-    type: 'ADD_USER_REVIEW_TO_STORE',
-    reviews
-  }
-}
-
-export const getReviewOfUser = (user_id) => {
-  return (dispatch) => {
-    axios.get('/review/userReviews/'+user_id)
-    .then( (response) => {
-      console.log(response.data)
-      dispatch(addUserReviewToStore(response.data))
-    }).catch( (error) => {
-      dispatch(loadingReviewError(error));
-    })
-  }
-}
+// const addUserReviewToStore = (reviews) => {
+//   return {
+//     type: 'ADD_USER_REVIEW_TO_STORE',
+//     reviews
+//   }
+// }
+//
+// export const getReviewOfUser = (user_id) => {
+//   return (dispatch) => {
+//     axios.get('/review/userReviews/'+user_id)
+//     .then( (response) => {
+//       console.log(response.data)
+//       dispatch(addUserReviewToStore(response.data))
+//     }).catch( (error) => {
+//       dispatch(loadingReviewError(error));
+//     })
+//   }
+// }
 
 export const activeReviewDetails = (review_id) => {
   return {
@@ -129,7 +137,6 @@ export const updateReviewWithoutPic = (review) => {
     // axios function to send info to backend database
     axios.put('/review/updateReviewWithoutPic/'+review._id,review)
     .then( (response)=>{
-      // here picReview is a new url
       dispatch(updateUserReviewInStore(response.data))
     }).catch( (error) =>{
       dispatch(loadingReviewError(error));
@@ -144,11 +151,20 @@ const deleteUserReviewInStore = (_id) => {
   }
 }
 
-export const deleteReview = (_id) => {
+const deleteReviewFromRestaurant = (review_id, restaurant_id) => {
+  return {
+    type: "DELETE_REVIEW_FROM_RESTAURANT_IN_STORE",
+    review_id,
+    restaurant_id
+  }
+}
+
+export const deleteReview = (review_id, restaurant_id) => {
   return (dispatch) => {
-    console.log('actions reached', _id)
-    dispatch(deleteUserReviewInStore(_id));
-    axios.delete('/review/deleteReview/'+_id)
+    dispatch(deleteUserReviewInStore(review_id));
+    dispatch(deleteReviewFromRestaurant(review_id, restaurant_id));
+
+    axios.delete('/review/deleteReview/'+review_id)
     .then( (response)=>{
 
     }).catch( (error) =>{

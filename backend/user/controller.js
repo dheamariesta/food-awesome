@@ -3,6 +3,8 @@ const crypto = bluebird.promisifyAll(require('crypto'));
 const nodemailer = require('../node_modules/nodemailer');
 const passport = require('../node_modules/passport');
 const User = require('./model');
+import Restaurant from '../restaurants/model';
+import Review from '../reviews/model';
 
 /**
  * GET /login
@@ -182,11 +184,23 @@ exports.postUpdatePassword = (req, res, next) => {
  * Delete user account.
  */
 exports.postDeleteAccount = (req, res, next) => {
-  User.remove({ _id: req.user.id }, (err) => {
+  User.findOneAndRemove({ _id: req.user.id }, (err,user) => {
     if (err) { return next(err); }
     req.logout();
     console.log('Your account has been deleted.');
     res.redirect('/');
+    user.reviews.forEach( (review,index) => {
+      Review.findOneAndRemove({'_id': review}, (err,review) => {
+        if (err) { return next(err); }
+        Restaurant.findOneAndUpdate({'_id': review.restaurant}, {
+          '$pull': {'reviews': review._id}
+        }, (err,restaurant) => {
+          if (err) { return next(err); }
+        })
+      })
+    })
+
+
   });
 };
 

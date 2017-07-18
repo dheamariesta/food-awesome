@@ -1,18 +1,19 @@
 import Restaurant from './model';
+import Review from '../reviews/model';
+import User from '../user/model';
 import cloudinary from 'cloudinary';
 import fs from 'fs';
 
 exports.getRestaurant = (req, res) => {
-  // Restaurant.find({},(err,restaurant) => {
-  //   res.json(restaurant);
-  // })
   Restaurant.find({}).populate('reviews').exec((err,restaurant) => {
+    if(err){console.log(err); return;}
     res.json(restaurant)
   })
 }
 
 exports.getSpecificRestaurant = (req, res) => {
   Restaurant.findOne({'_id':req.params.id},(err,restaurant) => {
+    if(err){console.log(err); return;}
     res.json(restaurant);
   })
 }
@@ -81,6 +82,21 @@ exports.updateRestaurant = (req,res) => {
 exports.deleteRestaurant = (req,res) => {
   Restaurant.findOneAndRemove({'_id':req.params.id}, (err,restaurant) => {
       if(err){console.log(err); return;}
+
+      restaurant.reviews.forEach( (review_id, index) => {
+
+          Review.findOneAndRemove({'_id': review_id},(err,review) => {
+            if(err){console.log(err); return;}
+
+              User.findOneAndUpdate({'_id': review.user}, {
+                '$pull':{'reviews': review._id}
+              }, (err,user) => {
+                if(err){console.log(err); return;}
+              })
+
+          })
+      })
+
       res.json(restaurant);
   })
 }

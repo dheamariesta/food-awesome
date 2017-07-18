@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import IndividualContainer from './IndividualContainer/IndividualContainer';
 import {activeHome} from '../../Actions/Home/activeHome';
 import Header from '../Header/Header';
+import Scroll from './Scroll/Scroll';
+import Poster from './Poster/Poster';
 import './Individual.css';
 
 export class Individual extends Component {
@@ -10,7 +11,6 @@ export class Individual extends Component {
     super(props);
     this.state = {
       restaurant: this.props.active,
-      reviews: null
     }
   }
 
@@ -21,13 +21,14 @@ export class Individual extends Component {
   }
   render() {
     //console.log('thispropsactive',this.props.active)
-
-
     return (
       <div>
         <Header/>
         <div className="container-fluid">
-          <IndividualContainer restaurant={this.state.restaurant}/>
+          <div className="row">
+            <Scroll restaurant={this.props.active}/>
+            <Poster img={this.props.active.picHome}/>
+          </div>
         </div>
       </div>
     );
@@ -37,12 +38,8 @@ export class Individual extends Component {
 const mapStateToProps = (state) => {
   return {
     active: state.activeHome,
-    restaurants: state.restaurants
+
   }
 }
-const mapDispatchToProps = (dispatch) => {
-  return {
-    activeHome: (active) => {dispatch(activeHome(active));}
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Individual);
+
+export default connect(mapStateToProps)(Individual);
