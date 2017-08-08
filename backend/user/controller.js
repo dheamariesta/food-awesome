@@ -192,14 +192,13 @@ exports.postDeleteAccount = (req, res, next) => {
     user.reviews.forEach( (review,index) => {
       Review.findOneAndRemove({'_id': review}, (err,review) => {
         if (err) { return next(err); }
-        Restaurant.findOneAndUpdate({'_id': review.restaurant}, {
-          '$pull': {'reviews': review._id}
-        }, (err,restaurant) => {
-          if (err) { return next(err); }
-        })
+        // Restaurant.findOneAndUpdate({'_id': review.restaurant}, {
+        //   '$pull': {'reviews': review._id}
+        // }, (err,restaurant) => {
+        //   if (err) { return next(err); }
+        // })
       })
     })
-
 
   });
 };
