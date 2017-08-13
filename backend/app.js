@@ -13,6 +13,7 @@ import mongoose from 'mongoose';
 import multer from 'multer';
 import cloudinary from 'cloudinary';
 import dotenv from 'dotenv';
+import fs from 'fs';
 dotenv.load( {path: '.env'} )
 
 import session from 'express-session';
@@ -92,5 +93,20 @@ process.on('uncaughtException', (err) => {
   //debug('Caught exception: %j', err);
   process.exit(1);
 });
+
+const key = fs.readFileSync('./food-awesome-key.pem')
+const cert = fs.readFileSync('./food-awesome-cert.pem')
+
+const option = {
+	key: key,
+	cert: cert
+}
+// const app = express();
+app.set('port', process.env.PORT || 443)
+const server = require('https').Server(option, app);
+server.listen(app.get('port'),() => {
+console.log('App is running at http://localhost:' + app.get('port'));
+});
+
 
 export default app;
