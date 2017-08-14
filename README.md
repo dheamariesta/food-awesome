@@ -2,7 +2,7 @@
 
 Food Awesome is a food review website project, developed by General Assembly Singapore, Web Development Immersive 10 students.
 
-View our site: https://food-awesome.review
+View our site: http://food-awesome.review
 
 Find our frontend repo at : https://github.com/Wiz1221/food-awesome-frontend
 
