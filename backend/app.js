@@ -102,8 +102,8 @@ const option = {
 	cert: cert
 }
 // const app = express();
-app.set('port', process.env.PORT || 443)
-const server = require('https').Server(option, app);
+app.set('port', process.env.PORT || 80)
+const server = require('https').Server(app);
 server.listen(app.get('port'),() => {
 console.log('App is running at http://localhost:' + app.get('port'));
 });
