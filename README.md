@@ -4,8 +4,6 @@ Food Awesome is a food review website project, developed by General Assembly Sin
 
 View our site: http://food-awesome.review
 
-Find our frontend repo at : https://github.com/Wiz1221/food-awesome-frontend
-
 ### Tech
 
 Food Awesome uses a number of open source projects to work properly:
