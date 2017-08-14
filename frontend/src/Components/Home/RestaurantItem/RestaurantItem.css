@@ -1,0 +1,43 @@
+#image {
+   width: 20vw;
+   overflow: hidden;
+}
+
+.restaurant-item-description{
+  font-size: 12px;
+  text-align: justify;
+}
+.restaurant-image{
+  margin-top: 10px;
+}
+.col-sm-3.item{
+  padding-bottom: 20px;
+  min-height: 400px;
+}
+/*.item{
+  padding-bottom: 20px;
+}*/
+.item:hover{
+  background-color: rgba(185, 192, 204, .3);
+}
+#share-button{
+ position: absolute;
+ right: 20px;
+ top: 10px;
+}
+.restaurant-item-title{
+  font-weight: bold;
+}
+/*.restaurant-item-description{
+  padding-bottom: 100px;
+}*/
+#share-button:hover{
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+.star-rating {
+  line-height:32px;
+  font-size:1.25em;
+}
+
+.star-rating .fa-star{color: orange;}
