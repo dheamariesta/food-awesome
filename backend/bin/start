@@ -11,7 +11,7 @@
 require('babel-core/register');
 require('babel-polyfill');
 
-// const app = require('../app').default;
+const app = require('../app').default;
 // const debug = require('debug')('backend:server');
 // const http = require('http');
 //

@@ -6,39 +6,31 @@ import logger from 'morgan';
 // import favicon from 'serve-favicon';
 import path from 'path';
 import lessMiddleware from 'less-middleware';
-import index from './routes/index';
-import auth from './routes/auth';
-import review from './routes/review';
+
 import mongoose from 'mongoose';
 import multer from 'multer';
 import cloudinary from 'cloudinary';
 import dotenv from 'dotenv';
 import fs from 'fs';
-dotenv.load( {path: '.env'} )
+
 
 import session from 'express-session';
 import passport from 'passport';
 
-const app = express();
+import index from './routes/index';
+import auth from './routes/auth';
+import review from './routes/review';
 
+dotenv.load( { path: '.env' })
+const app = express();
+app.set('port', process.env.PORT || 3001)
+const server = require('http').Server(app);
 /**
  * API keys and Passport configuration.
  */
 const passportConfig = require('./config/passport');
 
-mongoose.connect(process.env.MONGOLAB_URI);
-app.use(session({
-  resave: true,
-  saveUninitialized: true,
-  secret: 'secret-name'
-  // store: new MongoStore({
-  //   url: 'mongodb://admin:admin@ds151242.mlab.com:51242/food-awesome',
-  //   autoReconnect: true,
-  //   clear_interval: 3600
-  // })
-}));
-app.use(passport.initialize());
-app.use(passport.session());
+
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -47,7 +39,7 @@ cloudinary.config({
 });
 
 
-//const debug = Debug('backend:app');
+const debug = Debug('backend:app');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -64,6 +56,27 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+
+mongoose.Promise = global.Promise;
+mongoose.connect(process.env.MONGOLAB_URI);
+mongoose.connection.on('error', (err) => {
+  console.error(err);
+  console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
+  process.exit();
+});
+const MongoStore = require('connect-mongo')(session);
+app.use(session({
+  resave: true,
+  saveUninitialized: true,
+  secret: process.env.SESSION_SECRET,
+  store: new MongoStore({
+    url: process.env.MONGOLAB_URI,
+    autoReconnect: true,
+    clear_interval: 3600
+  })
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/api', index);
 app.use('/review',review);
@@ -93,17 +106,16 @@ process.on('uncaughtException', (err) => {
   //debug('Caught exception: %j', err);
   process.exit(1);
 });
-
-const key = fs.readFileSync('./food-awesome-key.pem')
-const cert = fs.readFileSync('./food-awesome-cert.pem')
-
-const option = {
-	key: key,
-	cert: cert
-}
+//
+// const key = fs.readFileSync('./food-awesome-key.pem')
+// const cert = fs.readFileSync('./food-awesome-cert.pem')
+//
+// const option = {
+// 	key: key,
+// 	cert: cert
+// }
 // const app = express();
-app.set('port', process.env.PORT || 80)
-const server = require('https').Server(app);
+
 server.listen(app.get('port'),() => {
 console.log('App is running at http://localhost:' + app.get('port'));
 });
